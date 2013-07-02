@@ -1,0 +1,37 @@
+algorithms
+
+
+> old Panorama.h
+calcCtrlPntsErrorStatscalcCtrlPntsRadiStatsrotatestraightencalcOptimalWidthcalcOptimalPanoScale
+calcMeanExposure
+
+
+> nonacalcFOVfitPano
+centerHorizontically
+
+pano2img
+pano2file
+
+
+> external programs
+PTStitcher - pano2file
+PTmender - pano2file
+
+nona+enblend - pano2file [TODO later]
+PTmender+enblend - pano2file [TODO later]
+
+Autopano_(kolor)
+autopano-sift
+
+
+> panotools
+autoOptimise
+smartOptimize
+
+> PhotometricOptimizeroptimizePhotometricsmartOptimizePhotometric
+
+> makefilecreateMakefile
+
+> PointSamplers
+sample_all
+sample_random

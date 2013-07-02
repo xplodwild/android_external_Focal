@@ -33,7 +33,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/src/layer_selection/ \
 	$(LOCAL_PATH)/../gsl \
-	$(LOCAL_PATH)/../boost_1_53_0 \
+	$(LOCAL_PATH)/../boost-1_53 \
 	$(LOCAL_PATH)/../libtiff \
 	$(LOCAL_PATH)/../lcms2/include \
 	$(LOCAL_PATH)/../vigra/include
@@ -80,7 +80,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/src/layer_selection/ \
 	$(LOCAL_PATH)/../gsl \
-	$(LOCAL_PATH)/../boost_1_53_0 \
+	$(LOCAL_PATH)/../boost-1_53 \
 	$(LOCAL_PATH)/../libtiff \
 	$(LOCAL_PATH)/../lcms2/include \
 	$(LOCAL_PATH)/../vigra/include
