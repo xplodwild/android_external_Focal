@@ -1,10 +1,11 @@
 # Makefile for vigra
- 
+
 ######################################################
 ###                libvigraimpex                    ##
 ######################################################
- 
+
 LOCAL_PATH := $(my-dir)
+
 include $(CLEAR_VARS)
 
 libvigraimpex_SOURCES_DIST = src/impex/bmp.cxx \
@@ -26,6 +27,11 @@ libvigraimpex_SOURCES_DIST = src/impex/bmp.cxx \
 	src/impex/tiff.cxx \
 	src/impex/viff.cxx \
 	src/impex/void_vector.cxx
+
+LOCAL_CPP_EXTENSION := .cxx
+
+LOCAL_SDK_VERSION := 14
+LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libvigraimpex_SOURCES_DIST)
 
