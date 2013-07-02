@@ -1,0 +1,27 @@
+2006-10-27  dmg  <dmg@uvic.ca>
+
+	* Updated reference files
+
+2006-09-22  dmg  <dmg@selenium.dmg>
+
+	* Added README.TXT to explain that PSD files are not supported.
+	* Updated reference files
+
+2006-08-12  dmg  <dmg@iridium.dmg>
+
+	* I finally added the TIFF_LZW reference file
+
+2006-08-05  dmg  <dmgerman@uvic.ca>
+
+	* Updated JPEG test to include the ICC profile data
+
+2006-07-28  dmg  <dmg@hydrogen.dmg>
+
+	* Makefile.am (EXTRA_DIST): Updated. It had incorrect files.
+
+
+2006-07-10  dmg  <dmgerman@uvic.ca>
+
+	* Added test. The LZW test needs to be created.
+	
+

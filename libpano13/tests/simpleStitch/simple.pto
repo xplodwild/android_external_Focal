@@ -1,0 +1,24 @@
+# hugin project file, version 1
+p f0 w3000 h1093 v80  n"TIFF c:NONE"
+m g1 i0 f0
+
+# image lines
+i w750 h500 f0 K0a1 K0b0 K1a1 K1b0 K2a1 K2b0 Va0 Vb0 Vc0 Vd0 Vx0 Vy0 a0 b0 c0 d0 e0 g0 p8.91614 r0.192433 t0 v25.3608 y-13.4262  u10 n"051221_6054_750.jpg"
+i w750 h500 f0 K0a1 K0b0 K1a1 K1b0 K2a1 K2b0 Va=0 Vb=0 Vc=0 Vd=0 Vx=0 Vy=0 a=0 b=0 c=0 d=0 e=0 g=0 p8.61975 r-0.511296 t=0 v=0 y-26.6329  u10 n"051221_6055_750.jpg"
+
+
+# specify variables that should be optimized
+v p0 r0 y0 
+v p1 r1 y1 
+v 
+
+# control points
+c n1 N0 x551.5 y196 X171.338 Y203.223 t0
+c n1 N0 x610 y374 X225.154 Y381.98 t0
+c n1 N0 x683 y113.5 X303.122 Y125.837 t0
+c n1 N0 x638.946 y230.781 X256.5 Y240 t0
+c n1 N0 x519.5 y410.5 X134.502 Y418.116 t0
+c n0 N0 x164.876 y410.03 X414 Y405.5 t2
+c n0 N0 x283.5 y395 X285 Y103 t1
+
+#hugin_options r0 e2

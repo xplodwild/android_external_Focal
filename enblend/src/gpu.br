@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2004-2005 Andrew Mihal
+ *
+ * This file is part of Enblend.
+ *
+ * Enblend is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Enblend is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Enblend; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/*kernel void gpuGDAMatrix(float2 index<>, float E[], float pi[], float T, float K, out float output<>) {*/
+/*
+kernel void gpuGDAMatrix(float2 index<>, float E[32], float pi[32], float T, out float output<>) {
+    float ex = E[index.x];
+    float ey = E[index.y];
+    float An = 32.0f * (1.0f + exp((ex-ey)/T));
+    float pi_plus = pi[index.x] + pi[index.y];
+    output = pi_plus / An;
+}
+
+reduce void gpuGDAReduce(float input<>, reduce float output<>) {
+    output = output + input;
+}
+*/
+
+/*
+kernel void gpuGDAKernel(float index<>, float E[32], float pi[32], float T, out float output<>) {
+    float ex = E[index];
+    float pix = pi[index];
+    float An;
+    float pi_plus;
+    float sum = 0.0f;
+    float i = 0;
+    for (i = 0; i < 32; ++i) {
+        An = 1.0f + exp((ex - E[i])/T);
+        pi_plus = pix + pi[i];
+        sum += (pi_plus / An);
+    }
+    output = sum / 32.0f;
+}
+*/
+
+kernel void gpuGDAKernel4(float index<>, float4 E[32], float4 pi[32], float T, out float4 output<>) {
+    float4 ex = E[index];
+    float4 pix = pi[index];
+    float4 An;
+    float4 pi_plus;
+    float4 sum = 0.0f;
+    float i = 0;
+    for (i = 0; i < 32; ++i) {
+        An = exp((ex - E[i])/T) + 1.0f;
+        pi_plus = pix + pi[i];
+        sum += (pi_plus / An);
+    }
+    output = sum / 32.0f;
+}
+
+kernel void gpuBlendKernel(float3 black<>, float3 white<>, float mask<>,
+        float scale, float clamp_min, float clamp_max, out float3 o<>) {
+
+    float whiteCoeff = mask / scale;
+    float blackCoeff = 1.0f - whiteCoeff;
+    o = min(max(((whiteCoeff * white) + (blackCoeff * black)), clamp_min), clamp_max);
+
+}
+

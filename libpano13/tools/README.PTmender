@@ -1,0 +1,88 @@
+PTmender
+--------
+
+This is a rewrite of PTStitcher. It has most of its functionality (see
+below) and it should be (for most people) a drop in replacement for
+PTstitcher. 
+
+
+----------------------------------------------------------------------
+HOW TO HELP.
+
+* Man pages for PTmender and PTblender.
+
+* Create test cases.  We need to create some test cases that we can
+   use to verify if PTmender works _exactly_ as PTStitcher. This will
+   require some panorama scripts and the images, and some scripts to
+   verify the results.
+
+* See TODO list and WHAT IS NOT GOING TO BE SUPPORTED for more ideas.
+
+
+----------------------------------------------------------------------
+
+TODO:
+
+* Testing. I am sure there are defects in the implementation that need
+  to be spotted and then removed.
+
+* Fully support 16 bit images. I don't quite remember what is done so
+  far, but I am planning to support 16 bit images in all the stages of
+  PTmender and PTblender.
+
+* Improving seam computation. The current algorithm is very poor.
+
+----------------------------------------------------------------------
+WHAT IS NOT GOING TO BE SUPPORTED
+
+These are features present in PTstitcher that I am not interesting in
+adding to PTmender. But I'll be happy to accept patches for them:
+
+* The following output formats:
+
+  WTVR
+  IVR_java
+  VRML
+  IVR
+  PAN
+  
+
+* 16bit Multi-layer PSD output. We do not know the format of these
+  types of PSD files. Either use 8 bit images, or generate TIFFs and
+  read them into photoshop.
+  
+
+----------------------------------------------------------------------
+
+COMMAND LINE OPTIONS
+
+-s     Sort image files. I assume that the processing of the files
+       (by default) is in the command line order. This overrides it.
+
+-q     Quiet execution. Do not display progress messages during
+       execution.
+
+-o     Specify the name of the result panorama file.
+
+-f     Specify the name of the script file.
+
+The program assumes that the last file specified in the command line
+with a .txt extension is the script (even if the -f option is
+specified). This means that if the script has no .txt extension it is
+treated as an image (in that case use -f option).
+
+If a command line argument is a directory, any files in it are
+processed (non-recursively) as if they were all specified in the
+command line.
+
+Any other command line argument that is a file is treated as an image.
+
+
+If the command line does not have any image in it, then the script is
+processed and any references to images in it are processed.
+
+If the command line does not have a script file, then the user is
+asked for it.
+
+----------------------------------------------------------------------
+

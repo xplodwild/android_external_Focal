@@ -1,0 +1,428 @@
+#include "version.h"
+LANGUAGE 0x09 , 0x01 
+#pragma code_page(1252)
+
+101  DIALOG DISCARDABLE  0, 0, 220, 80
+STYLE 0x80L  | 0x80000000L  | 0x10000000L  | 0x00C00000L  | 0x00080000L 
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           " 0 %",     1004 ,  5, 4, 210,8
+    CTEXT           "Memory Requests (Last/Max) MB",    1005 ,  2, 16,216,8
+    CTEXT           "Memory Usage (Current) MB",    1006 ,  2, 28,216,8
+    LTEXT           "Status",         1003 ,  40,42,140,10
+    DEFPUSHBUTTON   "Cancel",   2 ,     85,56,50,14
+END
+
+SETCPREFDLG DIALOG DISCARDABLE  0, 0, 199, 198
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Correct Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,148,170,41,14
+    PUSHBUTTON      "Cancel",2 ,101,170,38,14
+    PUSHBUTTON      "Save",6,54,170,38,14
+    PUSHBUTTON      "Load",5,7,170,38,14
+    CONTROL         "Radial shift",10,"Button",0x00000003L  | 0x00010000L ,
+                    7,24,51,10
+    PUSHBUTTON      "Options",40,122,24,38,10
+    CONTROL         "Vertical shift",11,"Button",0x00000003L  | 
+                    0x00010000L ,7,41,54,10
+    PUSHBUTTON      "Options",41,122,41,38,10
+    CONTROL         "Horizontal shift",12,"Button",0x00000003L  | 
+                    0x00010000L ,7,58,62,10
+    PUSHBUTTON      "Options",42,122,58,38,10
+    CONTROL         "Shear",13,"Button",0x00000003L  | 0x00010000L ,7,75,35,
+                    10
+    PUSHBUTTON      "Options",43,122,75,38,10
+    CONTROL         "Scale",14,"Button",0x00000003L  | 0x00010000L ,7,92,34,
+                    10
+    PUSHBUTTON      "Options",44,122,92,38,10
+    CONTROL         "Radial Luminance",26,"Button",0x00000003L  | 
+                    0x00010000L ,7,109,73,10
+    PUSHBUTTON      "Options",46,122,109,38,10
+    CONTROL         "Cut Frame",27,"Button",0x00000003L  | 0x00010000L ,7,
+                    126,48,10
+    PUSHBUTTON      "Options",47,122,126,38,10
+    PUSHBUTTON      "Prefs",100,167,7,25,10
+    CONTROL         "Fourier Filter",28,"Button",0x00000003L  | 
+                    0x00010000L ,7,145,54,10
+    PUSHBUTTON      "Options",48,122,145,38,10
+END
+
+RADIALOPT DIALOG DISCARDABLE  0, 0, 266, 151
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Set Polynomial Coefficients for Radial Correction"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,136,123,50,14
+    PUSHBUTTON      "Cancel",2 ,62,123,50,14
+    EDITTEXT        110,54,30,41,12
+    EDITTEXT        111,103,30,41,12
+    EDITTEXT        112,152,30,41,12
+    EDITTEXT        113,201,30,41,12
+    EDITTEXT        120,54,48,41,12
+    EDITTEXT        121,103,48,41,12
+    EDITTEXT        122,151,48,41,12
+    EDITTEXT        123,201,48,41,12
+    EDITTEXT        130,53,67,41,12
+    EDITTEXT        131,103,67,41,12
+    EDITTEXT        132,151,67,41,12
+    EDITTEXT        133,201,67,41,12
+    LTEXT           "r_src  =   a x r_dest^4  +  b x r_dest^3  +  c x r_dest ^2 +  d * r_dest",
+                    100,25,14,219,11,NOT 0x00020000L 
+    LTEXT           "red",101,27,31,17,11,NOT 0x00020000L 
+    LTEXT           "blue",102,27,69,17,11,NOT 0x00020000L 
+    LTEXT           "green",103,27,50,22,11,NOT 0x00020000L 
+    LTEXT           "Correction Mode:",104,27,87,61,11,NOT 0x00020000L 
+    RADIOBUTTON     "Radial",350,97,89,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Vertical",351,97,100,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Horizontal",352,151,89,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+END
+
+TWOPARAM DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Shift Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,99,68,50,14
+    PUSHBUTTON      "Cancel",2 ,37,68,50,14
+    EDITTEXT        155,103,17,41,12
+    EDITTEXT        156,103,40,41,12
+    LTEXT           "Horizontal",150,31,17,57,13,NOT 0x00020000L 
+    LTEXT           "Vertical",151,31,41,57,13,NOT 0x00020000L 
+END
+
+THREEPARAM DIALOG DISCARDABLE  0, 0, 186, 114
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Horizontal Shift"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,93,87,50,14
+    PUSHBUTTON      "Cancel",2 ,35,87,50,14
+    EDITTEXT        185,110,14,41,12
+    EDITTEXT        186,110,35,41,12
+    EDITTEXT        187,110,56,41,12
+    LTEXT           "red",180,37,16,51,12,NOT 0x00020000L 
+    LTEXT           "green",181,37,35,51,12,NOT 0x00020000L 
+    LTEXT           "blue",182,37,54,51,12,NOT 0x00020000L 
+END
+
+ADJUSTPREFS DIALOG DISCARDABLE  0, 0, 203, 143
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Create Panorama"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,110,115,50,14
+    PUSHBUTTON      "Cancel",2 ,40,115,50,14
+    RADIOBUTTON     "Extract",200,17,28,41,9,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Insert",201,17,42,38,10,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Read Control Points",205,17,84,82,8,0x00004000L  | 
+                    0x00020000L  | 0x00010000L 
+    RADIOBUTTON     "Run Optimizer",202,17,98,60,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Use Options",206,75,28,52,9,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Use Script",207,75,42,51,9,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    PUSHBUTTON      "Set",203,135,26,32,13
+    PUSHBUTTON      "Browse",204,135,42,32,12
+    PUSHBUTTON      "Prefs",100,171,7,25,10
+    LTEXT           "Extract/ Insert Image:",223,15,13,91,9,NOT 0x00020000L 
+    LTEXT           "--------------------------------------------------------------------------------------",
+                    224,13,58,174,8,NOT 0x00020000L 
+    LTEXT           "Tools for Script Creation:",225,13,67,101,8,NOT 
+                    0x00020000L 
+END
+
+ADJUSTOPT DIALOG DISCARDABLE  0, 0, 350, 170
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Create Panorama Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,205,149,96,15
+    PUSHBUTTON      "Cancel",2 ,61,150,96,14
+    EDITTEXT        234,43,27,32,13
+    EDITTEXT        228,43,42,32,13
+    EDITTEXT        227,43,57,32,13
+    RADIOBUTTON     "Rectilinear",214,142,20,49,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Panoramic",215,142,31,49,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye FFr",216,142,42,58,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye Circle",217,142,53,60,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    PUSHBUTTON      "Correct",100,87,51,39,12
+    EDITTEXT        240,43,95,32,13
+    EDITTEXT        239,43,110,32,13
+    EDITTEXT        238,43,125,32,13
+    RADIOBUTTON     "Rectilinear",245,143,92,49,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "QTVR pan.",246,143,104,49,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "PSphere",247,143,116,58,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    CONTROL         "Save to Buffer",10,"Button",0x00000003L  | 
+                    0x00010000L ,81,127,57,10
+    EDITTEXT        251,261,31,32,13
+    EDITTEXT        250,261,46,32,13
+    EDITTEXT        244,261,61,32,13
+    CONTROL         "Load Buffer",11,"Button",0x00000003L  | 0x00010000L ,
+                    211,94,53,10
+    RADIOBUTTON     "and blend",252,211,107,47,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "or paste",253,211,118,49,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    EDITTEXT        259,250,129,32,13
+    RADIOBUTTON     "Image",254,295,90,35,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Buffer",255,295,101,40,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "both",256,295,112,36,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "none",257,295,123,34,10,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Cube",248,143,128,60,8,0x00004000L  | 0x08000000L  | 
+                    0x00020000L  | 0x00010000L 
+    CTEXT           "Feather:",258,214,131,27,8,NOT 0x00020000L 
+    CTEXT           "----------------------------------------------------------------------------------------------------------------------------------------------------------------",
+                    210,7,73,329,9,NOT 0x00020000L 
+    CTEXT           "HFOV: (°)",211,7,30,31,8,NOT 0x00020000L 
+    CTEXT           "Format:",218,109,20,30,8,NOT 0x00020000L 
+    LTEXT           "Image:",223,7,6,27,8,NOT 0x00020000L 
+    LTEXT           "Panorama:",224,7,82,50,8,NOT 0x00020000L 
+    CTEXT           "Width:",213,7,44,22,8,NOT 0x00020000L 
+    CTEXT           "Height:",225,7,59,24,8,NOT 0x00020000L 
+    CTEXT           "HFOV: (°)",235,7,98,31,8,NOT 0x00020000L 
+    CTEXT           "Width:",236,7,112,22,8,NOT 0x00020000L 
+    CTEXT           "Height:",237,7,127,24,8,NOT 0x00020000L 
+    CTEXT           "Format:",249,108,93,30,8,NOT 0x00020000L 
+    LTEXT           "Position:",226,214,15,50,8,NOT 0x00020000L 
+    CTEXT           "Yaw (°)",241,225,34,24,8,NOT 0x00020000L 
+    CTEXT           "Pitch (°)",242,225,47,26,8,NOT 0x00020000L 
+    CTEXT           "Roll (°)",243,225,63,22,8,NOT 0x00020000L 
+    LTEXT           "Stitching:",230,213,81,50,8,NOT 0x00020000L 
+    LTEXT           "Color Correction:",231,278,82,54,8,NOT 0x00020000L 
+    RADIOBUTTON     "PSphere",219,143,64,60,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+END
+
+PERSPECT DIALOG DISCARDABLE  0, 0, 217, 178
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Perspective Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,115,148,50,14
+    PUSHBUTTON      "Cancel",2 ,50,148,50,14
+    RADIOBUTTON     "Normal",301,96,17,35,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye",302,141,17,45,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    EDITTEXT        305,75,46,26,12
+    EDITTEXT        306,75,62,25,12
+    RADIOBUTTON     "Points",320,157,49,35,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Degrees",321,157,61,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    EDITTEXT        307,75,86,25,12
+    EDITTEXT        309,172,88,25,12
+    EDITTEXT        310,172,108,25,12
+    EDITTEXT        311,172,124,25,12
+    PUSHBUTTON      "As Source",325,50,124,50,14
+    PUSHBUTTON      "Prefs",100,185,7,25,10
+    LTEXT           "Format:",300,29,17,38,8,NOT 0x00020000L 
+    LTEXT           "Horizontal",303,29,48,38,8,NOT 0x00020000L 
+    LTEXT           "Vertical",304,30,62,38,8,NOT 0x00020000L 
+    LTEXT           "Rotate (°)",323,29,90,38,8,NOT 0x00020000L 
+    LTEXT           "Turn to:",322,29,34,39,8,NOT 0x00020000L 
+    LTEXT           "Set Size:",327,55,108,38,8,NOT 0x00020000L 
+    LTEXT           "HFOV (°)",328,127,92,38,8,NOT 0x00020000L 
+    LTEXT           "Height",329,129,110,38,8,NOT 0x00020000L 
+    LTEXT           "Width",330,129,126,38,8,NOT 0x00020000L 
+    LTEXT           "Unit for turn:",324,109,49,43,8,NOT 0x00020000L 
+END
+
+REMAP DIALOG DISCARDABLE  0, 0, 233, 170
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Remap Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,118,140,50,14
+    PUSHBUTTON      "Cancel",2 ,51,141,50,14
+    RADIOBUTTON     "Normal",350,31,32,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "QTVR-Panoramic",351,31,45,78,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "PSphere",352,31,58,67,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye Hor.",353,31,71,53,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye Vert.",354,31,84,66,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Convex Mirror",355,31,97,59,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Normal",356,151,31,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "QTVR-Panoramic",359,151,44,75,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "PSphere",358,151,57,67,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye Hor.",360,151,70,53,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Fisheye Vert.",361,151,83,60,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Convex Mirror",357,151,96,59,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    EDITTEXT        362,71,113,30,12
+    EDITTEXT        363,149,113,30,12
+    PUSHBUTTON      "Prefs",100,201,7,25,10
+    LTEXT           "Convert from:",6,33,18,49,8,NOT 0x00020000L 
+    LTEXT           "Convert to:",7,152,17,36,8,NOT 0x00020000L 
+    RTEXT           "VFOV (°):",8,109,113,36,8,NOT 0x00020000L 
+    RTEXT           "HFOV (°):",9,23,114,36,8,NOT 0x00020000L 
+END
+
+FOURIEROPT DIALOG DISCARDABLE  0, 0, 191, 162
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Fourier Filter"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,95,130,50,14
+    PUSHBUTTON      "Cancel",2 ,33,130,50,14
+    LTEXT           "Point Spread Image:",303,18,14,68,10,NOT 0x00020000L 
+    EDITTEXT        305,18,27,114,12,0x0080L
+    DEFPUSHBUTTON   "Browse",10,141,28,34,11
+    RADIOBUTTON     "Add Noise",320,58,54,59,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "Remove Noise",321,58,65,65,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    LTEXT           "Mode:",304,19,43,25,10,NOT 0x00020000L 
+    RADIOBUTTON     "Internal",322,58,77,59,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    RADIOBUTTON     "External",323,58,88,46,8,0x00004000L  | 0x00020000L  | 
+                    0x00010000L 
+    LTEXT           "Noise filter:",306,19,79,36,10,NOT 0x00020000L 
+    DEFPUSHBUTTON   "Browse",11,109,85,34,11
+    EDITTEXT        307,61,106,25,12
+    EDITTEXT        308,131,106,25,12
+    LTEXT           "Filter factor:",309,19,105,38,10,NOT 0x00020000L 
+    LTEXT           "Frame:",310,98,106,25,10,NOT 0x00020000L 
+    RADIOBUTTON     "Scale",324,58,43,59,8,0x00004000L  | 0x00020000L  | 0x00010000L 
+END
+
+#ifndef EXCLUDEPTVERSION
+1  VERSIONINFO
+ FILEVERSION PTVERSION_FILEVERSIONNUMBER
+ PRODUCTVERSION PTVERSION_FILEVERSIONNUMBER
+ FILEFLAGSMASK 0x3fL
+
+ FILEFLAGS 0x0L
+
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", PTVERSION_COMMENT
+            VALUE "CompanyName", PTVERSION_COMPNAME
+            VALUE "FileDescription", PTVERSION_FILEDESCRIPTION
+            VALUE PTVERSION_NAME_FILEVERSION, PTVERSION_FILEVERSION
+            VALUE "InternalName", "pano13.dll\0"
+            VALUE PTVERSION_NAME_LEGALCOPYRIGHT, PTVERSION_LEGALCOPYRIGHT
+            VALUE "OriginalFilename", "pano13.dll\0"
+            VALUE "ProductName", "Panorama Tools\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+#endif
+
+LANGUAGE 0x09 , 0x01 
+#pragma code_page(1252)
+ 
+
+SIZE_SRC DIALOG DISCARDABLE  0, 0, 247, 169
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "If Source and Result are differently sized:"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,127,145,50,14
+    PUSHBUTTON      "Cancel",2 ,51,145,50,14
+    CHECKBOX        "(a) Display Cropped/Framed Resultimage",213,20,15,151,8
+    CHECKBOX        "(b) Save full sized Result to File",214,20,30,130,8
+    EDITTEXT        212,32,51,138,14,0x0080L
+    PUSHBUTTON      "Browse",217,191,51,28,14
+    CHECKBOX        "(c) Open Result with Application",215,20,71,124,8
+    EDITTEXT        216,32,94,137,14,0x0080L
+    PUSHBUTTON      "Browse",218,191,94,28,14
+    PUSHBUTTON      "More",219,217,7,23,9
+    LTEXT           "File Name:",223,32,40,38,8,NOT 0x00020000L 
+    LTEXT           "Application Name (Your Plug-in host might work)",224,32,
+                    81,162,8,NOT 0x00020000L 
+    CHECKBOX        "(d) Don't Save Mask (Photoshop LE)",220,21,116,129,12
+END
+
+INTPOL DIALOG DISCARDABLE  0, 0, 187, 262
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Interpolator"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",1 ,90,238,50,14
+    PUSHBUTTON      "Cancel",2 ,24,238,50,14
+    GROUPBOX        "Interpolator Options",100,8,9,167,142
+    RADIOBUTTON     "Polynomial           16 Pixels",350,16,25,99,8,
+                    0x00004000L  | 0x00020000L  | 0x00010000L 
+    RADIOBUTTON     "Spline                  36 Pixels",352,16,36,98,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Spline                  64 Pixels",353,16,47,98,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Sinc                    256Pixels",354,16,58,99,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Hammering         AA smooth 1.0",360,16,73,131,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Gaussian            AA smooth 1.25",361,16,84,131,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Quadratic           AA smooth  1.5",362,16,95,131,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Mitchell               AA sharp 2.0",370,16,111,131,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Lauczos2            AA sharp 2.0",371,16,122,131,8,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Lauczos3            AA sharp 3.0",372,16,133,131,8,
+                    0x00004000L  | 0x00010000L 
+    LTEXT           "  <- Faster",223,122,33,47,8,NOT 0x00020000L 
+    LTEXT           "Better ->",224,128,47,31,8,NOT 0x00020000L 
+    GROUPBOX        "Fast Transformation",101,8,159,167,52
+    RADIOBUTTON     "Off",380,16,171,78,10,
+                    0x00004000L  | 0x00020000L  | 0x00010000L 
+    RADIOBUTTON     "Some",381,16,183,78,10,
+                    0x00004000L  | 0x00010000L 
+    RADIOBUTTON     "Fast",382,16,195,78,10,
+                    0x00004000L  | 0x00010000L 
+    LTEXT           "Gamma:",20,13,220,31,8,NOT 0x00020000L 
+    EDITTEXT        300,56,219,26,12
+END
+
+105 DIALOG DISCARDABLE  0, 0, 201, 117
+STYLE 0x80L  | 0x80000000L  | 0x00C00000L  | 0x00080000L 
+CAPTION "Optimizer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",2 ,72,96,50,14
+    LTEXT           "",10,23,15,152,25
+    LTEXT           "",11,23,46,150,44
+END
+
+
+

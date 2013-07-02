@@ -1,0 +1,30 @@
+Newsworthy changes in 2.7.0.11
+------------------------------
+Do not process unchanged color channels for CA correction.
+Fix alpha mask threshold bug that would leave black edge to circular fisheye images.
+Correctly open BMP files created with rows in reverse order.
+Added antialiasing filters.
+Added support for 32bit float files ( but not with PTStitcher)
+
+
+Newsworthy changes in 2.7.0.10
+------------------------------
+
+Many fixes to allow building on 64bit platforms.
+Fix for bug that caused problems using or creating png files.
+Option to allow configure --without-java
+
+
+Newsworthy changes in 2.7.0.8
+-----------------------------
+
+Two small changes to optimize.c
+
+
+Newsworthy changes in 2.7.0.7
+-----------------------------
+
+The library has a new build system based on libtool, automake &
+autoconf.  JPEG optimisation is enabled for outputting jpg files
+when using PTStitcher
+

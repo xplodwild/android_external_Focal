@@ -1,0 +1,25 @@
+[patterns]
+.hgeol = CRLF
+**.vcproj = CRLF
+**.vcxproj = CRLF
+**.sln = CRLF
+**.props = CRLF
+**.vsprops = CRLF
+**.txt = native
+**.readme = native
+Makefile = native
+authors = LF
+bootstrap = LF
+ChangeLog = LF
+NEWS = LF
+README = LF
+**.jpg = BIN
+**.c = native
+**.cpp = native
+**.h = native
+**.hpp = native
+**.def = native
+**.r = native
+**.rc = native
+**.py = native
+**.pl = native

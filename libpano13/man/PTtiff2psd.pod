@@ -1,0 +1,124 @@
+=head1 NAME
+
+PTtiff2psd - Convert a set of TIFF files into a Photoshop PSD file
+
+
+=head1 SYNOPSIS
+
+B<PTtiff2psd> [options] I<tiff_file(s)>
+
+
+=head1 DESCRIPTION
+
+B<PTtiff2psd> is a command-line tool that crops a TIFF image to its
+bounding rectangle, preserving its original dimensions.
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-o> I<filename>
+
+Output filename (defaults to I<merged.psd>).
+
+=item B<-b> I<blendingmode>
+
+Specify blending mode for layers (use B<-h> to display them).
+
+=item B<-s>
+
+Stack them.
+
+=item B<-r>
+
+Reverse layers.
+
+=item B<-f>
+
+Force processing (do no stop on warning).
+
+=item B<-q>
+
+Quiet run
+
+=item B<-h>
+
+Output help summary.
+
+=back
+
+
+Valid blending modes:
+
+=over
+
+=item B<0>
+
+Normal
+
+=item B<1>
+
+Color
+
+=item B<2>
+
+Darken
+
+=item B<3>
+
+Difference
+
+=item B<4>
+
+Dissolve
+
+=item B<5>
+
+Hard
+
+=item B<6>
+
+Hue
+
+=item B<7>
+
+Lighten
+
+=item B<8>
+
+Luminosity
+
+=item B<9>
+
+Multiply
+
+=item B<10>
+
+Overlay
+
+=item B<11>
+
+Sof
+
+=item B<12>
+
+Saturation
+
+=item B<13>
+
+Screen
+
+=back
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTtiff2psd was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

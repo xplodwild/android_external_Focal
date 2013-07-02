@@ -1,0 +1,49 @@
+2006-10-27  dmg  <dmg@uvic.ca>
+
+	* Updated tiff_m
+
+2006-10-22  dmg  <dmg@uvic.ca>
+
+	* The PSD files were updated.
+
+2006-09-22  dmg  <dmg@selenium.dmg>
+
+	* Updated flat and mask outputs to match changes to mask
+	creation (see main changelog)
+
+2006-08-05  dmg  <dmgerman@uvic.ca>
+
+	* Updated JPEG test to include the ICC profile data
+
+2006-07-10  dmg  <dmgerman@uvic.ca>
+
+	* Updated tests to support 16 
+
+2006-07-08  dmg  <dmgerman@uvic.ca>
+
+	* Updated reference files to include ResolutionUnits in TIFFs
+
+2006-06-16  dmg  <dmgerman@uvic.ca>
+
+	* Updated reference files to reflect fixed bug "psd_mask"
+	"psd_nomask".
+
+2006-06-12  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (all): Undo the changes below... I decided instead
+	to remove the test directory from the make in the root
+	directory. Too bad CVS does not support transactions and rollbacks.
+
+	* README.txt: run "make test" to, you got it, run the test
+
+	* Makefile.am (all): Removed test from default Make. 
+
+2006-06-11  dmg  <dmgerman@uvic.ca>
+
+	* Removed fast transform in the tests, recreated them.
+
+2006-05-27  dmg  <dmgerman@uvic.ca>
+
+	* Created this test, including the Makefile
+	
+

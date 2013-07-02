@@ -1,0 +1,3350 @@
+2011-03-04    <dmg@uvic.ca>
+
+	* .hgignore: Added some files. Sorted files, so it is easier to
+	merge when the time comes.
+
+2011-03-03    <dmg@uvic.ca>
+
+	* CMakeList.txt: Added TAGS file creation, undid removal of
+	hugin-related paths.
+
+2011-03-02    <dmg@uvic.ca>
+
+	* panotypes.h, and many other files: Removed pt_int* data
+	types. There are not used consistently with the uint datatypes, so
+	why add confusion?
+
+	* tests/CMakeLists.txt: I removed some code that
+	moved/copied/removed the test data files in the reference directory.
+
+	* panorama.h: We no longer need code for OS 9. We don't support
+	it. Cleaned up the file.
+
+	* filter.h, sys_common.c (dieWithError): Removed const as it just
+	adds compiler warnings, and we don't really use const parameters
+	anyways.
+
+	* sys_ansi.c: Cleaned up the file from compiler warnings.
+
+	* pt_stdint.h: Cleaned up this file.
+
+	* panotypes.h: Cleaned up this file. 
+
+2011-02-20    <dmg@uvic.ca>
+
+	* tools/panoinfo_unix.c, sys_ansy.c: removed compiler
+	warnings. Patch submited by Guillaume Rousse.
+
+2011-01-20    <pablo.dangelo@web.de>
+
+	* parser.c: disabled debug printf in parsing code
+
+2011-01-11    jim0watters
+
+	* adjust.c Update SetStitchDefaults to include psdOpacity and psdBlendingMode
+
+	* version.h, pano13.rc Update version description to indicate if build is
+	32 or 64 bit
+  
+2011-01-06    <dmg@uvic.ca>
+
+	* PTcommon.c (Clear_Area_Outside_Selected_Region): thoby should
+	crop as a circular fisheye, not a rectangular region when using
+	the S parameter.
+
+	* configure.ac, version.h: Moved to version 2.9.18
+
+2011-01-05    <dmg@uvic.ca>
+
+	* queryfeature.c: Added data for thoby projection. Patch by
+	T. Modes.
+
+	* dump.c: removed unused variables. Patch by T. Modes.
+	
+2011-01-05    <dmg@uvic.ca>
+
+	* parser.c (ParseScript): Removed a bogus statement added during
+	debugging.
+
+	* PTcommon.c: Added debugging code to verify how stable the
+	transformations are.
+	
+	* doc/stitch.txt: updated for new projection.
+	
+	* dump.c, dump.f: Functions to dump the contents of internal
+	variables (for debugging purposes)
+
+	* math.c (thoby_sphere_tp, sphere_tp_thoby), adjust.c, parser.c,
+	filter.h, panorama.h: implemented Michel Thoby projection for
+	Nikkor 10.5, which is called Thoby Projection, and number 20.
+
+2010-04-27  dmg  <dmg@uvic.ca>
+
+	* jpeg.c: Removed dependency from file which was braking  build
+	for some Windows people. The change seems to be harmless under
+	Linux. Reported by  Volker Grabsch.
+
+2010-03-28  dmg  <dmg@uvic.ca>
+
+	* math.c, adjust.c, parser.c: enabled other input projections, in
+	particular: stereographic and equisolid (which is really lambert
+	equal area). We need to clean up a lot of the code from math.c,
+	because there are redundant functions. 
+
+
+2010-01-29  dmg  <dmg@Iridium.local>
+
+	* version.h, configure.ac: bumped version to 2.9.17
+
+2010-01-29  dmg  <dmg@uvic.ca>
+
+	* parser.c (ReadImageDescription): Expanded patch by Pablo to
+	avoid Translation processing when T[xyz] parms=0 are added to the
+	line.	 I hate our parser.
+
+
+2010-01-17  dmg  <dmg@uvic.ca>
+
+	* configure.ac, version.h: Updated version number to 2.9.16
+
+	* Makefile.am: Added new panini source code files to the building
+	of the library.
+
+2010-01-09  dmg  <dmg@uvic.ca>
+
+	* queryfeature.c (panoProjectionFormatCount): Fix for one the
+	problem with the type of the pointer. This was a big error I
+	introduced some time ago. This code removes the hard coded data
+	type. 
+
+2010-01-08  dmg  <dmg@uvic.ca>
+
+	* math.c: Reviewed and reformatted code by Tom for his implementation
+	of the panini general.
+
+2010-01-03  dmg  <dmg@uvic.ca>
+
+	* Pablo fixed the bug in which, if a Tr[xyz] was present, the
+	Translation operation was executed, even if the parms were
+	zero. This restricted the FOV to 180 degrees, regardless of
+	projection.
+
+2010-01-01  dmg  <dmg@uvic.ca>
+
+	* math.c (panini_general_erect): Fixed minor  typing  error when
+	implementing the formulae.
+
+	* queryfeature.c (panoProjectionFeaturesQuery): Cleaned up the
+	general panini parameters.
+
+2009-12-27  dmg  <dmg@uvic.ca>
+
+	* queryfeature.c: Yesterday I forgot to add the name of the
+	projection. This patch fixes that. Fixes bug 2921848. Removed
+	sizes from 
+
+
+
+2009-12-26  dmg  <dmg@uvic.ca>
+
+	* queryfeature.c, parser.c, panorama.h, filter.h, math.c,
+	adjust.c: Added general form of panini general projection. It
+	takes one parameter: the distance factor, any possitive
+	number. Math by Tom Sharpless.
+	
+2009-10-11 dangelo
+
+	* filter.h, math.c: Use Te0 as plane_yaw and Te1 as
+	plane_pitch. This allows specification of the plane that is used in
+	the translation mosaic (TrX, TrY, TrZ) mode. Not sure if the code is
+	bug free, though. It mostly worked as expected but didn't work nicely
+	for the nadir usecase in my limited tests.
+
+2009-10-07 jim0watters
+
+    * PTmender.c: use define for path seperator.
+
+	* ColourBrightness.c, file.c, hdrfile.c, main.c, parser.c, PTcommon.c, 
+	ptstitch.c, tiff.c pttiff.h: Fixed many possible memory leaks for libpano
+	
+	* PTblender.c, PTmasker.c, PTmender.h, PTroller.c: Fixed many possible 
+	memory leaks for the tools.
+	
+2009-09-26    <dmg@uvic.ca>
+
+	* adjust.c (SetAlignParams): Trying to normalize the angles didn't
+	really worked. Disabled for the time begin
+
+	* filter.h (NORM_ANGLE_RAD): Totally incorrect implementation before.
+
+
+
+2009-09-25    <dmg@uvic.ca>
+
+	* parser.c (ReadImageDescription): Removed a debugging printf I forgot
+
+2009-09-25    <dmg@uvic.ca>
+
+	* correct.c (SetCorrectDefaults): Initialized values of new parameters.
+
+	* adjust.h (GetGlobalPtr): added parms to its prototype
+
+	* PTcommon.c (panoPrintImage): Refactored this function from adjust.c
+
+	* panorama.h (correct_Prefs): Added new parameters
+
+	* adjust.c (SetAlignParams): Added new variables and renamed tilt ones.
+	(panoAdjustPrintMakeParams): Renamed function to make it standard.
+	Renamed variable g to optInfo
+	(SetAlignParams): Make sure the tilt parameters never go outside
+	incorrect values.
+
+	* parser.c (panoParseVariable, ParseScript): Refactored some
+	code. Sorry but I had to reindent the entire function.
+
+	* parser.c (WriteResults): Added new parameters to the output.
+
+	* parser.c (ParseScript): Renamed Tx, Ty,
+	and Tz to TiX, TiY, and TiZ. Added translation variables TrX, TxY,
+	and TrZ and test ones Te0, Te1, Te2, Te3.
+
+	* filter.h: Added translation parameters, (trans[XYZ]), renamed
+	optimization variables to a more meaningful name (suffix optVar),
+	added a new set of variables for testing new functions in the
+	stack.
+
+2009-09-20 21:08  dangelo
+
+	* adjust.c, panorama.h, filter.h, math.c: Mosaic mode based on
+	  camera position.
+
+2009-09-20 21:08  brunopostle
+
+	* Makefile.am, man/Makefile.am, tests/Makefile.am,
+	  tests/simpleStitch/Makefile.am, tests/simpleTiff16/Makefile.am,
+	  tools/Makefile.am: The cmake stuff should be available in the
+	  automake tarball
+
+2009-09-20 20:52  brunopostle
+
+	* CMakeLists.txt, Makefile.am: Bump soname to 2:0:0 for real this
+	  time
+
+2009-09-20 12:40  kornelbenko
+
+	* CMakeLists.txt, ChangeLog: creation of static pano13 library too
+
+2009-09-20 06:52  kornelbenko
+
+	* CMakeLists.txt: white space
+
+2009-09-19 19:06  kornelbenko
+
+	* ChangeLog, tools/CMakeLists.txt: Don't compile PTAInterpolate if
+	  no JAVA, it uses writeProject() from
+	  ptpicker.c
+
+2009-09-19 17:26  kornelbenko
+
+	* CMakeLists.txt: use javastub.c if noa java available
+
+2009-09-19 15:06  jim0watters
+
+	* ChangeLog, PTcommon.c: fixed getROI to not clip the nadir and
+	  zenith shots when outputting as cropped tiffs.
+
+2009-09-19 12:59  kornelbenko
+
+	* CMakeLists.txt, ChangeLog, tests/CMakeLists.txt,
+	  tests/simpleStitch/CMakeLists.txt,
+	  tests/simpleTiff16/CMakeLists.txt: Enable test of our only two
+	  simple tests.
+	  
+	  In build-tree one has first to call "make".
+	  After this one may call "make test" to actually execute the
+	  tests.
+
+2009-09-19 06:21  kornelbenko
+
+	* CMakeLists.txt, ChangeLog: Add installation of
+	  lib/pkgconfig/libpano13.pc
+
+2009-09-19 05:41  kornelbenko
+
+	* CMakeLists.txt, ChangeLog, tools/CMakeLists.txt: Added tools
+	  directory
+
+2009-09-19 02:47  dmg
+
+	* CMakeLists.txt, ChangeLog: 2009-09-18 <dmg@phosphorus>
+	  
+	  * CMakeLists.txt: Moved wx-widgets into Windows-only part
+
+2009-09-19 02:41  tksharpless
+
+	* CMakeLists.txt: CMakeLists.txt now requires version 2.6
+
+2009-09-18 23:35  kornelbenko
+
+	* CMakeLists.txt: Create symbolic links to libpano13.so
+
+2009-09-18 22:35  jim0watters
+
+	* doc/Optimize.txt, doc/stitch.txt: Update the optimize and stitch
+	  scripts to document Tilt.
+
+2009-09-18 21:59  kornelbenko
+
+	* CMakeLists.txt, man/CMakeLists.txt: Added installation of manuals
+
+2009-09-18 21:10  dmg
+
+	* doc/developmentPolicy.txt: added sentence on mailing list to
+	  policy draft
+
+2009-09-18 21:03  dmg
+
+	* ChangeLog: 2009-09-18 <dmg@uvic.ca>
+	  
+	  * doc/developmentPolicy.txt: Added file with a draft of a policy
+	  for development of libpano
+
+2009-09-18 21:03  dmg
+
+	* doc/developmentPolicy.txt: 2009-09-18 <dmg@uvic.ca>
+	  
+	  * doc/developmentPolicy.txt: Added file with a draft of a policy
+	  for development of libpano
+
+2009-09-18 20:13  dmg
+
+	* CMakeLists.txt, ChangeLog, ptpicker.c: 009-09-18 <dmg@uvic.ca>
+	  
+	  Patch submitted by Kornel Benko
+	  
+	  * ptpicker.c: Casted some values in printf to avoid compiler
+	  warnings.
+	  
+	  * CMakeLists.txt: As allways one has to call cmake
+	  -DCPACK_BINARY_DEB:BOOL=ON to create a package (debian/ubuntu in
+	  this example)
+	  
+	  make package creates then the package libpano13-2.9.15-Linux.deb.
+	  (Values automatically taken from configure.ac) The package will
+	  install the header-files and the (shared) libpano13 library.
+
+2009-09-18 03:25  jim0watters
+
+	* ChangeLog, PTcommon.c: Fix crash if script p line has n"TIFF_m"
+	  without any other options for tiff
+
+2009-09-17 21:27  jim0watters
+
+	* adjust.c: correct the default value for tiltScale optVars to 0,
+	  like all optVars.
+
+2009-09-17 17:01  jim0watters
+
+	* ChangeLog: adjust.c: Add tiltZ and tiltScale to list being set to
+	  default values
+	  math.c Move variable initialization to the beginning of code
+	  block for MSSC compiler.
+
+2009-09-17 16:57  jim0Watters
+
+	* adjust.c: Add tiltZ and tiltScale to list being set to default
+	  values.
+
+2009-09-17 16:56  jim0watters
+
+	* math.c: Move variable initialization to the beginning of code
+	  block for MSSC compiler.
+
+2009-09-17 16:40  dmg
+
+	* ChangeLog, parser.c: 2009-09-17 <dmg@uvic.ca>
+	  
+	  * parser.c: Fail if Ts parameter is set to zero
+
+2009-09-16 19:50  dmg
+
+	* ChangeLog, PTcommon.c, correct.c, parser.c: 2009-09-16
+	  <dmg@uvic.ca>
+	  
+	  * correct.c (correct): Removed debugging code that I introduced
+	  early. I suspect correct is no longer needed. Thanks to Jim
+	  (again) for catching this.
+	  
+	  * parser.c (ReadCoordinates): Removed bogus case switch (thanks
+	  to
+	  Jim Watters for catching this!)
+	  
+	  * PTcommon.c: Changed use of NDEBUG to a new preprocessor define
+	  called PANO_TEST_INVERSE
+
+2009-09-16 17:52  brunopostle
+
+	* ChangeLog: Update ChangeLog for likely beta2
+
+2009-09-14 20:59  brunopostle
+
+	* tests/panoAutomateTest.pl,
+	  tests/simpleStitch/reference/Makefile.am,
+	  tests/simpleTiff16/reference/Makefile.am: Put missing test case
+	  files in tarball (Andreas Metzler)
+
+2009-09-14 19:54  brunopostle
+
+	* Makefile.am: switch soname back to 1:0:0 as ABI hasn't really
+	  changed
+
+2009-09-14 18:23  dmg
+
+	* ChangeLog, configure.ac: 
+
+	  * configure.ac: Added support for kfreebsd. Patch created by
+	  Debian upstream maintainer Cyril Brulebois
+
+2009-09-10 06:41  dmg
+
+	* ChangeLog, PTcommon.c, adjust.c, correct.c, filter.h, math.c,
+	  panorama.h, parser.c, pt_stdint.h: 2009-09-09 <dmg@uvic.ca>
+
+	  * PTcommon.c, panorama.h, pt_stdint.h, math.c, adjust.c
+	  PTcommon.c, filter.h, parser.c, correct.c: Integrated Dev"s
+	  implementation of tilt, extended to support rotation of the
+	  camera
+	  before independent of roll,pitch,yaw. The new parameters are:
+	  Tx,Ty,Tz,Ts (tilt on x axis, y axis, z axis, and scaling of field
+	  of view in the transformation). Supported by PTmender and
+	  PToptimizer
+
+2009-09-03 17:41  brunopostle
+
+	* ChangeLog: Update ChangeLog with svn2cl
+
+2009-09-03 17:26  brunopostle
+
+	* Makefile.am, configure.ac, version.h: Bump version and soname
+
+2009-09-03 17:13  brunopostle
+
+	* adjust.h, parser.c: Fixes for implicit declarations (Stanislav
+	  Brabec)
+
+2009-09-03 14:08  brunopostle
+
+	* Makefile.am, configure.ac, libpano13.pc.in: Add a pkgconfig
+	  support with a libpano13.pc file (Andreas Metzler)
+
+2009-08-18 17:33  dmg
+
+	* ChangeLog: Forgot to update changelog
+
+2009-08-18 17:26  dmg
+
+	* parser.c: Tried to fix the setlocale thing
+
+2009-08-14 18:36  dmg
+
+	* ChangeLog, PTcommon.c, adjust.c, filter.h, math.c,
+	  tests/simpleStitch/reference/tiff_m0000.tif,
+	  tests/simpleStitch/reference/tiff_m_cropped0000.tif,
+	  tests/simpleStitch/reference/tiff_m_cropped0001.tif,
+	  tests/simpleTiff16/reference/tiff_m0000.tif,
+	  tests/simpleTiff16/reference/tiff_m_cropped0000.tif: 2009-08-14
+	  <dmg@uvic.ca>
+	  
+	  * Updated tests cases to reflect the slight change in the
+	  boundaries of the ROI.
+	  
+	  * adjust.c, math.c, filter.h: The inverse of shear was broken. I
+	  have added a shearInv function that takes care of this bug.
+	  
+	  * PTcommon.c (getROI): Improved its computation of its edges to
+	  make it err on the outside rather than on the inside of the
+	  actual
+	  area. I have also added code to test the inverse computations for
+	  any particular function.
+
+2009-08-14 06:14  dmg
+
+	* ChangeLog, PTcommon.c, tests/panoAutomateTest.pl,
+	  tests/simpleStitch/reference/tiff_m_uncropped0000.tif,
+	  tests/simpleStitch/reference/tiff_m_uncropped0001.tif,
+	  tests/simpleTiff16/reference/tiff_m0000.tif,
+	  tests/simpleTiff16/reference/tiff_m_uncropped0000.tif,
+	  tests/simpleTiff16/temp.txt: 2009-08-13 <dmg@uvic.ca>
+	  
+	  * PTcommon.c (panoCreatePanorama): Added support for uncropped
+	  TIFF_m, but only when it is not circular fisheye
+	  
+	  * tests/panoAutomateTest.pl (Compare_Images): Added support for
+	  uncropped and cropped images.
+	  
+	  * Updated tests
+
+2009-08-14 06:05  dmg
+
+	* tests/simpleStitch/reference/tiff_m0000.tif,
+	  tests/simpleStitch/reference/tiff_m0001.tif: i need actual files,
+	  not symlinks
+
+2009-08-14 06:01  dmg
+
+	* tests/simpleStitch/reference/tiff_m0000.tif,
+	  tests/simpleStitch/reference/tiff_m0001.tif: finished renaming
+	  files
+
+2009-08-14 06:00  dmg
+
+	* tests/simpleStitch/reference/tiff_m0000.tif,
+	  tests/simpleStitch/reference/tiff_m0001.tif,
+	  tests/simpleStitch/reference/tiff_m_uncropped0000.tif,
+	  tests/simpleStitch/reference/tiff_m_uncropped0001.tif: renaming
+	  some files part 2, has to be done in different commits
+
+2009-08-14 05:58  dmg
+
+	* tests/simpleStitch/reference/tiff_m_cropped0000.tif,
+	  tests/simpleStitch/reference/tiff_m_cropped0001.tif: renaming
+	  some files, has to be done in different commits
+
+2009-08-04 13:52  tksharpless
+
+	* CMakeLists.txt: Add Bruno's patch for Linux to CMakeLists.txt
+
+2009-08-04 12:48  tksharpless
+
+	* CMakeLists.txt: Improved version of previous mod to
+	  CMakeLists.txt
+
+2009-08-04 12:35  tksharpless
+
+	* CMakeLists.txt: Can define HUGIN_BASE_DIR on the CMake
+	  commandline to locate the Hugin source root (by default it must
+	  be next to the libpano source root and be called hugin).
+
+2009-08-04 04:16  tksharpless
+
+	* CMakeLists.txt: Added CMakeLists.txt to build libpano13 (only) in
+	  the Hugin build environment. Works with MSVC 2008 Exp. & Hugin
+	  SDK on WinVista. Please test elsewhere. Also untested is the
+	  option of including support for the Java utilities (left out by
+	  default).
+
+2009-08-01 09:16  dmg
+
+	* ChangeLog, parser.c: 2009-08-01 <dmg@uvic.ca>
+	  
+	  * parser.c: on discussion with Tom Modes I made sure that parser
+	  saves and restores the locale.
+
+2009-06-11 22:32  brunopostle
+
+	* adjust.c: Fix "Unsupported panorama projection" warning when
+	  opening a project with a recent projection (Yuval Levy).
+	  https://sourceforge.net/tracker/?func=detail&atid=550441&aid=2803939&group_id=77506
+
+2009-05-01 21:10  brunopostle
+
+	* ChangeLog: Update ChangeLog for 2.9.14_rc1
+
+2009-05-01 21:01  brunopostle
+
+	* man/Makefile.am, man/PTAInterpolate.pod, man/PToptimizer.1,
+	  man/PToptimizer.pod: man page for PTAInterpolate
+
+2009-05-01 20:36  brunopostle
+
+	* Makefile.am: ABI has changed since 2.9.12, bump soname (Andreas
+	  Metzler)
+
+2009-04-30 22:57  brunopostle
+
+	* math.c: Fix albers equal area conic division by zero error (Guido
+	  Kohlmeyer)
+
+2009-04-25 16:50  brunopostle
+
+	* man/PTblender.1, man/PTcrop.1, man/PTinfo.1, man/PTmasker.1,
+	  man/PTmender.1, man/PToptimizer.1, man/PTroller.1,
+	  man/PTtiff2psd.1, man/PTtiffdump.1, man/PTuncrop.1,
+	  man/panoinfo.1: Update VERSION in man pages (Andreas Metzler)
+
+2009-03-03 22:42  brunopostle
+
+	* ChangeLog: update
+
+2009-02-23 22:18  brunopostle
+
+	* adjust.c, remap.c: Apply MAX_FISHEYE_FOV only if both hfov and
+	  vfov match
+
+2009-02-23 22:11  brunopostle
+
+	* README.linux, README.windows, filter.h: reset MAX_FISHEYE_FOV to
+	  179 degrees (was 720)
+
+2009-02-12 21:19  brunopostle
+
+	* man/Makefile.am: Don't do pointless chmod a+r after installing
+	  man pages
+
+2009-02-10 00:47  jim0watters
+
+	* parser.c: add missing case statements
+
+2009-02-08 00:32  brunopostle
+
+	* filter.c: Don't include unistd.h on Windows, bug #2577715
+
+2009-02-05 00:45  brunopostle
+
+	* ChangeLog: update ChangeLog
+
+2009-02-05 00:38  brunopostle
+
+	* configure.ac, version.h: bump version to 2.9.14, sources
+	  conflicted as to whether previous version was 2.9.12 or 2.9.13
+
+2009-02-05 00:30  brunopostle
+
+	* m4/ax_check_graphics.m4: close bugs #1236502 & #1599376 -lm
+	  required for libpng
+
+2009-02-05 00:22  brunopostle
+
+	* Makefile.am, README.linux, makefile.linux: Remove unmaintained
+	  makefile.linux
+
+2009-02-05 00:06  brunopostle
+
+	* ColourBrightness.c, filter.c, pttiff.h: patch fixes implicit
+	  declaration warnings, which may lead to
+	  crashes. patch #2163691 (Stanislav Brabec)
+
+2009-02-04 23:49  brunopostle
+
+	* filter.c, filter.h: Fix of invalid write() calls, which don't
+	  appear to be used anyway. patch #2163669 (Stanislav Brabec)
+
+2009-02-04 23:02  brunopostle
+
+	* parser.c: four variables have been added to "C" lines:
+	  * c - control point number;
+	  * D, Dx, Dy - a control point error (value and orthogonal
+	  components).
+	  It is useful for the analysis of results of PToptimizer operation
+	  and the
+	  subsequent removal of "bad" control points. Patch #2118807 (Iouri
+	  Ivliev)
+
+2009-02-04 22:33  brunopostle
+
+	* parser.c: Existing implementation of WriteResults function uses
+	  two intermediate buffers
+	  for sprintf(3) and a considerable quantity of strcat(3) calls for
+	  copying data
+	  in the target buffer. This patch removes all strcat(3) calls and
+	  fulfils
+	  sprintf(3) in the target buffer directly. Patch #2118807 (Iouri
+	  Ivliev)
+
+2009-02-02 21:55  dangelo
+
+	* adjust.c, filter.h, panorama.h, parser.c, queryfeature.c: forgot
+	  to add some more files touched by the bi/triplane projection
+
+2009-02-02 21:51  dangelo
+
+	* ChangeLog: correct Changelog entry
+
+2009-02-02 21:29  dangelo
+
+	* ChangeLog, math.c: equirect -> rectilinear transform: reject
+	  points behind the camera
+	  applied patch with biplane and triplane projections.
+
+2009-02-02 20:39  brunopostle
+
+	* ChangeLog, man/.cvsignore,
+	  tests/simpleStitch/reference/.cvsignore,
+	  tests/simpleTiff16/.cvsignore,
+	  tests/simpleTiff16/reference/.cvsignore, tools/.cvsignore:
+	  housekeeping
+
+2009-02-01 23:34  brunopostle
+
+	* tools/PTmasker.c: fix for invalid format specification, bug
+	  #2163676 (Stanislav Brabec)
+
+2009-02-01 23:24  brunopostle
+
+	* configure.ac, m4/ax_check_java.m4: autotools cross-compile
+	  support, bug #2491104 (Diego E. Petteno)
+
+2009-02-01 23:15  brunopostle
+
+	* f2c.h, jpegicc.c, jpegicc.h, rgbe.c, rgbe.h: Fix vague licensing,
+	  bug #1877526 (Cyril Brulebois)
+
+2009-02-01 22:48  brunopostle
+
+	* Makefile.am, configure.ac, man, man/Makefile.am, man/PTblender.1,
+	  man/PTblender.pod, man/PTcrop.1, man/PTcrop.pod, man/PTinfo.1,
+	  man/PTinfo.pod, man/PTmasker.1, man/PTmasker.pod, man/PTmender.1,
+	  man/PTmender.pod, man/PToptimizer.1, man/PToptimizer.pod,
+	  man/PTroller.1, man/PTroller.pod, man/PTtiff2psd.1,
+	  man/PTtiff2psd.pod, man/PTtiffdump.1, man/PTtiffdump.pod,
+	  man/PTuncrop.1, man/PTuncrop.pod, man/panoinfo.1,
+	  man/panoinfo.pod: add missing manpages bug #1877534 (Cyril
+	  Brulebois)
+
+2009-02-01 21:18  brunopostle
+
+	* configure.ac, tests/simpleStitch/Makefile.am,
+	  tests/simpleStitch/reference/Makefile.am,
+	  tests/simpleTiff16/Makefile.am,
+	  tests/simpleTiff16/reference/Makefile.am: Don't ship .svn dirs in
+	  tarball bug #1861174 (Cyril Brulebois)
+
+2009-02-01 17:59  brunopostle
+
+	* Makefile.am, PixMap.c, PixMap.h, README.mac, makefile.mac,
+	  pict.c: Remove GPL incompatible files (bug #1861841), this
+	  removes mac classic support
+	  and hopefully doesn't break anything in OS X.
+
+2009-02-01 17:37  brunopostle
+
+	* bootstrap: support libtool-2.0 bug #2011492
+
+2009-01-17 22:35  brunopostle
+
+	* ChangeLog, math.c: fix reverse calculation for pannini (Thomas
+	  Modes)
+
+2009-01-08 23:47  brunopostle
+
+	* queryfeature.c: maximum field of view for pannini should be
+	  equivalent to related projections
+
+2009-01-03 07:22  dmg
+
+	* ChangeLog, adjust.c, filter.h, math.c, panorama.h, parser.c,
+	  queryfeature.c: 2009-01-02 dmg <dmg@phosphorus>
+	  
+	  * * adjust.c, filter.h, math.c, panorama.h, parser.c &
+	  queryfeateature.c:
+	  
+	  Fixed the panini (or should we call it pannini) and renamed
+	  previous projection as equirectangular panini. It might have to
+	  change its name
+
+2008-12-31 16:12  jim0watters
+
+	* queryfeature.c: Add missing projections for
+	  panoProjectionFeaturesQuery c/o Yuv
+
+2008-12-31 05:59  jim0watters
+
+	* ., ChangeLog, adjust.c, doc/Optimize.txt, doc/stitch.txt,
+	  filter.h, math.c, panorama.h, parser.c, queryfeature.c: adjust.c,
+	  filter.h, math.c, panorama.h, parser.c & queryfeateature.c
+	  added mirror, equisolid, orthographic, and stereographic as input
+	  image formats
+	  added equisolid, orthographic, stereographic as output panorama
+	  formats
+	  add some more defines to panorama.h to help image and pano
+	  formats
+
+2008-12-31 05:25  jim0watters
+
+	* PTcommon.c, correct.c, filter.c, morpher.c, pt_stdint.h,
+	  pteditor.c, ptpicker.c: Initialize TrformStr structure before use
+
+2008-12-29 23:05  dmg
+
+	* ChangeLog, adjust.c, filter.h, math.c, panorama.h, parser.c,
+	  queryfeature.c: 2008-12-29 dmg <dmg@phosphorus>
+	  
+	  * panorama.h, math.c, adjust.c, queryfeature.c, filter.h: Finally
+	  added the architectural.
+
+2008-12-29 21:37  dmg
+
+	* ChangeLog, queryfeature.c: 2008-12-29 dmg <dmg@phosphorus>
+	  
+	  * queryfeature.c (panoProjectionFeaturesQuery): Added querying
+	  features for panini; this will allow Hugin to use it
+
+2008-12-29 12:07  dmg
+
+	* ChangeLog, adjust.c, filter.h, math.c, panorama.h, parser.c,
+	  queryfeature.c: 2008-12-29 dmg <dmg@uvic.ca>
+	  
+	  * panorama.h, math.c, adjust.c, queryfeature.c, filter.h,
+	  parser.c: Added panini projection. the credit goes to Thomas
+	  Sharpless who rediscovered it, and to Bruno Postle, who did the
+	  original math.
+
+2008-08-11  dmg  <dmg@uvic.ca>
+
+	* bootstrap (have_libtool): Added support for 2.2.* version of
+	libtool. Patch submitted by Neil Shephard.
+	
+2008-01-26 Jim Watters <jwatters@photocreations.ca>
+
+	* Fix some warning messages
+	* sys_common.c and filter.h Updated printError functions to use Const char (submitted by Simon Oosthoek)
+	
+2008-01-04 Jim Watters <jwatters@photocreations.ca>
+
+	* Added FastTransform to the data structures removed as global variable
+	* added FastTransform to the dialog.
+	* updated the dialogs with some of the newer interpolator
+	* Fixed PTCorrect bug that had wrong order of operations on the image stack,
+	  Radial, then H & V shift.
+	* updated the default interpolator to _spline36
+	* On Windows changed the default location to store parameters file from app 
+	  folder to folder and file name %APPDATA%\Panotools\APPNAME.prf.  This should
+	  make the plugins Vista friendly.  Changed the default temp file location
+	  to %TEMP%
+	  
+	
+2008-01-03 Pablo d'Angelo
+
+	* tools/Makefile.am: Only compile PTAinterpolate if java (and thus
+	ptpicker.h) is available.
+
+2007-12-31 Jim Watters <jwatters@photocreations.ca>
+
+	* Update trunk to be pano13.  Create a name separation from pano12.
+	  Swepted many files.
+
+2007-12-29 Jim Watters <jwatters@photocreations.ca>
+
+	* Added Max Lyons bug fixes to libpano
+	* Added Max Lyons PTAinterpolate project to replace PTInterpolate
+	* Removed incomplete version of PTStitcher that was replaced by PTMender
+	* Removed duplicate make files for panoinfo and ptoptimizer
+	
+2007-12-28 Jim Watters <jwatters@photocreations.ca>
+
+	* removed warning suppression from MSVC builds
+	* swept many files to remove compiler warnings.
+
+2007-10-25 dangelo <pablo.dangelo@web.de>
+
+	* libpano.vcproj: updated MSVC build, produce libs named libpano13
+
+2007-10-21 dangelo <pablo.dangelo@web.de>
+
+	* parser.c: reset robust estimator sigma (m parameter) to 0, if
+	it is not specified explicitly
+
+2007-04-23  Jim Watters <jwatters@photocreations.ca>
+
+	* adjust.c (SetMakeParams): Update scale[0] to use selected width
+	and height.  Fix issue using C crop
+	
+2007-02-05 dangelo <pablo.dangelo@web.de>
+
+	* queryfeature.c: fixed projection names and HFOV/VFOV limits.
+
+2007-01-25 dangelo <pablo.dangelo@web.de>
+
+	* queryfeature.c: Panorama (aka cylindrical) projection supports
+	only VFOV < 180
+	* filter.c: SetImageDefaults did not initialize precomputed
+	parameters to zero
+
+2007-01-24 dangelo <pablo.dangelo@web.de>
+
+	* queryfeature.c: Forgot to set internal format id...
+
+2007-01-23 dangelo <pablo.dangelo@web.de>
+
+	* queryfeature.c, panorama.h: added internal format id to projection
+	description
+
+2007-01-22  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.13
+
+	* queryfeature.c (panoProjectionFeaturesQuery): Mercator is 179
+	vfov max.
+
+	* file.c (CREATED_BY_PSD): This constant needs to be ODD in length
+
+	* queryfeature.c, panorama.h, math.c, adjust.c, filter.h,
+	parser.c: Added Miller Cylindrical.
+
+2007-01-15  dmg  <dmg@uvic.ca>
+
+	* tiff.c (panoTiffSetErrorHandler): Disable warnings in TIFF library.
+
+2007-01-11  dmg  <dmg@uvic.ca>
+
+	* queryfeature.c, panorama.h (panoProjectionFormatCount): Added
+	function.
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.12
+
+	* tools/panoinfo_unix.c: Output features of panos.
+
+	* panorama.h, queryfeature.c: Added functions to query features of each pano
+	format as needed by hugin.
+
+	* parser.c (ParseScript): Ignore K-type variables too.
+
+2007-01-10  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.11
+
+	* parser.c (ParseScript): V-type variables from Hugin .pto files
+	need to be ignored also.
+	
+	* parser.c (readAdjust): Images with 'i' were all done with the
+	first spec. This change fixes that problem (the parser should be
+	rewritten)
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.10
+
+	* doc/stitch.txt: Updated the file to match latest version.
+	
+	* parser.c (readAdjust): Updated parser to accept adjustLine in
+	the i-line.
+	(nextWord): Make sure that it eats the closing quotes
+	(ReadPanoramaDescription): Forked this function from
+	ReadImageDescription. In the past both images (o and i lines)
+	and output format (p-line) were read with the same function.
+
+	* TODO (PTmender): Updated the file.
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.9
+	
+	* queryfeature.c: Updated labels for Lamberts to their full name.
+	
+	* parser.c: implemented option P (parameters to projection) as a
+	multivalue parameted
+
+	* panorama.h: Modified the Image struct to support parameters to
+	the projection and to support precomputation of values for the
+	projection (to speed up computation)
+	
+	* math.c, parser.c, panorama.h, adjust.c, filter.c,
+	queryfeature.c: Implemented Albers Conical Equal Area projection.
+
+	Most of these changes submitted by Michael Gross, reviewed and
+	slightly adapted by me.
+	
+2007-01-01  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.8
+
+	* parser.c (ParseScript): Added some comments to "z" option
+
+	* sys_ansi.c (PrintErrorIntern): Add an end-of-line if none is
+	provided (to increase readbility of PrintError, but only when
+	stdout is used)
+
+	* AUTHORS: Updated my own URL. Order them in lexicographical order
+	by lastname
+
+	* TODO: Updated file.
+
+	* ZComb.c (ZCOMBLOGFILENAME): Changed name of log file for Zcomb
+	to something more appropriate.
+
+	* ColourBrightness.c (CorrectImageColourBrigthness): Fixed some
+	compilation warnings
+
+	* tools/PTmasker.c (main): Added support for focus enhancing (z
+	option in the old PTstitch script)
+
+2006-12-31 dangelo <pablo.dangelo@web.de>
+
+	* file.c (panoSingleFileExists): Added function to check if a single
+	file exists
+
+	* ptcommon.c (panoCreatePanorama): PTmender overwrites output files on
+	all platforms now
+	
+2006-12-31 dangelo <pablo.dangelo@web.de>
+
+	* ColourBrightness.c, file.c, PTcommon.c, ptstitch.c, queryfeature.c,
+	tiff.c, tools/PTmender.c: Cleanup signed vs unsigned warnings
+
+	* tools/PTmasker.c: Actually set default output name, if none given
+	on the command line
+
+	* libpano.sln: Forgot to compile PTroller
+
+2006-12-26  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.7.
+
+	* tiff.c (panoTiffDisplayInfo): Fixed compilation warning
+
+	* math.c: Cleaned up some of the Lambert related code.
+	
+	* tools/PTblender.c: Improved error message
+		
+	* TODO: Updated it.
+	
+	* ptfeather.c: Improved the feathering algorithm, made sure 16
+	bits works too.
+
+	* ptstitch.c, ptstitch.h (panoStitchPixelChannelSet): Added function,
+	cleanedup panoStitchPixelChannelGet.
+
+	* metadata.c (panoImageBytesPerSample): Added function.
+
+	* tools/PTmasker.c (main): If one file is specified feather it,
+	otherwise do nothing.
+
+	* tiff.c, pttiff.h: (panoImageDispose): Disposes properly any
+	memory used by the Image data structure.
+
+	* ColourBrightness.c, PTcommon.c, ptstitch.c, PTcommon.c: replaced
+	myfree(image.data) with panoImageDispose.
+
+	* filter.c (panoMetadataFree): Set pointers to null once they have
+	been released.
+
+2006-12-18  dmg  <dmg@uvic.ca>
+
+	* sys_ansi.c (PrintErrorIntern): The function had a limit of 256
+	bytes to print, and anything longer created a run time error. I
+	have changed it to deal with any lenght.
+
+2006-12-18 dangelo <pablo.dangelo@web.de>
+
+	* adjust.c, adjust.h, parser.c, doc/Optimize.txt:
+	Added optional robust estimation using the Huber
+	M-estimator function. 
+	
+2006-12-17 dangelo <pablo.dangelo@web.de>
+
+        * math.c: added defines for isnan and isinf, if MSVC is used.
+	* Makefile.am, libpano.vcproj, PTDialogs.c: use sys_ansi on
+	windows
+
+2006-12-15  dmg  <dmg@uvic.ca>
+
+	* PTcommon.c (panoCreatePanorama): A pointer was freed more than
+	once
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.6.
+
+	* tools/PTtiff2psd.c (PT_TIFF2PSD_USAGE): Updated help message
+
+	* PTcommon.c (panoPSDCreate): Added support for 1 input file only in
+	the creation of PSDs.
+
+	* tools/PTtiff2psd.c (main): Added support for 1 input file only.
+
+	* tiff.c (readTIFF): Reenable readTIFF and writeTIFF. pteditor
+	uses them.
+
+2006-12-14  dmg  <dmg@uvic.ca>
+
+	* file.c: Fixed major problems with PSD logic and PICT tags
+
+	* metadata.c (panoImageFullHeight): Darn. It was returning width
+	instead of height!
+
+2006-12-15 dangelo <pablo.dangelo@web.de>
+        * queryfeature.c: Include lambert azimuthal in list of supported
+	output projections
+
+2006-12-13  dmg  <dmg@uvic.ca>
+
+	* ColourBrightness.c (CorrectFileColourBrightness): Another bug I
+	introduced when I replaced readTIFF with panoTiffRead. I need
+	regression testing :(
+
+2006-12-13  dangelo <pablo.dangelo@web.de>
+
+        * Makefile.am: install file.h during make install. It is required
+	for compilation of programs using libpano13
+
+2006-12-12  dmg  <dmg@uvic.ca>
+
+	* math.c (transmercator_erect): Make sure it returns 0 when the
+	width is infinite.
+
+	* adjust.c: Updated comments
+
+	* math.c (erect_transmercator): Make sure it only translates
+	points within the sphere (avoids duplication of the image).
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.5.
+
+	* queryfeature.c:  Added lambert Azimuthal projection
+
+	* math.c (erect_lambert, lambert_erect): Added lambert Azimuthal
+	projection
+
+	* filter.h: Added Lambert Azimuthal projection
+
+	* panorama.h (enum): Added Lambert Azimuthal projection
+
+	* adjust.c (SetMakeParams, SetInvMakeParams): Added Lambert
+	Azimuthal projection
+
+	* parser.c (readAdjust,ParseScript): Added Lambert Azimuthal projection.
+
+2006-12-12 dangelo <pablo.dangelo@web.de>
+        * ColorBrightness.c, PTcommon.c, tools/PTblender.c,
+          tools/PTcrop.c, tools/PTinfo.c, tools/PTmasker.c, tools/PTmender.c,
+          tools/PTtiff2psd.c, tools/PTtiffdump.c, tools/PTuncrop.c: Fixes for
+          MSVC compilation, unistd.h not available on that platform. C Compiler
+          only accepts variables declared at the beginning of a function.
+
+        * libpano.sln, libpano.vcproj, tools/PTblender.vcproj, 
+          tools/PTcrop.vcproj, tools/PTinfo.vcproj, tools/PTmasker.vcproj,
+          tools/PTmender.vcproj, tools/PTtiff2psd.vcproj,
+          tools/PTtiffdump.vcproj, tools/PTuncrop.vcproj: New MSVC project
+          files, statically linked to libpano and image libraries.
+
+        * tools/compat_win32/dirent.h, tools/compat_win32/getopt.h
+          tools/compat_win32/getopt.c: getopt not ANSI C.
+
+2006-12-11  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.4.
+
+	* tools/PTmender.c: Fixed a bug in the processing of the input files.
+	
+	* queryfeature.c:  Added lambert projection
+
+	* math.c (erect_lambert, lambert_erect): Added lambert projection
+
+	* filter.h: Added Lambert projection
+
+	* panorama.h (enum): Added Lambert projection
+
+	* adjust.c (SetMakeParams, SetInvMakeParams): Added Lambert projection
+
+	* parser.c (readAdjust,ParseScript): Added Lambert projection.
+
+	* adjust.c (SetInvMakeParams): Corrected error message.
+
+2006-12-04  dmg  <dmg@uvic.ca>
+
+	* PTcommon.c: Uncommented getCropInformation. It is still being
+	used in the PDF code.
+
+2006-12-03  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.3.
+
+	* tiff.c (panoTiffDisplayInfo): Added function. 
+
+	* parser.c (panoParserFindOLine): Added function.
+
+2006-12-02  dmg  <dmg@uvic.ca>
+
+	* PTinfo.c, Makefile.am (bin_PROGRAMS): Created new program
+
+	* metadata.c (panoMetadataCropSizeUpdate),
+	tiff.c (panoImageBoundingRectangleCompute): Fixed a bug in the
+	creation of cropped files. The full size tag was not being
+	created.
+
+	* file.h, file.c (panoFileDeleteMultiple): Created function. Used
+	with -x option.
+
+	* PTcommon.h, PTcommon.c:  Refactored main function from PTcrop
+	and PTuncrop.
+
+	* tools/PTcrop.c: allow the multiple files in the command line
+	
+	* tools/PTmasker.c, tools/PTroller.c, tools/PTblender.c, tools/PTcrop.c: Add -x switch
+
+2006-11-30  dmg  <dmg@uvic.ca>
+
+	* parser.c (READ_OPT_VAR): Bug fix: changed a format spec from %k
+	to %d
+
+2006-11-28  dmg  <dmg@uvic.ca>
+
+	* tools/PTmender.c (PT_MENDER_USAGE): Updated usage message
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.2.
+
+	* TODO: Updated it.
+	
+	* tools/PTmender.c: Mimic processing of input filenames to match
+	PTstitcher: 
+	  -- First use command line options
+	  -- If no images, then use filename in "i" lines
+	  -- If still no images, then use filename in "o" lines
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.1,
+	updated copyrights.
+
+	* tools/panoinfo_unix.c (main): Cleaned up the output
+
+	* queryfeature.c: Removed list of patches. It should be enough
+	with the version number
+
+
+	* tiff.c (panoImageBoundingRectangleCompute): Remove a debug
+	statement.
+	
+	* file.h: removed a wrong comment
+
+	* tools/PTcrop.c (main): Renamed option -o to -f (to be consistent)
+
+	* tiff.c (panoTiffCrop): Do processing in a temporal file, instead
+	of directly in the output file
+
+	* PTcommon.c: Removed some dead code
+	
+	* PTcommon.c (panoCreatePanorama): The calculation of the ROI is
+	not done correctly for circular fisheye images (CFIs). For the
+	time being we will do uncrop processing for CFIs, and cropped
+	processing for everything else. For fisheyes we will create crops
+	in post-processing (it is a hack, but it means everything is
+	consistent).
+	
+	* tools/PTroller.c (main): Fixed a warning
+
+	* adjust.c (SetMakeParams): Added some debugging code (and
+	commented it out)
+
+	* parser.c (ReadImageDescription): Croping options  were not
+	working properly when 2 cropping specs were specified in the same
+	command line. For instance, when M=0 was specified any cropping on
+	the image was considered a type C crop. The new behaviour is the
+	following:
+
+	if M is specified with parameter == 0, then it is ignored
+
+	For project with two different types of cropping (M<>0, S or C)
+	the first takes precedence over the second, and a warning is
+	displayed.
+	
+
+2006-11-27  dmg  <dmg@uvic.ca>
+
+	* ColourBrightness.c (CorrectFileColourBrightness): Replaced
+	readTIFF and writeTIFF  with panoTiffRead and panoTiffWrite. Added
+	some error checking
+
+	* PTcommon.c (panoPSDCreate): Replaced readTIFF  with panoTiffRead
+
+2006-11-26  dmg  <dmg@uvic.ca>
+
+	* file.c (panoImageRead): Fixed bug in return value of panoReadImage
+
+2006-11-25  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.9.0
+
+	* TODO: Updated this file
+	
+	* Makefile.am: Minor fix
+
+	* tiff.c (readTIFF, writeTIFF): Finally stopped using these functions.
+
+	* ptstitch.c: Fixed a bug in the computation of masks for 16 bit
+	images, and replaced calls to readTIFF and writeTIFF
+
+	* tools/PTmasker.c (main): Added some testing code
+
+	* ptfeather.c (panoFeatherImage): Implemented feathering of
+	cropped files and 16 bit images
+
+	* metadata.h, metadata.c: added a bunch of simple functions to
+	access the metatada of the image. Ideally we should not access the pointer
+	directly any more.
+
+2006-11-25  dmg  <dmg@uvic.ca>
+	
+	* version.h (VERSION), configure.ac Upgraded to version 2.8.5pre17
+
+	* tiff.c (panoTiffWrite): Fixed a bug in the allocation of the
+	buffer for writing to the output file.
+
+	* ptstitch.c, tools/PTmasker.c: Enabled feathering code
+
+	* PTcommon.c: removed feathering skeletons from here.
+	
+	* ptfeather.c, ptfeather.h: Implemented feathering. 
+
+	* Makefile.am: Added ptfeather.c, ptfeather.h
+
+2006-11-23  dmg  <dmg@uvic.ca>
+
+	* TODO: updated tasks.
+
+	* PTcommon.c (panoCreatePanorama): Change slightly error message
+	to make it clearer.
+
+2006-11-18  dmg  <dmg@uvic.ca>
+
+	* doc/PTmender.readme (Options): Added a note on circular fisheye support
+
+	* PTcommon.c (Clear_Area_Outside_Selected_Region): Implemented circular fisheye
+	
+	* PTcommon.c (getROI): Reverted _isnan to isnan
+
+	* tools/PTmender.c: I changed my mind. We should keep the PTmender name
+	in the new version of the tools too. 
+
+	* tools/PTremap.c: Deleted.
+
+	* tools/Makefile.am: Removed PTremap
+	
+	* version.h (VERSION), configure.ac Upgraded to version 2.8.5pre16 
+	
+2006-11-17  dmg  <dmg@uvic.ca>
+
+	* panorama.h: Created Boolean data type (unsigned char)
+
+	* filter.c, filter.h (panoWrite*, panoRead*): Simplified the
+	functions, got rid of mywrite, replaced BOOL with Boolean
+
+2006-11-15  Jim  <jwatters@photocreations.ca>
+
+	* filter.h, filter.cpp created file i/o funtions with error checking to replace macro.
+
+2006-11-12  Jim  <jwatters@photocreations.ca>
+
+	* Updated MSVC project file to build current version.  Add files.
+
+	* file.c fixed compile warnings.  Moved macros for file BIGENDIAN/LITTLEENDIAN i/o to
+	     filter.h
+	     
+	* filter.h  Moved macros for file BIGENDIAN/LITTLEENDIAN i/o from file.c.  
+	     Commented out no longer used funtions in Windows.  Still used in pict.c for Mac.
+	     
+	* pano12vc.def updated with new funtions and commented out old 
+	* pano12vcd.def removed file
+	
+	* tiff.c fix compile error unknown size void*
+
+	* version.h (VERSION), configure.ac Upgraded to version 2.8.5pre15 (configure.ac changes
+	     untested)
+	
+2006-11-02  dmg  <dmg@uvic.ca>
+
+	* TODO (KNOWN BUGS): Create a section with list of bugs
+
+2006-10-28  dmg  <dmg@uvic.ca>
+
+	* README: Updated it.
+	
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre14
+
+	* tools/PTtiff2psd.c: Add -f force processing option. Cleaned up.
+
+	* file.h: Added a field to specify if forced processing in panoTiffUncrop
+
+	* tools/PTmasker.c: Moved functionalty to create stitching masks
+	into this program (from PTroller and PTblender).
+	
+	* tools/PTroller.c (main): Cleaned up options, added the option
+	for force processsing.
+
+	* tools/PTmender.c (main): Removed all functionality from it.
+
+	* tools/PTblender.c (main): Cleaned up options. Added the option -f
+	for force procesing
+
+	* file.h, file.c (panoFileExists): Added function.
+
+	* PTfile.c, tools/PTblender: Refactored function
+	panoFileOutputNamesCreate
+
+	* tools/PTcrop.c: Reindented. Cleanup options. Replaced -o with -f
+	to be consistent
+
+	* tools/PTcrop.c: Cleanup options. Replaced -o with -f
+	
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre13
+
+	* ptstitch.c, ptstitch.h (panoStitchPixelChannelGet): Upgraded
+	this function to non-static, since it is useful in tiff.c too.
+
+	* pttiff.h, metadata.c, metadata.h, tiff.c: implemented cropping
+	of tiffs to boudning rectangle
+
+	* tools/Makefile.am, tools/PTcrop.c: Created program to crop panos
+	to bounding rectangle
+
+	* tools/PTuncrop.c (main): Fixed bug: return zero when success, and non-zero
+	in error.
+
+2006-10-27  dmg  <dmg@uvic.ca>
+
+	* tiff.c (panoTiffOpen, panoTiffRead): These functions were not
+	handling input errors properly
+
+	* TODO (PTblender): Added ideas from JD Smith on how to improve it.
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre12
+
+	* tools/PTroller.c: Removed unused variables
+	
+	* TODO: Updated it
+
+	* PTcommon.c. Set the ImageDescription field of the tiff to the
+	contents of the script.
+	
+	* PTcommon.c, tiff.c: Set imagenumber, and imagesTotalNumber in
+	PAGENUMBER field of tiff. 
+
+	* panorama.h (struct): Added imageNumber, and imagesTotalNumber
+	and script to the metadata struct.
+
+	* PTcommon.c (panoPSDCreate): Implemented the ability to specify a
+	blending mode in the output of the image.
+
+	* tools/PTtiff2psd.c, file.c, file.h: panoCreatePSD renamed to
+	panoPSDCreate, replaced last parameter to be a
+	struct (panoFlatteningParms) so we can pass as many parameters as
+	necessary. Added support for blending mode in PSD
+ 
+2006-10-26  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre11
+
+	* Support for cropped images that do not contain full size. We
+	assume the full size = croppped size + offset
+
+	* tools/PTtiffdump.c: Cleaned up compilation errors.
+
+	* tiff.c, PTcommon.c (panoTiffUnCrop): Moved function from
+	PTcommon.c, renamed it.
+
+	* TODO: Updates to reflect current status.
+	
+2006-10-26  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre10
+
+	* TODO: Added file
+
+	* tools/README.PTmender: Removed it (created equivalent in ./docs)
+
+	* doc/PTmender.readme: Added file
+	
+	* doc/PTblender.readme: Added file
+	
+	* doc/PTremap.readme: Added file
+
+	* tests/panoAutomateTest.pl: Updated it to use PTremap and not PTmender.
+
+	* tools/PTblender.c (main): Removed flattening
+	functionality. Improved command line handling
+
+	* tools/Makefile.am, tools/PTroller.c: Added PTroller, and 
+	renaming back of PToptimize.
+
+	* tools/PToptimize.c: Renamed PTestimate back to PToptimize.
+
+	* tools/PTremap.c: Copied logic from PTmender to PTremap. Cleaned up logic
+	and simplified handling of command line parameters.
+
+	* PTcommon.c: Made some minor cosmetic fixes to progress report.
+	
+2006-10-26  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre9
+
+	* tiff.c (panoTiffGetImageProperties): Do not choke if LZW
+	compressed TIFFs do not have a predictor field
+		
+2006-10-26  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre8
+
+	* PTcommon.c (panoCreatePanorama): Remove post-processing during
+	remapping of images: in other words, ignore output format in script file.
+
+2006-10-25  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre7
+
+	* ColourBrightness.c (ReadHistograms): Compute histograms only
+	when mask == 255. Ignore otherwise.
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre6
+
+	
+	* tools/Makefile.am: Renamed PToptimizer to PTestimate
+
+2006-10-24  dmg  <dmg@uvic.ca>
+
+	* ColourBrightness.c:  Map and Curve files for photoshop (colour
+	correction) were not properly created in Intel machines. 
+
+	Submitted by Michal at lightcomp.
+	
+	* tools/PTblender.c: Updated command line processing: assume image
+	0 as reference if options -m or -c are specified.
+	
+
+2006-10-24  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre5
+
+	* ColourBrightness.c, tools/PTblender.c: The following bugs in PTblender
+	are fixed:
+	
+	1) When -c or -m is specified no image output is done and therefore it 
+	should not be possible to specify -f too.
+	2) When -c is specified wrong index to array curveExtension is used.
+	3) Program tries to free already freed memory at the end.
+
+	Submitted by Michal at lightcomp.
+
+	We need a test suite for PTblender.
+	
+2006-10-22  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre4
+
+	* tiff.c: Removed redundant #defines
+
+	* PTcommon.c, PTcommon.h, filter.h, file.c: Added support for
+	stacking images in PSD files, that is, each iamge contributes
+	equaly to a final image.
+
+2006-09-22  dmg  <dmg@uvic.ca>
+
+	* ptstitch.c: The creation of the stitching masks was not working
+	in certain cases (a combination of output format + number of
+	images, and the use of cropped files). This change fixes that problem.
+
+2006-09-21  dmg  <dmg@uvic.ca>
+
+	* version.h (VERSION), configure.ac: Upgraded to version 2.8.5pre3
+
+	* ColourBrightness.c, PTcommon.c: added support for
+	saturation-only and brightness-only correction. I also fixed some
+	small rounding problems in the old code.
+
+2006-09-21  dmg  <dmg@uvic.ca>
+
+	* bootstrap (have_autoconf): Added support for autoconf 2.6
+
+	* PTcommon.c (getROI): Replace calls to _nan() with nan()
+
+	by Florian Merz
+
+
+2006-08-30  dmg  <dmg@uvic.ca>
+
+	* file.c: Added code to start to include metadata in PSD file. So
+	far only 2 bits of information are added: ICC Profile and creator
+	software. Photoshop does not display the IPTC originating program,
+	hence I resorted to use the "Source IPTC" tag.
+
+2006-08-12  dmg  <dmg@iridium.dmg>
+
+	* ptstitch.c, ptstitch.h, PTcommon.c: moved all the functions
+	related to stitching into the ptstich files. Renamed the functions
+	according to new standard
+	(panoStitchComputeMaskMap): Unified 8bit and 16bit versions into 1
+	function, and refactored most of the code to improve readability
+	and maintainability. In the process I found a major bug that was
+	probably affecting spherical panoramas.
+
+2006-08-05  dmg  <dmgerman@uvic.ca>
+
+	* version.h, configure.ac: Updated version to 2.8.5pre2
+
+	* jpeg.c: Implemented reading and writing ICC profile data.
+
+	* jpegicc.c, jpegicc.h, Makefile.am: I incorporated these two
+	files from the LCMS project. Marti Maria, the original author, has
+	granted us permission to change the license from MIT to GPL. These
+	routines implement reading and writing of JPEG ICC profiles.
+
+
+2006-07-30  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am: Updated it with the new files (metadata.*
+	
+	* pteditor.c, morpher.c, PTpano.c, PTcommon.c, tiff.c: Replaced
+	calls to readImage with calls to panoReadImage and makeTempPath to
+	panoFileMakeTemp.
+
+	* tiff.c, pttiff.h: moved panoCreatePanorama, Enabled tifferror
+	handlers again for non windows.
+
+	* jpeg.c (panoJPEGRead): Renamed it from panoReadJPEG to be consistent.
+
+	* tiff.c: moved panoUnCropMetadata out of it
+	
+	* metadata.c, metadata.h: Added file with metadata only functions.
+	(panoUnCropMetadata): Moved this function from tiff.c
+
+	* hdrfile.c (panoHDRRead): Added function to support metadata
+
+	* png.c (panoPNGRead): Added function to support metadata
+
+	* bmp.c (panoReadBMP): Added function to support metadata
+
+	* file.c: unified imageRead and makeTempPath into panoImageRead,
+	panoMakeTempPath and moved them into this file (there exist one
+	version for windows and one for unix)
+	
+
+2006-07-30  dmg  <dmgerman@uvic.ca>
+
+	* ppm.c (readImage): I forgot to enable the PPM functions.
+
+2006-07-28  dmg  <dmgerman@uvic.ca>
+
+
+	* configure.ac: Added tests/simpleTiff16/Makefile
+
+	* PTcommon.c (CreateAlphaChannels): Fixed bug (I never
+	initialized a variable with the length of hte line)
+
+	* configure.ac,	version.h: Bumped version to 2.8.5pre1 
+
+	* pict.c (makeTempPath), ppm.c (makeTempPath), bmp.c
+	(makeTempPath): libpano can now create more than 1000 temporal
+	files. 
+
+	* ppm.c (panoUpdateMetadataFromPPM): Updated PPM support for new
+	metadata processing.
+
+	* PTcommon.c: Improved output of progress indicators (fixed some
+	minor mistakes)
+
+	* jpeg.c, tiff.c, PTcommon.c, filter.c: Updated indentation according to
+	new standard, and I removed debug messages.
+
+2006-07-09  dmg  <dmgerman@uvic.ca>
+
+	* panorama.h, PTcommon.c, pttiff.h, filter.c, tiff.c, filter.h,
+	jpeg.c, ppm.c: Panotool is now able to preserve some metadata from
+	beginning to end of the process. Only TIFF is currently
+	supported. PPM is not yet supported.
+	
+	* ColourBrightness.c (OutputPhotoshopArbitraryMap): Removed unused variable.
+
+	* filter.c: Set defaults for image.metadata.
+	(panoSetMetadataDefaults): Added fuction that sets defauls for
+	Image. Changed compression default from PACKBITS to DEFLATE
+	(which creates smaller TIFFs)
+
+	* tiff.c, jpeg.c, ppm.c, panorama.h, PTcommon.c: Reindented using
+	Apache's code style.
+
+2006-07-08  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c, PTcommon.h: Major refactoring of the TIFF logic. I
+	have tried to encapsulate all the metadata of TIFFs including
+	cropped logic. I also renamed a lot of the functions.
+
+	* PTcommon.h, ColourBrightness.c: Updated files accordingly.
+
+2006-06-30    <dmgerman@uvic.ca>
+
+	* This entry marks the first commit using subversion
+
+2006-06-25  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c (ColourBrightness, OutputCurves,
+	OutputPhotoshopArbitraryMap, OutputPhotoshopCurve): Implemented
+	Photoshop arbitrary map .amp.
+	
+	* ColourBrightness.h: Last parameter to ColourBrightness specifies
+	the type of format to output (.amp or .acv)
+
+2006-06-25  dmg  <dmgerman@uvic.ca>
+	
+	* ColourBrightness.c (OutputPhotoshopCurve)
+	(OutputEmptyPhotoshopCurve, OutputCurves, ColourBrightness):
+	Implemented the ability to output a photoshop .acv file that can
+	be loaded into a curves layer. It required to add an extra
+	parameter to ColourBrightness
+
+	* ColourBrightness.h: Updated prototype. 
+	
+	* PTcommon.c (CreatePanorama): 	Updated call to ColourBrightness
+	
+	
+2006-06-16  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (CreatePanorama): The process for creating PSD_mask
+	and PSD_nomask was inverted.
+
+2006-06-15  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c: Major reindent, removed tabs.
+
+	* ppm.c (makeTempPath): Added zeroes to temp files, so they are
+	nicely sorted when listed.
+
+	* panorama.h: Added crop info to Image data structure.
+
+	* tiff.c (writeTIFF): Added cropInformation parameter to function
+	call.
+	(setCropInformationInTiff, getCropInformationFromTiff): Moved
+	functions to this file from PTcommon.c
+
+2006-06-14  Bruno Postle <bruno@postle.net>
+
+	* Makefile.am, tests/simpleStitch/Makefile.am: put tests in tarball,
+	but only run them with 'make check'.
+
+2006-06-13  Max Lyons <maxlyons@tawbaware.com>
+
+	* filter.h, sys_common.c, pano12.def, libpano12.def: Adding new dieWithError 
+	function to print error message and exit program with non-zero exit code
+
+	* PTCommon.c: Modifying getROI function to better calculate ROI for images 
+	in projects with 360/180 FOV.  Not sure if this completely eliminates 
+	problems, but is certainly a step in the right direction.
+
+	* PTCommon.c: Adding error checking to setCropInformationInTiff function.
+	
+	* PTCommon.c: Removing check for cropped TIFF in uncropTIFF...it is possible 
+	for a cropped TIFF to have x and y offset equal to zero, so this check could 
+	have caused problems.
+
+
+2006-06-12  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (tiffErrorHandler): Typecasted parameter to (char *) to
+	avoid warning.
+	(VerifyTiffsAreCompatible): changed sprintf to strcpy to avoid
+	compiler warning.
+	(CreateAlphaChannels): Added (long unsigned) to avoid compiler error.
+	(BlendLayers16Bit): Changed format specifier to match type of variable.
+	(FlattenTIFF): Removed unused variable.
+
+	* PTcommon.c (VerifyTiffsAreCompatible): Uncommented TIFF error
+	handlers (commented by Max few weeks ago). Wrapped it around with
+	ifndef to avoid windows compilation. I have the feeling this is a
+	windows issue, not a gcc.
+
+	* PTcommon.h (ReplaceExt): Declared function, moved it from
+	ColourBrightness.c to PTcommon.c
+
+	* Makefile.am (SUBDIRS): Removed tests from the default make
+
+	* PTcommon.c (ReplaceAlphaChannel): The images created in this
+	routine were not labeled as cropped. This patch fixes the
+	problem. The test case did not catch this problem. We need a
+	360/180 one.
+
+2006-06-12  Jim Watters <jwatters@photocreations.ca>
+
+	* PTcommon.c and ColourBrightness.c exclude a bunch of include files that 
+	  were not needed and did not exist on Windows. 
+	* pt_stdint.h add define for INT32_MAX for Windows platform
+	* libpano.vcproj updated to include ColourBrightness and PTCommon.
+	
+2006-06-11  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c: Improved the behaviour during errors. exit(-1) if
+	there is an irrecoverable error.
+
+2006-06-11    <dmgerman@uvic.ca>
+
+	* PTcommon.c (CreatePanorama): Change extension of generated PSD
+	from .PSD to .psd. Remove a temp file that was left in the cropped processing.
+	
+2006-06-11  Max Lyons <maxlyons@tawbaware.com>
+
+	* ColourBrightness.c, PTcommon.c, tiff.c, filter.h, pttiff.h, 
+	libpano12.def, pano12.def.  Changes to support "cropped tiff" processing 
+	when using colour/brightness correction in PTMender.  Changes also allow 
+	pttiff2psd to work with cropped tiff output as well.
+
+
+2006-06-04  Pablo d'Angelo <pablo.dangelo@web.de>
+
+	* ptpicker.c, PTcommon.c: Moved InsertFileName from ptpicker.c to
+	PTcommon.c. This broke compilation of PTmender, when java support
+	was disabled.
+
+2006-06-04  Max Lyons <maxlyons@tawbaware.com>
+
+	* PTMender.c: Changed behavior for input file name parsing.  If the script 
+	is specified on the command line with a path (e.g. c:\some\path\myscript.txt), 
+	this path was prepended to all of the image names in the script, regardless 
+	of whether those image names were also specified with a full qualified path.  
+	This change adds a check so that the script path is only prepended to the 
+	image names if the image names don't already contain path information.
+
+	* PTCommon.c: Fixing bug with morph-to-fit.  Memory allocated with malloc 
+	was being incorrectly freed with myfree leading to random crashes.
+	
+2006-05-31  Max Lyons <maxlyons@tawbaware.com>
+
+	* PTCommon.c: Fixed bug in getROI
+
+2006-05-29  Max Lyons <maxlyons@tawbaware.com>
+
+	* adjust.c: CheckParams: Allowing optimizer to work with new projections
+
+	* Moving uncrop logic from ptuncrop.c to ptcommon.c.  Creating 
+	uncropTiff function
+	
+	* Adding uncropTiff function declaration to pttiff.h
+	
+	* Making cropped TIFF the intermediate format for all processing, 
+	regardless of output format.  Uncropped TIFFs can be generated, if needed, 
+	from intermediate cropped TIFFs by calling new uncropTiff function.
+
+2006-05-29  Max Lyons <maxlyons@tawbaware.com>
+
+	Changes fix various compilation problems:
+
+	* Moved declaration of three functions from ptcommon.h to new ptttiff.h file.  
+	
+	* Updated includes in PTcommon.c and PTuncrop.c
+	
+	* Updated pano12.def and libpano12.def to  include the same, latest, exports
+
+2006-05-27  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (CreatePanorama): Removed some ugly formatting I
+	introduced in a recent commit
+	(CreatePanorama): Fixed bug of the missing column/row introduced
+	in cropped files.
+	
+	* PTcommon.h (TiffSetImageParameters,TiffGetImageParameters):
+	Exported  these functions to be able to use them in
+	PTuncrop. Added #include <tiffio.h>
+
+2006-05-24  Max Lyons <maxlyons@tawbaware.com>
+
+	* PTCommon.c: All logic has been reworked so that "cropped"
+	TIFF files can be used throughout the stitching process for all currently 
+	supported output formats.  (Cropped TIFF files are those that are just 
+	large enough to contain	the remapped image, and the offset/full size 
+	information is stored in the TIFF header).  Modified functions include 
+	ReplaceAlphaChannel, CreateAlphaChannels, AddStitchingMasks, FlattenTIFF, 
+	createPanorama.  New functions include getCropInformationFromTiff, 
+	setFullSizeImageParameters.
+	
+	* PTCommon.c: Simplified ComputeStitchingMask8bits syntax
+	
+	* PTCommon.c: CreatePanorama.  Reworked logic to handle intermediate output files
+	and produce final output in various formats.  Added logic that decides when
+	to use cropped TIFF as intermediate format based on chosen output format.  TODO:
+	this could use some tidy up, and it might be a good idea to have cropped TIFF
+	as the default intermediate format for TIFF_m and TIFF_mask, and include a 
+	function to "expand" the cropped TIFFs to full size when finished (if the 
+	user requests non-cropped TIFF).
+	
+	* PTCommon.c: Reluctantly commented out calls to TIFFSetWarningHandler and 
+    TIFFSetErrorHandler...these cause to GCC to abort, with a series of errors 
+    about multiple definition of TIFF functions in libpano and libtiff.  
+    
+    * PTCommon.c: Changed title bar of progress dialog to indicate currently 
+    processing image number (indexed at 1) and total images to be processed.
+	
+	* ColourBrightness.c, PTMender.c : changed #include syntax
+	
+	* file.c: writePSD, writeLayerAndMask, writeChannelData, getImageRectangle, 
+	addLayer.  Reworked to handle "cropped" files.
+	
+	* filter.h: getCropInformation. Adding declaration.
+	
+	* tiff.c: readTIFF.  Storing filename of TIFF in im->name.
+	
+	* panorama.h: Adding CropInfo struct...used for processed cropped images
+
+	* pt_stdint.h: Fixing bad CR/LF combinations
+        	
+
+2006-05-24  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (TiffSetImageParameters, TiffGetImageParameters):
+	Make sure ROWSPERSTRIP is propagated.
+
+2006-05-23  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (TiffGetImageParameters, TiffSetImageParameters):
+	Make sure compression is propagated at further stages
+	(CreatePanorama): Implemented support for C:NONE 
+	(CreatePanorama): Implemented support for C:DEFLATE 
+	(ComputeStitchingMask8bits): Removed redundant code.
+
+2006-05-22  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c: Checked return value of each TIFFWriteScanline. It
+	now returns an error when it cannot write to the output (instead of
+	just continue blindly). Added Error and Warning handler for TIFF
+	library so the errors are now reported using the PTtools error
+	handler.
+	(CreatePSD): Make sure PSD is 8 bit if it contains more than 1
+	layer (we do not support multi-layer 16bit images). Cleaned up the
+	function and added some comments.
+	(ComputeStitchingMask8bits): Cleanedup the function (still more
+	work to do)
+
+2006-05-20  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (CreatePanorama): Fixed a bug in TIFF_mask (the
+	program was not ending after where it should have)
+
+2006-05-15  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (CreatePanorama): Fixed a typo related to QTVR
+	images. I also renamed Unknown07 to Create_QTVR
+
+	* resample.c: Fixed compilation warnings by moving #define
+	unsigned inside the body of the functions.
+
+2006-05-16 Max Lyons (maxlyons@tawbaware.com)
+
+	* resample.c: Fixing bug in fast transform logic that caused crash when 
+	destRect.left != 0 (i.e. producing cropped TIFF output)
+
+2006-05-15 Max Lyons (maxlyons@tawbaware.com)
+
+	* Removed old versions of ptcommon and colourbrightness from the 
+	tools...these had already been moved into libpano main directory
+
+	* Updated Makefile.win32 to include missing references to sys_common.c, 
+	PTCommon.c, hdrfile.c, rgbe.c, ColourBrightness.c...should now build 
+	correctly using MingW
+
+	* pano12.def: Removed duplicate entry for "StringtoFullPath" 
+	(exported twice).
+
+	* PTcommon.c: Changed #include <filter.h> to #include "filter.h" (this 
+	prevented compilation with MingW)
+
+	* PTcommon.c: Changed call to execute_stack to execute_stack_new (necessary 
+	as a result of modification to Transformation function type)
+
+	* PTcommon.c: Removed InsertFileName definition.  This is already defined 
+	in PTPicker, and prevented compilation with MingW.
+
+	* ColourBrightness.c: Changed #include <filter.h> to #include "filter.h" 
+	(this prevented compilation with MingW)
+
+	* PTBlender: Fixed comparison between pointer and integer error (line 102)
+
+2006-05-07  dmg  <dmgerman@uvic.ca>
+
+	* version.h: Updated version to 2.8.3
+	
+	* PTcommon.c (SetBestAlphaChannel16bits): Implemented function.
+
+2006-05-06  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c: (BlendLayers): Added support for 16 bit images.
+
+	* PTcommon.c (BlendLayers16Bit): Added function. 
+
+	* PTcommon.h (CreatePanorama): Added StringtoFullPath
+
+	* pano12.def: Exported StringtoFullPath
+
+	* PTcommon.h: removed <tiffio.h> from its includes. 
+
+	* Makefile.am (STD_HDR): Install PTcommon.h
+
+	* version.h: Updated version to 2.8.2 and improved ifdefs for
+	easier maintenance
+
+	* pano12.def: Added ColourBrightness, PTcommon definitions.
+
+	* Moved ColourBrightness.{c,h}, PTcommon.{c,h} to this directory.
+
+	* Added missing entries to Changelog 
+
+2006-05-05 05:46:48  dangelo  (dangelo)
+
+	* morpher.c: fixed return code
+
+	* math.c: MSVC does not provide atanh.
+
+	* libpano.vcproj: updated MSVC project file. Use $WXWIDGETS_HOME
+	and $JDK_HOME environment variables instead of hardcoded paths
+
+2006-04-28 06:39:00  dangelo  (dangelo)
+
+	* libpano12.def, pano12.def, pano12vc.def, pano12vcd.def: export
+	exectute_stack_new in windows .dll
+
+2006-04-27  brunopostle  (brunopostle)
+
+	* ChangeLog, configure.ac, version.h: update version to 2.8.1
+
+2006-04-26  dmg (dmg)
+
+	* ChangeLog: updated changelog to match last 2 changes (including
+	the change to the ChangeLog :)
+
+2006-04-25 23:31:09  dangelo  (dangelo)
+
+	* doc/stitch.txt: added new projection types to documentation
+
+2006-04-25 20:09:26  brunopostle  (brunopostle)
+
+	* ChangeLog: Updated ChangeLog to the autogenerated one (had
+	been clobbered)
+
+2006-04-21 07:00:21  dangelo  (dangelo)
+
+	* rgbe.c: previous commit errornously replaced #include <stdlib.h>
+	with malloc.h.	revert to #include <stdlib.h>
+
+2006-04-20 23:01:41  dangelo  (dangelo)
+
+	* AUTHORS, ChangeLog, adjust.c, filter.h, math.c, morpher.c,
+	pano12.def, pano12vc.def, pano12vcd.def, panorama.h, parser.c,
+	queryfeature.c, rgbe.c: added stereographic, mercator, transverse
+	mercator and sinusoidal projection.  Transverse mercator does not
+	work properly yet. Modified all coordinate transform functions
+	to return if the transformation was possible. (Not used during
+	stitching yet)
+
+2006-04-19 21:09:13  brunopostle  (brunopostle)
+
+	* sys_common.c: Fix for previous patch for customizing libpano12
+	error and progress output (Pablo D'Angelo)
+
+2006-04-14 21:10:59  dmg  (dmg)
+
+	* ChangeLog: update changelog for previous commit
+
+2006-04-14 20:27:52  brunopostle  (brunopostle)
+
+	* AUTHORS, Makefile.am, filter.h, libpano12.def, pano12.def,
+	pano12vc.def, pano12vcd.def, queryfeature.c, queryfeature.h,
+	sys_X11.c, sys_ansi.c, sys_common.c, sys_mac.c, sys_win.c:
+	Allow applications to supply their own callback functions for
+	error and progress reporting.  (Pablo d'Angelo)
+
+2006-04-11 03:41:59  dmg  (dmg)
+
+	* ChangeLog, tools/PTblender.c, tools/PTmender.c: released
+	version 0.4.0 of PTmender and PTblender
+
+	* tools/PTcommon.h, tools/PTmender.c, tools/PTmender.h,
+	tools/README.PTmender, ChangeLog, tools/PTblender.c,
+	tools/PTcommon.c: 2006-04-10  dmg  <dmgerman@uvic.ca>
+
+	* toos/README.PTmender: updated it.
+
+	* tools/PTmender.h: removed some prototypes from the file that
+	belong now to PTcommon.h
+
+	* tools/PTmender.c: added support for flattening tiffs (including,
+	by extension, JPG and PNG support).
+
+	* tools/PTcommon.h: moved pt_tiff_parms into it, moved some
+	prototypes from tools/PTmender.h
+
+	* tools/PTcommon.c: Added blending of TIFFs into a single
+	one. JPG creation.
+
+	* tools/PTblender.c: added JPG creation.
+
+2006-04-09 23:07:38  dmg  (dmg)
+
+	* ChangeLog, rgbe.c: 2006-04-09  dmg  <dmgerman@uvic.ca>
+
+	* rgbe.c: Replaced #include <malloc.h> with <stdlib.h> to avoid
+	MacOS compilation error
+
+2006-03-10 11:17:24  brunopostle  (brunopostle)
+
+	* resample.c: Fix for gcc compilation error (Thomas Rauscher)
+
+2006-03-09 21:29:57  brunopostle  (brunopostle)
+
+	* tools/.cvsignore: ignore non-source files
+
+2006-03-01 07:12:17  maxlyons  (maxlyons)
+
+	* tools/PTmender.c: Added ability to produce "cropped" output
+	files in tiff_m and tiff_mask format.  Unfortunately, it doesn't
+	currently work when the fast transform (f0 option in m line)
+	so make sure not to include this option in stitcher script.
+	Added ability to produce LZW compressed output.  Use following
+	syntax: p w1237 h952 f1 u0 v115 n"TIFF_m r:CROP c:LZW" Modified
+	the number of rows per strip of TIFF data to be 1.  Code cleanup
+	(removing goto statements, etc.), give variables more descriptive
+	names, and added a lot of comments/documentation.
+
+	* tools/PTcommon.h, tools/PTmender.h: Moving declaration of
+	InsertFileName.  Adding TIFFTAGs for full image width/length
+	(in case not present in tiff.h)
+
+2006-02-27 22:38:24  brunopostle  (brunopostle)
+
+	* tools/.cvsignore: add .deps to .cvsignore
+
+	* tools/.cvsignore: cvs should ignore Makefile.in not Makefile.am
+
+	* Makefile.am, bmp.c, filter.h, hdrfile.c, queryfeature.c,
+	resample.c, rgbe.c, rgbe.h: Support for radiance 32bit float
+	.hdr files (Thomas Rauscher)
+
+	* ChangeLog: updated ChangeLog from CVS commit messages
+
+2006-02-21 10:19:20  dmg  (dmg)
+
+	* tools/PTcommon.c, tools/ChangeLog: 06-02-21  dmg
+	<dmgerman@uvic.ca>
+
+	* PTcommon.c: Replaced InsertFileName with the one from ptpicker.c
+	(patch submitted by Max Lyons)
+
+2006-02-20 19:07:22  dmg  (dmg)
+
+	* tools/ChangeLog: Fixed spelling mistake in ChangeLog
+
+	* tools/ChangeLog, tools/PTcommon.c, tools/PTmender.c,
+	tools/PTtiff2psd.c: 2006-02-20	dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (AddStitchingMasks): Removed exit that I was using
+	during debugging.
+
+	* PTtiff2psd.c (PT_TIFF2PSD_USAGE): Added name of default
+	output file.
+
+	* PTmender.c (ComputeStitchingMask8bits,
+	ComputeStitchingMask16bits,
+	ComputeStitchingMask,SetBestAlphaChannel16bits,
+	SetBestAlphaChannel8bits, CalculateAlphaChannel,
+	ApplyFeather8bits, ApplyFeather16bits, ApplyFeather): Removed
+	functions, they are  already in PTcommon.c
+
+	* PTmender.c: Removed test code for TEST_ENABLE_COLOUR_CORRECTION
+
+	Changes submitted by Max Lyonx:
+
+	* PTcommon.c: Moved InsertFileName to this file from
+	PTmender.c. It should be compiled only under Windows.
+
+	* PTmender.c (main): Changed 0x6f for 'o'.
+
+	* tools/PTcommon.c, tools/PTcommon.h: I forgot to commit these
+	files
+
+2006-02-17 17:56:04  dmg  (dmg)
+
+	* tools/ColourBrightness.c, tools/Makefile.am, tools/PTblender.c,
+	tools/PTmender.c, tools/PTmender.h, tools/PTtiff2psd.c,
+	tools/ChangeLog: 2006-01-23  dmg  <dmgerman@uvic.ca>
+
+	* PTblender.c (main): There was an extra colon in the spec of
+	the command line options (reported by josh at joshdoe com)
+
+	* PTcommon.c (SetBestAlphaChannel8bits): Fixed minor bug.
+
+	2006-01-20  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (bin_PROGRAMS): Added PTtiff2psd.
+
+	* PTblender.c (main): Freed pointers. Added call to
+	VerifyTiffsAreCompatible.  Added include to PTcommon.h
+
+	* PTmender.h: Moved quietFlag from this one to PTcommon.h
+
+	* PTmender.c: Added include to PTcommon.h, extracted CreatePSD,
+	and CreateStitchingMasks.
+
+	* PTtiff2psd.c: Created program.
+
+	* PTcommon.h (VerifyTiffsAreCompatible): Created file, added
+	prototypes.
+
+	* PTcommon.c (VerifyTiffsAreCompatible): Created file, and
+	added function. Moved CreatePSD and CreateStitchingMasks from
+	PTmender.c.
+
+2006-01-20 04:02:35  dmg  (dmg)
+
+	* tools/ChangeLog, tools/PTblender.c: 06-01-19	dmg
+	<dmgerman@uvic.ca>
+
+	* PTblender.c (main): If no files were specified in the command
+	line, then print usage.
+
+	* tools/ChangeLog, tools/ColourBrightness.c,
+	tools/ColourBrightness.h, tools/Makefile.am, tools/PTblender.c,
+	tools/PTmender.c: 2006-01-19  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main): Used PATH_SEP instead of / to get it to
+	work under Windogs.  (CreateStitchingMasks): Removed unnecessary
+	assert.
+
+	* PTblender.c: Added program.
+
+	* PTmender.c (CreatePanorama): Changed call to ColourBrightness
+	to match new prototype. See below.  Moved ReplaceExt from to
+	ColourBrightness.
+
+	* ColourBrightness.h: Changed prototypes (see below).
+
+	* ColourBrightness.c (CorrectFileColourBrightness): Add an
+	extra parameter to handle different input and output file names.
+	(ColourBrightness): Added an extra parameter to handle different
+	input and output filename. If the input filename is different
+	from output, then process file.  (ReplaceExt): Moved it here
+	from PTmender.c
+
+2006-01-16 01:01:58  dmg  (dmg)
+
+	* tools/ChangeLog, tools/ColourBrightness.c: Removed useless
+	comments
+
+	* tools/ChangeLog, tools/ColourBrightness.c: Fixed a bug in
+	Unknown49
+
+	* tools/ChangeLog: Minor edit change
+
+	* tools/ChangeLog, tools/PTmender.c: 2006-01-15  dmg
+	<dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): Found a bug. strcmp
+	did not include ==0.  (ComputeStitchingMask8bits):
+	Implemented function.  (CalculateAlphaChannel): Implemented
+	function.  (SetBestAlphaChannel8bits): Implemented function.
+	(CreateStitchingMasks): Found an error: Progress returns zero
+	when not error, not !=0. Also, I forgot return -1 (ApplyFeather):
+	Implemented function.  (SetBestAlphaChannel8bits): Fixed a bug
+	in the function. Wrong condition in loop.  (PT_MENDER_VERSION):
+	Bumped version to 0.3. Released.
+
+	2006-01-14  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePSD): Implemented function.
+	(TiffSetImageParameters): Added function.  (CreateStitchingMasks):
+	Implemented function.  (ComputeStitchingMask): Implemented
+	function.
+
+2006-01-15 06:59:44  dwilkins42  (dwilkins42)
+
+	* Makefile.am, configure.ac: Add endian check. OS check only is
+	not sufficient
+
+2006-01-12 19:27:27  dmg  (dmg)
+
+	* tools/ChangeLog, tools/ColourBrightness.c, tools/PTmender.c:
+	2006-01-12  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: Remove fprintfs
+
+	* PTmender.c: Enabled colour correction. Ready for
+	testing. Upgraded version to 0.2: "the Enlightment"
+
+	* ColourBrightness.c (Unknown40): Fixed another bug. This time
+	it was the data type of a variable. It was double, not integer!
+
+	* tools/ChangeLog, tools/ColourBrightness.c,
+	tools/ColourBrightness.h, tools/PTmender.c, tools/README.PTmender:
+	006-01-12  dmg	<dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): Reduced the size of the cache
+	to 500kbytes
+
+	* ColourBrightness.c: Improved readibility of many functions.
+	(RemapHistogram): Another bug. Divided a/b instead of b/a.
+
+	2006-01-11  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: (ComputeColourBrightnessCorrection)
+	Found another bug (limit of for loop was < 0xff not <= 0xff).
+	(ComputeColourBrightnessCorrection): Cleaned up the function,
+	renamed variables to make them meaninful. Killed another
+	bug. Again, a/b instead of b/a (CorrectFileColourBrightness):
+	Another bug. Missundertood return value from readTIFF: it is zero
+	when success, -1 when it is not.  (CorrectImageColourBrigthness):
+	Another bug. im->data is a pointer to the pointer to the
+	actual data, not a pointer to the data!  Took advante of the
+	editing and cleaned up the code and renamed some veriables.
+	(DisplayHistogramsError): Refactored this function from
+	ColourBrightness.
+
+	* ColourBrightness.h, ColourBrightness.c: Renamed Unknown41 to
+	ComputeAdjustmentCurve. Renamed Unknown37 to RemapHistogram. I
+	have added assertions and debug code everywhere. Renamed Unknown33
+	to MapFunction. Updated callers accordingly.
+
+	2006-01-10  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: (ComputeColourBrightnessCorrection):
+	Another bug: incorrect number of daisies.
+
+2006-01-10 12:27:27  dmg  (dmg)
+
+	* tools/ChangeLog, tools/ColourBrightness.c, tools/Makefile.am,
+	tools/PTmender.c, tools/README.PTmender: 1-10  dmg
+	<dmgerman@uvic.ca>
+
+	* ColourBrightness.c: I changed all mallocs to callocs. I also
+	added and removed some debug messages, and added optional use
+	of the dmalloc library.  (InitializeMagnolia): fixed a bug. I
+	had allocated sizeof(pointer) rather than sizeof(thing pointed
+	by pointer). What an amateur!  (ColourBrightness): Another bug,
+	I was freeing an incorrect number of histograms.  (Unknown33):
+	Fixed another bug. I referenced last element as array[n] instead
+	of the correct way array[n-1].	(Unknown37): Another bug 2 bugs. I
+	had missed a set of parenthesis in an expression. The next line
+	had a couple of errors too.  (FreeHistograms): Another bug. One
+	free  was in the wrong place.
+
+	* README.PTmender: Updated it.
+
+	* PTmender.c (CreatePanorama): Disabled code for colour
+	correction.
+
+	* Makefile.am (AM_CPPFLAGS): Added flags for TIFF and JPEG to
+	the compilation of the programs.
+
+2006-01-09 21:54:36  brunopostle  (brunopostle)
+
+	* configure.ac: update version to 2.8.0
+
+2006-01-09 19:55:02  dmg  (dmg)
+
+	* tools/ChangeLog, tools/ColourBrightness.c,
+	tools/ColourBrightness.h, tools/PTmender.c, tools/README.PTmender:
+	2006-01-09  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): Fixed a bug that affected cropped
+	images. I think TIFF_m is ready for the masses. The tests I have
+	performed are promising.  (main): Added a Version message for
+	its official release. Initial release: 0.1
+
+	* ColorBrightness.c, ColorBrightness.h: First bug: I got burned
+	by the fact that chars are by default signed. I changed any use
+	of char to unsigned.
+
+	* tools/ColourBrightness.c, tools/ColourBrightness.h,
+	tools/ChangeLog, tools/Makefile.am, tools/PTmender.c: 2006-01-09
+	dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (PTmender_SOURCES): Added colourBrightness.*
+	to PTmender
+
+	* PTmender.c: Renamed CreatePanorama, removed old function stub
+
+	* ColorBrightness.c, ColorBrightness.h: added files. All the
+	functions for colourBrightness have been created, but they do
+	not work.
+
+	2006-01-04  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main): Fixed another bug, in the case that no files
+	were specified in the command line.  (ARGtoRGBAImage): Fixed
+	another bug (a line I duplicated, but that I did not update).
+	(CreatePanorama): Replaced assertion on colourCorreection. I
+	had misinterpreted what the value was.
+
+2005-12-25 03:14:42  dmg  (dmg)
+
+	* tools/Makefile.am: I really removed -Wall -g this time
+
+	* tools/.cvsignore, tools/ChangeLog, tools/Makefile.am,
+	tools/PTmender.c: 2005-12-25  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main,CreatePanorama): Fixed 5 more bugs. I am able
+	to stitch the first one photo panorama!
+
+	* tools/ChangeLog, tools/Makefile.am, tools/PTmender.c,
+	tools/PTmender.h: 005-12-24  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am: Removed -Wall from make process
+
+	* PTmender.c (main): Fixed 3 bugs.  (CreatePanorama): Fixed 2 bugs
+
+2005-12-23 00:59:10  dmg  (dmg)
+
+	* tools/ChangeLog: fixed minor typo in ChangeLog
+
+	* tools/ChangeLog, tools/PTmender.c: 2005-12-23  dmg
+	<dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): It appears now to be complete. We
+	have all the code for TIFF_m without brightness adjustement. Time
+	to start planning the testing phase.
+
+2005-12-22 23:27:47  dmg  (dmg)
+
+	* tools/ChangeLog, tools/PTmender.c, tools/PTmender.h: 2005-12-22
+	dmg  <dmgerman@uvic.ca>
+
+	* PTmender.h: Renamed Unknown09 to
+	Clear_Area_Outside_Selected_Region
+
+	* PTmender.c (Clear_Area_Outside_Selected_Region): Created
+	function. This completes all the functions needed for TIFF_m.
+
+2005-12-21 23:38:34  dmg  (dmg)
+
+	* tools/ChangeLog, tools/Makefile.am, tools/PTmender.c,
+	tools/PTmender.h: 2005-12-21  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.h (InsertFileName): added prototype.
+
+	* Makefile.am (PTmender_LDADD): We now require the tiff
+	library too.  (AM_CFLAGS): Added -Wall. I need to catch _any_
+	potential error.
+
+	* PTmender.c, PTmender.h (ARGtoRGBAImage): Renamed Unknown08 to
+	ARGtoRGBAImage and implemented it.
+
+	* tools/ChangeLog, tools/Makefile.am, tools/PTmender.c: 2005-12-21
+	dmg  <dmgerman@uvic.ca>
+
+	* I forgot that OS X is case insensitive (even though it is case
+	preserving). I have renamed ptmender.h to PTmender.h. Updated
+	Makefile.am and PTmender.c (thanks to Bruno Postle for noticing
+	this).
+
+	* PTmender.c (CreatePanorama): Fixed some bugs during code review
+	of CreatePanorama (CreatePanorama): Changed name of Unknown28
+	to Colour_Brightness
+
+	* tools/PTmender.h, tools/ptmender.h: renamed ptmender.h to
+	PTmender.h
+
+	* tools/ChangeLog, tools/README.PTmender: 2005-12-21  dmg
+	<dmgerman@uvic.ca>
+
+	* README.PTmender: Added an explanation of its command line
+	options.
+
+	* tools/PTmender.c, tools/ptmender.h, tools/ChangeLog: 2005-12-21
+	dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main): Completed main.  (sorting_function): Added
+	it to sort files if -s
+
+2005-12-20 15:43:49  dmg  (dmg)
+
+	* tools/.cvsignore, tools/ChangeLog, tools/Makefile.am,
+	tools/PTmender.c, tools/README.PTmender, tools/ptmender.h:
+	2005-12-20  dmg  <dmgerman@uvic.ca>
+
+	* README.PTmender: Added this file.
+
+	* PTmender.c, PTmender.h: I created these two files. Created the
+	functions ReplaceExt, InsertFileName, and CreatePanorama. It
+	has also all the skeletons to all the functions that need to
+	be rewritten.
+
+	* Modified Makefile.am to add PTStitcher. The program currently
+	compiles, but does nothing.
+
+	* Created the ChangeLog.
+
+2005-12-13 04:04:21  jim0watters  (jim0watters)
+
+	* makefile.win32: added missing ZComb.o
+
+2005-12-07 04:42:55  jim0watters  (jim0watters)
+
+	* tools/PTStitcher.cpp, tools/PTStitcher.vcproj: Add
+	PTstitcher.exe helper tool This is to replace the original
+	PTstitcher
+
+	* tools/PTpano12.dsp, tools/PTpano12.vcproj,
+	tools/PTpano12_readme.txt, tools/ptpano12.cpp, tools/ptpano12.def,
+	tools/ptpano12.h: Add too PTpano12 This tool will intercepts
+	calls, displays info, and then calls original pano12.dll with
+	the same parameters.  It then passes back the return values back
+	to the original caller.
+
+2005-11-25 07:07:34  jim0watters  (jim0watters)
+
+	* version.h: update to ver 2.8
+
+2005-11-24 11:14:58  brunopostle  (brunopostle)
+
+	* ChangeLog: Updated chnagelog from CVS commit messages
+
+	* configure.ac: updated to 2.7.0.14 release
+
+2005-11-23 04:46:13  jim0watters  (jim0watters)
+
+	* version.h: update to ver .14
+
+	* sys_win.c: MSVS memory tracking tools
+
+	* sys_win.h: remove build warning
+
+	* adjust.c, parser.c: fix possible double delete or delete of null
+
+2005-11-16 12:40:52  brunopostle  (brunopostle)
+
+	* ChangeLog: updated from cvs commit messages
+
+	* configure.ac: updated to 2.7.0.13 release
+
+2005-11-16 06:47:08  jim0watters  (jim0watters)
+
+	* version.h: update to ver .13
+
+	* libpano.vcproj: do not use MSVCP71.DLL
+
+	* ZComb.c: Fix "Bounds error"
+
+2005-11-09 12:31:51  brunopostle  (brunopostle)
+
+	* configure.ac: updated configure.ac to version 2.7.0.12
+
+2005-11-09 05:42:16  jim0watters  (jim0watters)
+
+	* adjust.c, filter.h, resample.c, seamer_.c, version.h: Fix
+	inverse transform Add number to aa_transform Increase ver to .12
+
+	* math.c: fix 64bit process slow down
+
+	* parser.c, tiff.c: fix possible memory leak / double free
+
+2005-11-03 11:54:31  brunopostle  (brunopostle)
+
+	* Makefile.am: Add Xcode project files to dist archive target
+
+2005-10-27 03:13:37  jim0watters  (jim0watters)
+
+	* doc/Optimize.txt, doc/stitch.txt: Added Antialiasing filter
+	numbers
+
+	* libpano.vcproj: Updated Windows project
+
+2005-10-26 00:19:27  jim0watters  (jim0watters)
+
+	* resample.c: Added the dual-color modes to the transform_aa
+	and cleaned the code, rename 4 variables...
+
+2005-10-24 03:27:23  jim0watters  (jim0watters)
+
+	* PanoTools.pbproj.tgz: A project file for Apple's "XCode" IDE,
+	for developers who like to use Apple's tool.
+
+	* adjust.c, filter.h, resample.c: combine makePano with MyMakePano
+	and transform with MyTransform to remove duplicate code and
+	prepair to make MyTransform multiprocessor aware
+
+2005-10-23 05:20:25  jim0watters  (jim0watters)
+
+	* resample.c, resample.c, NEWS: alpha mask threshold bug fix
+
+2005-10-22 03:58:52  jim0watters  (jim0watters)
+
+	* NEWS, AUTHORS, correct.c, queryfeature.c, resample.c, version.h:
+	Do not process unchanged color channels for CA correction
+
+2005-10-19 03:06:32  jim0watters  (jim0watters)
+
+	* AUTHORS, NEWS, version.h: update changes
+
+	* adjust.c, filter.h, panorama.h, parser.c, queryfeature.c,
+	resample.c: ByThomas Rauscher, Added antialiasing filters
+
+	* file.c, filter.c, tiff.c: ByThomas Rauscher, Added support
+	32bit float files
+
+2005-10-18 23:33:24  jim0watters  (jim0watters)
+
+	* bmp.c: allow to read both top to bottom or bottom to top
+	BMP files
+
+	* panorama.h: remove incorrect filer_main()
+
+2005-05-22 12:44:04  dwilkins42  (dwilkins42)
+
+	* version.h: Update all versions
+
+	* configure.ac, filter.c, queryfeature.c, version.h: Correct
+	behaviour for mode=_usedata
+
+2005-05-18 13:40:39  brunopostle  (brunopostle)
+
+	* NEWS, configure.ac, version.h: Changed version to 2.7.0.10
+	for release
+
+2005-05-12 02:24:07  jim0watters  (jim0watters)
+
+	* libpano.vcproj: update for VC .Net
+
+2005-05-07 15:17:07  dwilkins42  (dwilkins42)
+
+	* lmdif.c, multilayer.c, panotypes.h, pteditor.c, ptpicker.c,
+	resample.c, sys_ansi.c: Explicitly mark unused variables and
+	remove GCC warning
+
+2005-05-05 05:06:51  dwilkins42  (dwilkins42)
+
+	* queryfeature.c: Modify sense of Java test
+
+2005-05-04 15:08:57  dwilkins42  (dwilkins42)
+
+	* ChangeLog: Update ChangeLog
+
+	* filter.c: Use 64 bit clean data types. Use 64 bit safe casts.
+
+	* file.c: Use decimal instead of hex constants
+
+	* pan.c: Use 64 bit safe casts.
+
+	* PTDialogs.c: Correct typo
+
+	* perspect.c: Use 64 bit clean data types.
+
+	* morpher.c, jpeg.c, fourier.c: Use 64 bit clean data types. Use
+	64 bit safe casts.
+
+	* file.c: Use 64 bit clean data types. Use 64 bit safe
+	casts. Rename READLONG and WRITELONG to READINT32 and WRITEINT32
+	to accurately reflect their purpose.
+
+	* correct.c: Use 64 bit safe casts.
+
+	* sys_ansi.c, sys_win.c: Use 64 bit clean parameter declarations.
+
+	* tiff.c: Use 64 bit clean data types and types defined in tiff.h
+	where appropriate
+
+	* resample.c: Use 64 bit clean data types.
+
+	* queryfeature.c: Use 64 bit clean data types. Use 64 bit safe
+	const instead of define
+
+	* ppm.c: Use 64 bit clean data types. Use correct format
+	specifiers for 32/64 bit
+
+	* parser.c: Use correct format specifiers for 32/64 bit
+
+	* panorama.h, filter.h: use 64 bit clean types
+
+	* fftn.h, fftn.c: Correct data widths for 32/64 bit use
+
+	* Triangulate.c: Use floating point version of abs() to avoid
+	conversion errors
+
+	* tools/panoinfo_unix.c: gcc 2.95 on ppc barfs if local variables
+	defined late
+
+	* Makefile.am, panotypes.h: Add panotypes.h header for 32/64
+	bit support
+
+	* m4/ax_check_graphics.m4, configure.ac: Small fixes for darwin
+	platform
+
+2005-05-01 14:41:18  dwilkins42  (dwilkins42)
+
+	* PTDialogs.c, multilayer.c, pteditor.c, resample.c: Supress
+	unused parameter warning on msvc.
+
+	* sys_win.h: Correct function declarations.
+
+	* sys_win.c: Correct function declarations. remove unused local
+	variables. Supress unused parameter warning on msvc.
+
+	* ptpicker.c: Update function declaration. Supress unused
+	parameter warning on msvc
+
+	* optimize.c: Remove redundant function declaration
+
+	* lmdif.c: Update function declarations. Remove redundant function
+	declarations. Supress unused parameter warnings on msvc
+
+	* file.c: Replace (char)255 with 0xFF so that msvc won't complain
+
+	* correct.c: Initialise a few more variables.
+
+	* adjust.h: Add one more function declaration
+
+	* adjust.c: Initialise variables. Correct typing error. Update
+	function declaration
+
+2005-04-30 18:55:27  dwilkins42  (dwilkins42)
+
+	* queryfeature.c: Add note in queryfeature if java support
+	is disabled
+
+	* Makefile.am: Add msvc files to autotools
+
+	* libpano.vcproj, pano12vc.def, pano12vcd.def: Add project file
+	for msvc and support files
+
+	* resample.c: Fix cast-as-lvalue warning. Add function
+	declarations. Ensure all variables initialised. Remove unused
+	variables. Fix cast scope. Fix fprintf format string
+
+	* ptpicker.c: Correct sprintf format strings
+
+	* lmdif.c: Correct function declarations. Remove unused
+	variables. Remove redundant functions
+
+	* fourier.c: Remove unused variables. Comment out unused code
+
+	* filter.c: Ensure variables initialised. Fix cast scope
+
+	* file.c: Fix multi-character char const warning. Remove unused
+	variables. Fix signed/unigned comparison warnings
+
+	* adjust.c: Add function declarations. Ensure variables
+	initialised. Comment out unused code. Correct sprintf format
+	string
+
+	* adjust.h: Add new header
+
+	* fftn.c: Fix signed/unsigned warnings
+
+	* correct.c: Fix cast-as-lvalue error. Ensure all variables
+	initialised
+
+	* Makefile.am: Add new files to automake system
+
+	* optimize.c: Remove unused variables. Add function declarations
+
+	* ptpicker.c: Remove unused variable
+
+	* parser.c: Add function declarations. Correct printf/scanf
+	format definitions. Add default case to switch statement
+
+	* ZComb.c, ZComb.h, tiff.c: Move Z combining code to it's own
+	files. Fix parameter declaration in tiff.c
+
+	* pteditor.c, ptpicker.c, resample.c, adjust.c, lmdif.c: Remove
+	#pragma unused (not used by gcc or msvc)
+
+	* tools/PTOptimizer.c: Remove unused variables. Add explicit
+	function declaration
+
+	* sys_win.h: Correct parameter declaration
+
+	* sys_ansi.c: Remove unused variable
+
+	* remap.c: Add explicit variable initialisation
+
+	* pteditor.c: Add explicit function declaration
+
+	* png.c: Fix data type. Fix Optimise bug
+
+	* Triangulate.c: Remove unused variable
+
+2005-04-22 15:30:14  dwilkins42  (dwilkins42)
+
+	* javastub.c: Required for --without-java support
+
+	* pano12.rc: Correct rc language version (messages are in english
+	not german)
+
+	* Makefile.am, configure.ac: Add --without-java support
+
+2005-02-26 08:14:10  dwilkins42  (dwilkins42)
+
+	* panorama.h: __INTEL__ cannot be used as a test for windows
+
+2005-02-17 14:37:46  dwilkins42  (dwilkins42)
+
+	* configure.ac: Update version number
+
+2005-02-04 08:38:21  jim0watters  (jim0watters)
+
+	* adjust.c, parser.c, queryfeature.c, version.h: Fix bug when
+	cropping outside of image  - Joost Nieuwenhuijse
+
+2005-01-12 08:03:39  dwilkins42  (dwilkins42)
+
+	* m4/ax_check_graphics.m4, configure.ac: Add initial support
+	in autotools for the 64 bit linux platform. Remove default
+	search paths
+
+2005-01-07 09:26:30  dwilkins42  (dwilkins42)
+
+	* tools/.cvsignore, tools/Makefile.am, build/win32/Makefile.am,
+	doc/Makefile.am, m4/Makefile.am, build/Makefile.am, Makefile.am,
+	bootstrap, configure.ac: Ensure maintainer-clean and distcheck
+	targets work. Disable maintainer-mode in dist tarball.
+
+	* m4/ax_check_java.m4: Put only _really_ required includes in
+	JAVA_FLAGS. Should fix problem on Debian with gcj.
+
+2004-12-01 01:44:33  specu  (specu)
+
+	* sys_win.c: add title to the PrintError messagebox
+
+	* sys_win.c: fix typo
+
+	* version.h: replace non ASCII char with (c) - fix for bug 1076139
+
+2004-11-23 19:43:16  dwilkins42  (dwilkins42)
+
+	* doc/.cvsignore, m4/ax_check_graphics.m4, m4/ax_check_java.m4,
+	Makefile.am, configure.ac: Fixes for build (cygwin now compiles,
+	but need to add README.cygwin to explain how). Also add .cvsignore
+	to doc subdir.
+
+	* libpano12.def: Add libpano12.def used to create the import
+	library on windows. This is the same as pano12.def, but does not
+	re-export the TIFFxxxx symbols from the tiff library (which can
+	cause some hard-to-track errors)
+
+2004-11-22 19:24:54  dwilkins42  (dwilkins42)
+
+	* tools/Makefile.am, build/Makefile.am, build/README,
+	build/win32/.cvsignore, build/win32/Makefile.am,
+	build/win32/compile-resource, build/win32/lt-compile-resource,
+	m4/ax_check_java.m4, build/.cvsignore, Makefile.am, configure.ac:
+	Fixes for mingw and cygwin build. Note that cygwin build still
+	has a few problems.
+
+	* m4/.cvsignore, tools/.cvsignore, .cvsignore: Add cvs ignore
+	files
+
+2004-11-16 09:08:51  brunopostle  (brunopostle)
+
+	* ChangeLog: *** empty log message ***
+
+	* doc/stitch.txt, Makefile.am, configure.ac, doc/Makefile.am,
+	doc/Optimize.txt: Added updated documentation for PTStitcher
+	and PTOptimizer.
+
+	* NEWS, configure.ac: Updated for 2.7.0.8 release
+
+2004-11-16 06:08:41  jim0watters  (jim0watters)
+
+	* version.h: Official release, Updated to version 2.7.0.8
+
+	* optimize.c: Fix small memory leak, as reported by Pablo d'Angelo
+
+2004-11-10 09:46:25  dwilkins42  (dwilkins42)
+
+	* m4/ax_check_graphics.m4, Makefile.am: Update mac support in
+	the build files
+
+2004-11-10 08:32:33  brunopostle  (brunopostle)
+
+	* configure.ac: Stop configure when it can't find libjpeg, zlib,
+	libtiff, libpng or java (Douglas Wilkins)
+
+	* tools/Makefile.am: Allow out of tree builds.	Remove an
+	unnecessary osx hack.
+
+	* m4/ax_check_java.m4: Add a path to find java on osx 10.1
+	(Douglas Wilkins)
+
+2004-11-09 18:04:40  brunopostle  (brunopostle)
+
+	* m4/ax_check_java.m4: small changes to allow for the sun java
+	packaged by www.jpackage.org (Douglas Wilkins)
+
+	* tools/Makefile.am, panorama.h: Fixes to build on osx, though
+	not ideal.
+
+	* m4/ax_check_java.m4: fixes to detect java libraries
+
+	* tools/Makefile.am: Add AM_LDFLAGS=-L.. so the tools can link
+	to the just-built library
+
+	* configure.ac: allow older versions of autoconf
+
+	* Makefile.am: Add some likely include paths for building on a mac
+
+	* tools/Makefile.am, AUTHORS, ChangeLog, Makefile.am,
+	NEWS, README, bootstrap, configure.ac, m4/Makefile.am,
+	m4/ax_check_graphics.m4, m4/ax_check_java.m4: Added new libtool,
+	automake, autoconf build system.  Needs testing on various
+	platforms.
+
+2004-11-08 19:35:10  brunopostle  (brunopostle)
+
+	* Makefile, README.linux, README.windows, makefile.win32,
+	tools/makefile panoinfo, tools/makefile ptoptimizer,
+	tools/makefile.panoinfo.win32, tools/makefile.ptoptimizer.win32:
+	Renamed Makefile as it would be clobbered by upcoming automake
+	build system.  Renamed files with spaces as they confuse make.
+	Modified README files as appropriate.
+
+2004-10-15 16:28:22  jim0watters  (jim0watters)
+
+	* jpeg.c, queryfeature.c, version.h: Turned on JPEG optimization -
+	disable in script file
+
+2004-10-07 15:06:34  jim0watters  (jim0watters)
+
+	* version.h: Official release, Updated to version 2.7.0.6
+
+2004-09-27 06:32:10  jim0watters  (jim0watters)
+
+	* tools/panoinfo_unix.c: Unix version of PanoInfo
+
+	* version.h: Updated to new version - rc1
+
+	* resample.c: Updated fastTransform - removed bugs
+
+	* sys_win.c: disable warnings for unknown tags for TIFF files
+
+	* queryfeature.c: Fix asserts with Microsoft compilers
+
+2004-09-22 19:59:25  jim0watters  (jim0watters)
+
+	* correct.c, filter.c, resample.c: Reduce the number of times
+	the status bar gets updated.  From every 5 lines to every 2%.
+	Speed increase using plugin from 4:30 down to 1:30 with 5000
+	pixel high image
+
+	* math.c: Fix PTCorrect vignetting correction.	Use same amount
+	of correction with 16 and 8 bit files.	16 bit too dark
+
+2004-07-20 03:55:59  jim0watters  (jim0watters)
+
+	* file.c: Fix PTAdjust saving 16 bit files loaded from plug-in
+	as too dark.
+
+	* version.h: new version
+
+	* seamer_.c: Fix 16 bit PTAdjust blend method paste,  remove
+	black border  - Jim Watters
+
+	* ptpicker.c: Fix PTEditor to open files
+
+	* filter.h: Remove many type size warnings
+
+	* PTDialogs.c, pano12.rc, sys_win.h: Fix path and file input
+	with dialog boxes.  Now accept path with spaces.  Updating edit
+	control is remembered.
+
+2004-07-18 03:20:52  jim0watters  (jim0watters)
+
+	* adjust.c: Speed up adding an alpha channel to image -
+	Jim Watters
+
+2004-07-15 23:01:16  jim0watters  (jim0watters)
+
+	* tools/panoinfo.c: Remove unused variables
+
+	* version.h: Set to Alpha 4
+
+	* queryfeature.c: Update with new features - mask for focus,
+	Faster, PSD & 16bit bug fix
+
+	* sys_win.h: Fix propper dialog names for Windows plug-ins -
+	Jim Watters
+
+	* tiff.c: Added Combining images of different focus by Rik
+	Littlefields
+
+	* filter.c, filter.h, morpher.c, parser.c, resample.c: Added
+	Faster transformations by Fulvio Senore and with morphing by
+	Rik Littlefields
+
+	* file.c: Fix problem with large PSD files with image width
+	> 16384 and heavy file swapping and updated hasFeather.
+	Rik Littlefield & Jim Watters
+
+	* correct.c, file.c, filter.c, filter.h, math.c: Fix 16bit plug-in
+	for Radial Shift and PTAdjust - Kevin Kratzke & Jim Watters
+
+2004-07-13 02:51:28  jim0watters  (jim0watters)
+
+	* file.c: Dynamically allocate scanline buffer in
+	writeWhiteBackground, to avoid buffer overflow and crash on
+	large images.
+
+	* queryfeature.c: made to work with microsoft compiler
+
+2004-06-06 03:13:35  jim0watters  (jim0watters)
+
+	* version.h: increased version #
+
+	* Makefile: add missing bracket
+
+2004-05-30 01:41:24  jim0watters  (jim0watters)
+
+	* tools/makefile ptoptimizer: makefile for ptoptimizer
+
+	* tools/makefile panoinfo, tools/panoinfo.c: Small application
+	to test the query feature functions of pano12 library.
+
+	* queryfeature.c, queryfeature.h, Makefile, makefile.linux,
+	makefile.mac, makefile.osx, pano12.def, pano12.rc, version.h:
+	Functions to determine properties of this specific pano12 library.
+	Features are name/value pairs. The name is string and the value
+	can be either an integer, double or string. Boolean values are
+	encoded as integers (0=false, 1=true)
+
+	* adjust.c, filter.h, filter.r, optimize.c, parser.c: Rik
+	Littlefield's Improved optimizer. Better.  Faster.  Stronger.
+	The method used here is a hybrid of two optimization strategies.
+	In the first strategy, fcnPano is configured to return one
+	function per control point, that function being total distance
+	without regard for direction.  In the second strategy, fcnPano
+	is configured to return two functions per control point, those
+	functions being distance in two directions, typically longitude
+	and latitude.
+
+2004-05-03 11:56:45  brunopostle  (brunopostle)
+
+	* makefile.osx: Partially working OS X makefile.  This creates
+	a statically linkable .a archive that can be used to build a
+	working PTOptimizer like so: make -f makefile.osx && cd tools &&
+	gcc -o PTOptimizer -I.. -L/sw/lib -L.. -ljpeg -ltiff -lpano12
+	PTOptimizer.c
+
+2004-03-18 02:06:00  jim0watters  (jim0watters)
+
+	* resample.c: Radial Shift, when colors channels have different
+	values and d is > 1 would give incorrect results around the edge
+	of the image
+
+2003-12-30 16:41:38  jim0watters  (jim0watters)
+
+	* file.c: Fix odd size PSD files and reading multilayer PSD files
+
+	* adjust.c, filter.c: Fix return, for compile warning.
+
+2003-12-30 10:37:48  brunopostle  (brunopostle)
+
+	* Makefile, pano12.def, resample.c: Files somehow got converted
+	to DOS format, fixed
+
+2003-12-20 11:51:46  brunopostle  (brunopostle)
+
+	* tools/PTOptimizer.c: Initial commit, this is intended to be
+	a drop-in replacement for the binary-only PTOptimizer, seems
+	to work.
+
+2003-12-20 00:04:37  bret_mckee  (bret_mckee)
+
+	* Makefile, pano12.def, resample.c: Changes to get ptools to
+	compile under windows: - Makefile modified to build the supporing
+	libraries if they are present - pano12.def - removed comments
+	which were causing syntax errors - resample.c - change a reference
+	to an undefined (and dangerous looking) function to sprintf
+
+2003-12-16 21:56:15  brunopostle  (brunopostle)
+
+	* jpeg.c, png.c, tiff.c: Mac specific changes related to file
+	paths (Kekus Digital)
+
+	* adjust.c, pano12.def, resample.c: Two new functions: MyMakePano
+	and MyTransForm are PTMac specific (Kekus Digital)
+
+2003-12-14 18:32:41  brunopostle  (brunopostle)
+
+	* README.mac, README.windows, README.linux: These instructions
+	are out-of-date (Helmut Dersch)
+
+	* gpl.txt: The content of Copying.html from the original
+	sources converted to text is identical (apart from formatting)
+	to http://www.fsf.org/licenses/gpl.txt.
+
+2003-12-13 12:03:45  brunopostle  (brunopostle)
+
+	* ptpicker.c: changed 'picker' to 'gpicker' (a namespace
+	conflict?) (Kekus Digital)
+
+	* PTDialogs.c: minor dialog text change (Kekus Digital)
+
+	* filter.h, panorama.h: mac specific changes to build using carbon
+	(Kekus Digital)
+
+	* PixMap.c, PixMap.h, filter.r, pict.c, sys_mac.c, sys_mac.h:
+	Mac specific changes, mostly porting gui to carbon (Kekus Digital)
+
+2003-12-12 17:32:07  brunopostle  (brunopostle)
+
+	* PixMap.c, PixMap.h, filter.r, makefile.mac, pict.c, shell_mac.c,
+	sys_mac.c, sys_mac.h: Extra files required for mac compilation
+	as distributed by Helmut Dersch.
+
+	* sys_X11.c, sys_X11.h: Found two files in the macintosh sources
+	that appear to be gtk+ dialog boxes for a linux front-end,
+	the more the merrier.
+
+2003-12-01 22:19:14  brunopostle  (brunopostle)
+
+	* Makefile: Makefile modifications to build with mingw2.0
+	(Max Lyons)
+
+	* filter.h: Reduce random luminance effect for photoshop plugin
+	(Jim Watters)
+
+	* file.c: Fix to export psd files in a better way (Jim Watters)
+
+	* adjust.c: Feature to allow linking of roll, pitch and yaw
+	parameters when optimising (Jim Watters)
+
+	* morpher.c: Fix for morph-to-fit that was causing intermittent
+	crashes (Max Lyons)
+
+	* correct.c, filter.h, math.c: Feature to randomise brightness
+	correction in photoshop plugin (Jim Watters).  Anchor brightness
+	correction to narrowest dimension of the source image rather
+	than width for photoshop plugin (Jim Watters).
+
+	* file.c, filter.h, panorama.h, png.c, pteditor.c, ptpicker.c:
+	Fix for BIGENDIAN namespace confict when compiling on Windows
+	(Max Lyons).  Additional error messages when writing psd files
+	(Max Lyons).
+
+	* sys_win.c: Feature to add 'are you sure' dialog on Windows
+	when hitting cancel button (Max Lyons)
+
+	* sys_win.c, pano12.rc: Fix for memory problems on win95/98/me
+	(Max Lyons).  Feature to show memory usage in Windows dialog box
+	(Max Lyons).
+
+	* bmp.c: Fix to bmp file output, bmp file dimensions need to be
+	multiples of 4 (Max Lyons)
+
+	* adjust.c, filter.h, parser.c: Straight-line control points
+	feature added (Helmut Dersch).	g and t shear correction feature
+	added (Helmut Dersch).	256 byte limit on script-file line length
+	extended (Max Lyons).
+
+	* makefile.linux: Modified CFLAGS to suit real location of linux
+	java header files
+
+	* makefile.linux, sys_ansi.h: Added two files needed to build on
+	linux.	sys_ansi.h was originally missing from both the Windows
+	and Linux sources, makefile.linux is the Makefile copied from
+	the Linux source tarball.
+
+	* ppm.c: branches:  1.1.1; Initial revision
+
+	* ppm.c: Initial import of Windows Version 2.6b1 of Panorama Tools
+	library Sources as distributed by Helmut Dersch December 2001.
+
+	* sys_ansi.c: branches:  1.1.1; Initial revision
+
+	* sys_ansi.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* Makefile: branches:  1.1.1; Initial revision
+
+	* Makefile: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* multilayer.c: branches:  1.1.1; Initial revision
+
+	* multilayer.c: Initial import of Windows Version 2.6b1 of
+	Panorama Tools library Sources as distributed by Helmut Dersch
+	December 2001.
+
+	* pano12.def: branches:  1.1.1; Initial revision
+
+	* pano12.def: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* pano12.rc: branches:	1.1.1; Initial revision
+
+	* pano12.rc: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* png.c: branches:  1.1.1; Initial revision
+
+	* png.c: Initial import of Windows Version 2.6b1 of Panorama Tools
+	library Sources as distributed by Helmut Dersch December 2001.
+
+	* bmp.c: branches:  1.1.1; Initial revision
+
+	* bmp.c: Initial import of Windows Version 2.6b1 of Panorama Tools
+	library Sources as distributed by Helmut Dersch December 2001.
+
+	* jpeg.c: branches:  1.1.1; Initial revision
+
+	* jpeg.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* seamer_.c: branches:	1.1.1; Initial revision
+
+	* seamer_.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* tiff.c: branches:  1.1.1; Initial revision
+
+	* tiff.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* pteditor.c: branches:  1.1.1; Initial revision
+
+	* pteditor.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* ptpicker.c: branches:  1.1.1; Initial revision
+
+	* ptpicker.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* Triangulate.c: branches:  1.1.1; Initial revision
+
+	* Triangulate.c: Initial import of Windows Version 2.6b1 of
+	Panorama Tools library Sources as distributed by Helmut Dersch
+	December 2001.
+
+	* morpher.c: branches:	1.1.1; Initial revision
+
+	* morpher.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* optimize.c: branches:  1.1.1; Initial revision
+
+	* optimize.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* resample.c: branches:  1.1.1; Initial revision
+
+	* resample.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* seamer.c: branches:  1.1.1; Initial revision
+
+	* seamer.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* fftn.c: branches:  1.1.1; Initial revision
+
+	* fftn.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* fourier.c: branches:	1.1.1; Initial revision
+
+	* fourier.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* PTDialogs.c: branches:  1.1.1; Initial revision
+
+	* PTDialogs.c: Initial import of Windows Version 2.6b1 of
+	Panorama Tools library Sources as distributed by Helmut Dersch
+	December 2001.
+
+	* math.c: branches:  1.1.1; Initial revision
+
+	* math.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* pan.c: branches:  1.1.1; Initial revision
+
+	* pan.c: Initial import of Windows Version 2.6b1 of Panorama Tools
+	library Sources as distributed by Helmut Dersch December 2001.
+
+	* file.c: branches:  1.1.1; Initial revision
+
+	* file.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* lmdif.c: branches:  1.1.1; Initial revision
+
+	* lmdif.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* remap.c: branches:  1.1.1; Initial revision
+
+	* remap.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* adjust.c: branches:  1.1.1; Initial revision
+
+	* adjust.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* perspect.c: branches:  1.1.1; Initial revision
+
+	* perspect.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* correct.c: branches:	1.1.1; Initial revision
+
+	* correct.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* sys_win.c: branches:	1.1.1; Initial revision
+
+	* sys_win.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* filter.c: branches:  1.1.1; Initial revision
+
+	* filter.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* parser.c: branches:  1.1.1; Initial revision
+
+	* parser.c: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* ptutils.h: branches:	1.1.1; Initial revision
+
+	* ptutils.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* sys_win.h: branches:	1.1.1; Initial revision
+
+	* sys_win.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* version.h: branches:	1.1.1; Initial revision
+
+	* version.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* f2c.h: branches:  1.1.1; Initial revision
+
+	* f2c.h: Initial import of Windows Version 2.6b1 of Panorama Tools
+	library Sources as distributed by Helmut Dersch December 2001.
+
+	* fftn.h: branches:  1.1.1; Initial revision
+
+	* fftn.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* filter.h: branches:  1.1.1; Initial revision
+
+	* filter.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* pteditor.h: branches:  1.1.1; Initial revision
+
+	* pteditor.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+
+	* panorama.h: branches:  1.1.1; Initial revision
+
+	* panorama.h: Initial import of Windows Version 2.6b1 of Panorama
+	Tools library Sources as distributed by Helmut Dersch December
+	2001.
+

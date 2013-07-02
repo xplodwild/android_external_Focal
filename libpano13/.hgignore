@@ -1,0 +1,32 @@
+TAGS
+glob:*.cmake
+glob:*.filters
+glob:*.opensdf
+glob:*.sdf
+glob:*.suo
+glob:*.user
+glob:*_PTStitcher*
+glob:*~
+glob:CMakeCache.txt
+glob:CMakeFiles
+glob:CPackSourceConfig.cmake
+glob:Debug CMD
+glob:Makefile
+glob:Release CMD
+glob:Testing
+glob:libpano13.so*
+libpano13.a
+libpano13.o
+libpano13.pc
+tests/simpleStitch/tests
+tests/simpleTiff16/tests
+tools/PTblender
+tools/PTcrop
+tools/PTinfo
+tools/PTmasker
+tools/PTmender
+tools/PToptimizer
+tools/PTroller
+tools/PTtiff2psd
+tools/PTtiffdump
+tools/PTuncrop

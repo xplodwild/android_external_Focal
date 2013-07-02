@@ -1,0 +1,47 @@
+2006-11-25  dmg  <dmg@uvic.ca>
+
+	* panoAutomateTest.pl: CHanged from PTremap to PTmender
+
+2006-10-26  dmg  <dmg@uvic.ca>
+
+	* panoAutomateTest.pl: Disable all tests but tiff_m
+
+2006-10-24  dmg  <dmg@uvic.ca>
+
+	* panoAutomateTest.pl: I have disabled PSD testing. The inclusing
+	of the version of  metadata in the output is making it fail every
+	time. We need a program to test only data.
+
+2006-08-30  dmg  <dmg@uvic.ca>
+
+	* updated PSD files according to changes in file.c
+
+2006-07-28  dmg  <dmg@hydrogen.dmg>
+
+	* panoAutomateTest.pl: Remove the software tiff TAG from tests,
+	as it changes with every new version
+
+2006-07-10  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (SUBDIRS): Added simpleTiff16 directory
+
+2006-07-08  dmg  <dmgerman@uvic.ca>
+
+	* panoAutomateTest.pl: Fixed a wrong error message
+
+2006-06-16  dmg  <dmgerman@uvic.ca>
+
+	* panoAutomateTest.pl: Added PSD_mask to the tests.
+
+2006-06-12  dmg  <dmgerman@uvic.ca>
+
+	* Added README.txt
+
+2006-06-11  dmg  <dmgerman@uvic.ca>
+
+	* panoAutomateTest.pl: Use tiffcmp instead of diff for tiff files.
+
+2006-05-27  dmg  <dmgerman@uvic.ca>
+
+	* panoAutomateTest.pl: Created the file.
+

@@ -1,0 +1,296 @@
+
+This file documents the activities required before we release version
+3.0.0 of the library.
+
+* TODO Very little testing has been done in 16 bit images.
+
+
+* TODO Perhaps the most pressing issue is to create a good set of tests for
+  each of the tools. So far we only have tests for PTmender (and only 2).
+
+* Input formats
+
+** TODO Create tests for various input formats, particularly stereographic and equisolid.
+
+** TODO Equisolid
+
+- equisolid and Albert Equal Area are the same. 
+
+- We need to correctly implement 
+
+What we need:
+
+* PTmender. We need to test each of the projections, and each of the
+  different types of input projections.
+
+* All others: they desperately need a test.
+
+Issues with creating the tests:
+
+* tiffcmp is good for comparing just the data in tiffs. But once one
+  starts using the non-deterministic parts of panotools (such as
+  colour correction and feathering) it is impossible to use them. What
+  we need is some type of program that reads the data inside an image
+  and compares it to be "similar" within certain threshold.
+
+* we also need the equivalent of tiffcmp for PSDs, where we can
+  specify we want to compare the data, not the metadata. The small
+  parser I have written might be exactly what we need: ignore all
+  metadata. It might be necessary to compare the "layer and masks
+  block", but not the ColorModedDataBlock or the Metadata block. It
+  might not be as easy as it sounds, because offset might have
+  shifted. 
+
+======================================================================
+KNOWN BUGS:
+
+----------------------------------------------------------------------
+All tools:
+
+- Update make file to include resource files for version info.
+
+- perspective.c, and remap.c are all using transForm 
+  instead of the new transformEx.  This is needed to take advantage of the 
+  new AntiAliasing functions.   Requires creating inverse stack.
+
+- Command line processing. All tools should have similar command line
+  processing. This needs to be checked, and updated, if
+  necessary. 
+
+  * I have updated most of them to be consistent, but I might have
+    missed something. Needs to be checked.
+
+- PTcrop tries to read the entire image at once. With a huge image I
+   got a segfault from inside libtiff. It needs to be rewritten to read
+   only one line at a time (not critical for 3.0.0, but it would be nice).
+
+- PTroller runs _extremely_ slow. I need to find out why. (not
+  critical for 3.0.0)
+
+- PTtiff2psd. I fixed a major bug in the implementation of writing the
+  metadata. I suspect that there are still some "issues" regarding
+  this. I have also written a small top-down parser to verify the data
+  written. 
+
+----------------------------------------------------------------------
+
+panoinfo:
+
+----------------------------------------------------------------------
+
+PTmender:
+
+- The Albers projection is ignoring the field-of-view and it is
+  computing a 360 degrees in all cases.
+
+
+DESIRABLE:
+
+- PTmender is not properly calculating ROI for some images. In
+  particular (at least) circular fisheyes that cover the zenit or the
+  nadir. Currently these types of images require full size processing
+  (as opposed to cropped processing).
+
+----------------------------------------------------------------------
+PTtiff2psd:
+ 
+DESIRABLE:
+
+Create PSDs of one layer 8 and 16 bit images
+
+======================================================================
+
+After 3.0.0:
+
+DESIRABLE FEATURES:
+ 
+ - Output a text file with the names of the files processed and extra
+   information, such as size
+
+ - If somebody wants full compatibility with PTstitcher, a new program
+   can be added that does all the work. It will be a "superset" of many
+   of the current pano tools.
+ 
+----------------------------------------------------------------------
+PTblender:
+
+DESIRABLE:
+ 
+ - Feature: Create photoshop curves and maps for HSV colour
+   corrections. Probably not for 3.0.0
+ 
+----------------------------------------------------------------------
+PTroller:
+ 
+DESIRABLE:
+
+- PTroller: Add the ability to stack and add composing
+  images (PTtiff2psd is able to do stacking and compositing)
+ 
+----------------------------------------------------------------------
+ PTuncrop:
+
+----------------------------------------------------------------------
+ PTcrop:
+ 
+DESIRABLE
+
+- It needs to be able to crop images as a "set" (that is, compute the
+   bounding rectangle of a group of images) not only as a single one.
+
+- Compute the inner rectangle with the largest area (not a priority)
+
+
+----------------------------------------------------------------------
+ 
+PTtiff2psd:
+ 
+DESIRABLE:
+
+Create PSDs of one layer 8 and 16 bit images
+
+ ----------------------------------------------------------------------
+PToptimizer:
+
+* Ready for 3.0.0
+ 
+----------------------------------------------------------------------
+
+ 
+----------------------------------------------------------------------
+ LONGER TERM:
+ 
+ * Allow tools to read their parameters from the PTstitcher script.
+ 
+ * Add support to all the tools for 16 bit, and 32 bit images (it is
+   kind of mixed at this point)
+
+----------------------------------------------------------------------
+PTblender:
+
+- Pre-compute which images could actually overlap from their TIFF
+  offsets, adding only these to a linked list of pairs.  Might as well
+  support cropped TIFFs where possible.  This will really help people
+  who do >20 image multi-row sphericals (since the current algorithm
+  loops over all pixels in the image N^2 times).  For such panos, it
+  may even be worth calling PTcrop (when it exists) first on the
+  uncropped images.
+
+- Replace the two inner nested loops in ReadHistogram with one loop
+  over the linked list of "possible match" images, and invert the
+  order of the loops:
+
+    for (each row) {
+            read_row_from_images(row,&row_buffer); // careful with crop
+            for (each match in matching_images_list) {
+                    if (row intersects both image boundaries) {
+                            for (each pix in row) {
+                                    if pixel_include(row,pix,im1,im2,trim)
+                                            add_to_histogram(pix,match);
+                            }
+                    }
+            }
+    }   
+
+- Factor out the code which decides whether to use a given pixel in
+  the histogram into a separate function (pixel_include() above), and
+  pass it an options structure which gives it what it needs to know
+  (the optional trim factors, etc., called 'trim' above).  This is
+  also where separate mask data could be used, but the "graymask"
+  method currently employed may obviate that.
+
+- Simplify the actual histogram remapping and subsequent color
+  correction code:
+
+  1. Always match all three histograms, RGB.  Impose "brightness only"
+     or other constraints on the mapping functions at the very end
+     (see below).  No HSV computations are ever performed.
+
+  2. Use a single routine to compute a mapping function (table) from
+     histogram 1 (source) to histogram 2 (target).  This routine will
+     simply:
+
+	a. Form cumulative totals of the both histograms.
+        b. Create the 256 element floating point mapping function z
+           which maps between them (one for each of RGB).
+
+     This function will be called many times, so needs to be short and
+     sweet.
+
+  3. Build a ragged array of length n_images, with each element
+     holding a linked list of all other images to which it matches,
+     keeping track of pixel overlap count, and omitting matches
+     without enough pixels in overlap.
+
+  3. Compute the floating point mapping functions z for all pairs in
+     the ragged array..  There is one z per pair for each of RBG.
+
+  4. "Anneal" the (potentially long list of) mapping functions z over
+     the entire image:
+
+	a. For each image, compute a master mapping function m for the
+	   image, from the overlapping pixel count-weighted average of
+	   all the modified sub-functions to all neighbors.
+
+        b. The modified sub-function z' to a neighbor will depend on
+           i) the mapping function between the two, z, and ii) the
+           master function m of the neighbor, as:
+
+		z'=m^-1 z 
+
+	   The inverse of a mapping function m is that function which,
+	   when m is run through it, produces the unit vector
+	   (0..255).  In the first round, all master functions are set
+	   to the unit vector (0..255), and z'=z.
+
+	c. Repeatedly iterate over all images in this way until all
+	   master mapping functions converge.  Convergence can
+	   progress non-uniformly (image by image); each image is
+	   marked as converged once its master function converges.
+        
+     Note that a reference image is no longer needed... the average
+     best mapping to make all images compatible is automatically
+     developed (e.g. for a range of brightnesses, the "average"
+     brightness will be targeted).  If a reference image is desired,
+     it is marked "converged" before the first round of annealing, and
+     everything proceeds in the same manner.
+
+  5. Normalize each image's annealed master mapping function, subject
+     to the (optional) user constraints:
+
+	-t 1 (brightness only): m(r) = m(g) = m(b) (one average table).
+        -t 2 (color only):      m(r) + m(g) + m(b) = I (unit vector)
+
+  6. Convert all normalized, annealed master mapping tables to byte,
+     by rounding, perhaps with some care taken to avoid banding caused
+     by large gaps.
+
+  7. Run each image's data through its master mapping table and write
+     out to output image.
+
+- No flattening (separate tool).
+
+- Add an optional debug switch to enable all that Debug.txt output
+  (just to stdout).
+----------------------------------------------------------------------
+
+GetROI
+
+   Hello
+   I used ptmender to play with the projections. I use the SVN-source from 
+   SF. I converted a equirectangular panorama to lambertazimuthal projection.
+   I had the problem that the resulting image-file often displays not the 
+   whole projection. The reason for this problem seems to be the x_jump in 
+   the getROI-function:
+   
+   Depending on the image size and because of the x_jumping getROI 
+   calculates sometimes wrong left/right values.
+   
+   I could solve my problems by changing the line 504 in PTcommon.c from
+       x_jump = (y==0 || y==TrPtr->src->height) ? 1 : TrPtr->src->width/2;
+   into
+       x_jump = (y==0 || y==TrPtr->src->height ||
+           abs(y - TrPtr->src->height/2)<=5) ? 1 : TrPtr->src->width/2;
+   
+   
+   

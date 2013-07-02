@@ -1,0 +1,75 @@
+=head1 NAME
+
+PTblender - Colour and brightness correction of panoramas
+
+
+=head1 SYNOPSIS
+
+B<PTblender> [options] I<tiff_file(s)>
+
+
+=head1 DESCRIPTION
+
+B<PTblender> is a command-line tool that only implements the colour
+and brightness correction functionality of B<PTmender>.
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-p> I<prefix>
+
+Prefix for output filename. Defaults to I<blended%4d>.
+
+=item B<-k> I<index>
+
+Index of the image to use as a reference (0-based, defaults to 0).
+
+=item B<-t> I<[0,1,2]>
+
+Type of colour correction: 0 full (default), 1 brightness only, 2
+colour only.
+
+=item B<-c>
+
+Output curves smooth (output one per each corrected file).
+
+=item B<-m>
+
+Output curves arbitrary map (output one per each corrected file).
+
+=item B<-f>
+
+Force processing (ignore warnings).
+
+=item B<-x>
+
+Delete source files (use with care).
+
+=item B<-q>
+
+Quiet run.
+
+=item B<-h>
+
+Output help summary.
+
+=back
+
+
+=head1 SEE ALSO
+
+L<http://wiki.panotools.org/PTblender>, L<PTmender(1)>
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTblender was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

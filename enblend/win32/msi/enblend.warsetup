@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WarSetup-Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" nextUniqueId="1615" projectName="Enblend 3.1" projectUuid="a7c3712b-4d9e-47f9-a8c8-4ea2ff48b6e7" projectUpgradeUuid="1cd3f9ab-d868-46f7-8e40-2a7d539eab6e" projectVersion="3.0.9" projectOrganization="Enblend" projectMustBeAdministratorToInstall="false" project64BitTarget="false" projectTargetName="enblend-3.0.9_win32.msi" projectType="0" projectUserInterface="WixUI_FeatureTree">
+  <projectFeatures featureId="IDD7BD875E2B8B954EF03EF9CF64AA1E51" featureName="enblend" featureDescription="Enblend and enfuse for multi resolution spline blending" configurableDirectory="APPLICATIONFOLDER" configurableDirectoryDefaultPath="[ProjectName]" enableInDefaultInstall="true" enableInMinimalInstall="true" excludeFromBuild="false">
+    <childFeatures featureId="ENFUSE_DROPLETS" featureName="Droplets" featureDescription="Droplets to simplify the use of enblend and enfuse." enableInDefaultInstall="true" enableInMinimalInstall="true" excludeFromBuild="false">
+      <components componentId="ID1001" componentGuid="372cb6f7-e6e2-4f24-8351-320f94cce729">
+        <componentFiles fileId="ID_4668b129_e1e9_4188_98c5_404168874352" srcName="enfuse_droplet.bat" srcDirectory="..\..\contrib\enfuse_droplet" dstName="enfuse_droplet.bat" dstPath="" isComModule="false" typelibGuid="" menuName="enfuse_droplet" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="[APPLICATIONFOLDER]" shortcutCommandArguments="" shortcutDescription="Enfuse selected files or files in selected directory">
+          <service StartWhenInstalled="true" Remove="both" id="ID1000" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+        </componentFiles>
+      </components>
+      <components componentId="ID1003" componentGuid="24697647-5c89-4c4f-bbd0-2b15ec006611">
+        <componentFiles fileId="ID_b8ae3b1b_7861_406f_96a7_706d07357768" srcName="enfuse_droplet_360.bat" srcDirectory="..\..\contrib\enfuse_droplet" dstName="enfuse_droplet_360.bat" dstPath="" isComModule="false" typelibGuid="" menuName="enfuse_droplet_360" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="[APPLICATIONFOLDER]" shortcutCommandArguments="" shortcutDescription="Enfuse dropped images or directories (360° panoramas)">
+          <service StartWhenInstalled="true" Remove="both" id="ID1002" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+        </componentFiles>
+      </components>
+      <components componentId="ID1005" componentGuid="f14aa016-9c40-47a0-be11-3575ac57a561">
+        <componentFiles fileId="ID_661585af_b4da_443b_bb51_1c185e11b369" srcName="enfuse_droplet_readme.txt" srcDirectory="..\..\contrib\enfuse_droplet" dstName="enfuse_droplet_readme.txt" dstPath="" isComModule="false" typelibGuid="" menuName="enfuse_droplet_readme" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+          <service StartWhenInstalled="true" Remove="both" id="ID1004" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+        </componentFiles>
+      </components>
+      <defaultInstallMode>1</defaultInstallMode>
+    </childFeatures>
+    <components componentId="ID1007" componentGuid="a1f4f6df-b4cf-4b68-8ae9-2c7ae03cef26">
+      <componentFiles fileId="ID_6fdeca0f_2499_4fe7_8024_cf721cc9af88" srcName="enblend.exe" srcDirectory="..\..\src\Release" dstName="enblend.exe" dstPath="" isComModule="false" typelibGuid="" menuName="enblend" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1006" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1009" componentGuid="55d46b7e-8215-4082-8a8e-4c519429f8b4">
+      <componentFiles fileId="ID_73fe94cb_3c39_4a27_a7c5_8fb817e2466a" srcName="enfuse.exe" srcDirectory="..\..\src\Release" dstName="enfuse.exe" dstPath="" isComModule="false" typelibGuid="" menuName="enfuse" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1008" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1011" componentGuid="a2395178-a7ed-4ae4-b46b-0fe665902458">
+      <componentFiles fileId="ID_006c9ec4_1275_4657_9179_530dab01f504" srcName="NEWS" srcDirectory="..\.." dstName="NEWS.txt" dstPath="" isComModule="false" typelibGuid="" menuName="NEWS" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1010" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1013" componentGuid="3454ba8b-4d14-4829-910d-f06b1e8c6948">
+      <componentFiles fileId="ID_65b8b449_0453_44da_a40b_b171917bd65b" srcName="README" srcDirectory="..\.." dstName="README.txt" dstPath="" isComModule="false" typelibGuid="" menuName="README" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1012" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1017" componentGuid="c0e0a104-8cef-4ebe-8975-257680944197">
+      <componentFiles fileId="ID_b3055216_5d78_4e74_a7f7_70dafba5f703" srcName="COPYING" srcDirectory="..\.." dstName="COPYING.txt" dstPath="" isComModule="false" typelibGuid="" menuName="COPYING" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1016" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1019" componentGuid="a70e15dd-0517-4f6e-baf4-727b9efa0b63">
+      <componentFiles fileId="ID_0d49a012_9b05_466f_9b79_4b94fdc3b217" srcName="enblend.html" srcDirectory="..\..\doc" dstName="enblend.html" dstPath="" isComModule="false" typelibGuid="" menuName="enblend" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1018" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1021" componentGuid="6e88ff87-6882-4b5e-871f-1284bc416b1a">
+      <componentFiles fileId="ID_55fa7846_2d45_435a_8ecf_604a625c22bd" srcName="enfuse.html" srcDirectory="..\..\doc" dstName="enfuse.html" dstPath="" isComModule="false" typelibGuid="" menuName="enfuse" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1020" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1346" componentGuid="7330e4bd-1243-4956-9413-70c9d6d0c702">
+      <componentFiles fileId="ID_e63c9a82_247a_4b20_bfef_e8310296e782" srcName="AUTHORS" srcDirectory="..\.." dstName="AUTHORS.txt" dstPath="" isComModule="false" typelibGuid="" menuName="AUTHORS" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1345" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1348" componentGuid="ee2d8cfa-ae04-4767-a538-ba91c80a84ad">
+      <componentFiles fileId="ID_a08aa3d6_c7fc_4ddc_87f6_952365ad868e" srcName="README_WINDOWS.txt" srcDirectory="..\.." dstName="README_WINDOWS.txt" dstPath="" isComModule="false" typelibGuid="" menuName="README_WINDOWS" shortcutInProgramFilesMenu="true" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1347" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <components componentId="ID1614" componentGuid="de30340b-b56c-4208-b308-12800e12a859">
+      <componentFiles fileId="ID_77e4f348_4267_41a2_bf63_b206a90b0bd2" srcName="ChangeLog" srcDirectory="..\.." dstName="ChangeLog.txt" dstPath="" isComModule="false" typelibGuid="" menuName="ChangeLog" shortcutInProgramFilesMenu="false" shortcutOnDesktop="false" shortcutInQuickLaunch="false" shortcutWorkingDirectory="" shortcutCommandArguments="" shortcutDescription="">
+        <service StartWhenInstalled="true" Remove="both" id="ID1613" isService="false" userAccount="" userPassword="" cmdLineArguments="" errorControl="normal" interactive="false" loadOrderGroup="" serviceName="" startMode="auto" vital="true" />
+      </componentFiles>
+    </components>
+    <defaultInstallMode>0</defaultInstallMode>
+  </projectFeatures>
+  <buildNoValidiation>false</buildNoValidiation>
+  <projectInstallForCurrentOrAllUsers>2</projectInstallForCurrentOrAllUsers>
+  <License>
+    <System>true</System>
+    <Name>GNU General Public License (GPL) 2.0</Name>
+  </License>
+  <projectProperties TopBanner="top-banner.bmp" BigBanner="big-banner.bmp" ExclamationIcon="" InfoIcon="" NewIcon="" UpIcon="" VS2003Integration="VS2003_INTEGRATION" VS2005Integration="VS2005_INTEGRATION" UseRelativePaths="true" UseWixUI_ErrorProgressText="true" UseWixUI="true" Codepage="1252" ProductLanguage="1033" AlwaysMajorUpgrade="true" Compress="true" BuildTarget="true" PublisherUrl="http:\\enblend.sourceforge.net/" SupportContact="" SupportUrl="http://enblend.sourceforge.net/" SupportPhone="" ReadMeFile="[APPLICATIONFOLDER]\README_WINDOWS.txt" UpdateUrl="http://enblend.sourceforge.net/" Comments="Image Blending with Multiresolution Splines" Icon="" EmbedCab="true" MaxCabSize="0" CabCompressionLevel="mszip">
+    <UiCultures Name="en-US" Enabled="true" />
+    <UiCultures Name="de-de" Enabled="false" />
+    <UiCultures Name="es-es" Enabled="false" />
+    <UiCultures Name="nl-nl" Enabled="false" />
+  </projectProperties>
+</WarSetup-Project>

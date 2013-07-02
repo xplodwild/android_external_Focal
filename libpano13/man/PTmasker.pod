@@ -1,0 +1,97 @@
+=head1 NAME
+
+PTmasker - Compute stitching masks
+
+
+=head1 SYNOPSIS
+
+B<PTmasker> [options] I<tiff_file(s)>
+
+
+=head1 DESCRIPTION
+
+B<PTmasker> computes stitching masks. It implements the ability to
+increase depth-of-field by stacking images.
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-p> I<prefix>
+
+Prefix for output files (defaults to I<masked%4d>).
+
+=item B<-e> I<feather>
+
+Size of the feather (defaults to zero).
+
+=item B<-f>
+
+Force processing (do not stop on warnings).
+
+=item B<-x>
+
+Delete source files (use with care).
+
+=item B<-q>
+
+Quiet run.
+
+=item B<-h>
+
+Output help summary.
+
+=item B<-z>
+
+Enable Extended depth of field.
+
+=item B<-m>
+
+Focus estimation mask type.
+
+=over
+
+=item 0 hard-edged masks, mutually exclusive
+
+=item 1 hard-edged masks, stack of nested masks
+
+=item 2 blended masks, stack of nested masks
+
+=back
+
+2 is default and strongly recommended: This option includes a
+smoothing computation that seems to help a lot.
+
+=item B<-w> I<integer>
+
+Focus estimation window size. Only available if -z.
+
+
+Recommended value is 0.51001114526f image width, e.g. 4 pixels for an
+800-pixel image.
+
+Computation cost for focus estimation increases proportional to N^2.
+Defaults to w4.
+
+=item B<-s> I<integer>
+
+Smoothing window size. Only available if -z.
+
+Recommended value is 0.50f image width, e.g. 4 pixels for an 800-pixel
+image.
+
+Computation cost for focus estimation increases proportional to N^2.
+Defaults to w4.
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTmasker was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

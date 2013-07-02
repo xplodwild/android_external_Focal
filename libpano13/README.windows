@@ -1,0 +1,68 @@
+Readme Sources
+
+This file discribes how to build the library pano13.dll
+for the Windows operating system.
+
+Legal Issues:
+
+This software is distributed under GNU-license, see the
+file COPYING for details. Some parts of the software
+are derived from other sources, which are distributed under
+different copyrights. These are:
+
+- The public domain Levenberg-Marquardt solver 
+of the Argonne National Laboratories MINPACK mathematical library,
+C translation by Steve Moshier (file lmdif.c).
+- Fast fourier transformation, code by:
+RC Singleton, Stanford Research Institute, Sept. 1968
+Copyright MJ Olesen, Queen's University at Kingston, 1995-97.
+See the file fftn.c for details.
+
+
+Requirements:
+
+A working Mingw installation is required to build 
+the library. Mingw comprises a free GNU-development
+environment for Windows, which uses the Windows API
+to build applications. The Compiler and tools can be
+downloaded from www.mingw.org or one of its mirrors.
+
+The following tools are required:
+gcc - the GNU-C-compiler
+make - GNU make
+windres
+dllwrap
+strip
+dlltool
+
+The Java Development Kit 1.3 or later is required.
+It can be downloaded from www.javasoft.com.
+During the build of pano13.dll, the java include
+files have to be accessed by the compiler.
+
+
+Building the Library:
+
+The source files of this distribution have to be unpacked.
+The Makefile expects the MINGW-installation 
+in the directory c:\mingw, include files for the
+format libraries (jpeg,png,tiff) in c:\mingw\usr\include,
+and the format libraries themselves in c:\mingw\usr\lib.
+Adjust these paths to your needs, and issue
+the command 'make -f makefile.win32 pano13.dll' inside the
+sources directory. There will be a couple of warning
+messages which are non-fatal and can be ignored.
+
+Limits and Modifications:
+
+This distribution of the sources limits processing
+of fisheye images to fields of view smaller than
+179 degrees. This limit is controlled by the constant
+MAX_FISHEYE_FOV in the file filter.h. There
+is some controversy regarding the legality of processing
+hemispherical images (ie images having 180 degree field
+of view) in connection with virtual reality panoramas.
+If your application of fisheye lenses is not prohibited
+by patents, you can build and use your own unlimited version 
+of the library by changing the soure code.
+

@@ -1,0 +1,95 @@
+LIBJPEG=$(wildcard ../*jpeg*)
+LIBTIFF=$(wildcard ../*tiff*)
+LIBZ=$(wildcard ../z*)
+LIBPNG=$(wildcard ../*png*)
+# note: if you have installed the JAVA SDK somewhere else you need to change
+# JAVASDK to point to it.
+JAVASDK=$(wildcard ../*sdk*)
+
+LIBS=$(LIBJPEG) $(LIBTIFF) $(LIBZ) $(LIBPNG)
+
+.PHONY: $(LIBS)
+
+all: $(LIBS) pano13.dll
+
+ifeq "$(LIBJPEG)"  ""
+$(warning "No jpeg library found - assuming it is already installed")
+else
+$(LIBJPEG):
+	@echo "configuring $@" && cd $@ && ./configure
+	@echo "building $@" && cd $@ && make
+	@echo "installing $@" && cd $@ && make install-lib
+endif
+
+ifeq "$(LIBTIFF)"  ""
+$(warning "No tiff library found - assuming it is already installed")
+else
+$(LIBTIFF):
+	@echo "configuring $@" && cd $@ && yes yes | ./configure
+	@echo "building $@" && cd $@ && make
+	@echo "installing $@" && cd $@ && cp libtiff/*.h /usr/local/include && cp libtiff/*.a /usr/local/lib
+endif
+
+ifeq "$(LIBZ)"  ""
+$(warning "No zlib library found - assuming it is already installed")
+else
+$(LIBZ):
+	@echo "configuring $@" && cd $@ && ./configure
+	@echo "building $@" && cd $@ && make
+	@echo "installing $@" && cd $@ && make install
+endif
+
+ifeq "$(LIBPNG)"  ""
+$(warning "No png library found - assuming it is already installed")
+else
+$(LIBPNG):
+	@echo "configuring $@" && cd $@ && cp scripts/makefile.gcc makefile
+	@echo "building $@" && cd $@ && make ZLIBINC=/usr/local/include ZLIBLIB=/usr/local/lib
+	@echo "installing $@" && cd $@ && cp *.h /usr/local/include && cp *.a /usr/local/lib
+endif
+
+ifeq "$(JAVASDK)" ""
+$(warning "No java sdk found - assuming it is already in your include and library paths")
+endif
+
+sources = panorama.h filter.h fftn.h f2c.h pteditor.h \
+          ptutils.h sys_win.h version.h \
+          filter.c parser.c queryfeature.c sys_win.c sys_common.c PTcommon.c ColourBrightness.c correct.c perspect.c \
+          adjust.c  remap.c lmdif.c  file.c \
+          math.c pan.c PTDialogs.c fftn.c fourier.c resample.c \
+          optimize.c morpher.c Triangulate.c \
+          seamer.c ptpicker.c pteditor.c seamer_.c \
+          tiff.c bmp.c jpeg.c png.c  multilayer.c ZComb.c hdrfile.c rgbe.c\
+          Makefile pano13.rc libpano13.def sys_ansi.c ppm.c
+
+objects = filter.o parser.o queryfeature.o sys_common.o PTcommon.o ColourBrightness.o correct.o perspect.o \
+          adjust.o  remap.o lmdif.o  file.o math.o pan.o \
+          PTDialogs.o fftn.o fourier.o resample.o optimize.o \
+          morpher.o Triangulate.o seamer.o ptpicker.o pteditor.o \
+          tiff.o jpeg.o png.o multilayer.o ZComb.o hdrfile.o rgbe.o
+
+winobj =  sys_win.o bmp.o pano13rc.o
+
+ansobj =  sys_ansi.o ppm.o
+
+libDirs =  -L/usr/local/lib
+incDirs =  -I/usr/local/include -I$(JAVASDK)/include -I$(JAVASDK)/include/win32
+CC = gcc -O2 -mms-bitfields $(incDirs)
+
+pano13rc.o  : pano13.rc
+	windres  -i pano13.rc -o pano13rc.o
+
+pano13.dll  : $(objects) $(winobj)
+	dllwrap --enable-stdcall-fixup -o pano13.dll --def libpano13.def $(objects) $(winobj) $(libDirs) $(incDirs) -lcomdlg32 -ljpeg -ltiff -lpng -lz -mwindows
+	strip pano13.dll
+	dlltool --dllname pano13.dll --def libpano13.def --output-lib libpano13.a
+
+install  : pano13.dll
+	mv pano13.dll C:/WINDOWS/SYSTEM32/pano13.dll
+
+.PHONY : clean
+clean :
+	-rm -f *.o pano13.dll libpano13.a panosrc.zip
+
+panosrc.zip : $(sources)
+	zip -R panosrc.zip $(sources)

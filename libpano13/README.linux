@@ -1,0 +1,51 @@
+Readme Sources
+
+This file discribes how to build the library libpano13.so
+for the Linux operating system.
+
+Legal Issues:
+
+This software is distributed under GNU-license, see the
+file COPYING for details. Some parts of the software
+are derived from other sources, which are distributed under
+different copyrights. These are:
+
+- The public domain Levenberg-Marquardt solver 
+of the Argonne National Laboratories MINPACK mathematical library,
+C translation by Steve Moshier (file lmdif.c).
+- Fast fourier transformation, code by:
+RC Singleton, Stanford Research Institute, Sept. 1968
+Copyright MJ Olesen, Queen's University at Kingston, 1995-97.
+See the file fftn.c for details.
+
+
+BUILD INSTRUCTIONS
+
+You need the gcc compiler, libgcj and various imaging libraries: libtiff,
+libjpeg and libpng.  Headers for these libraries are required, so you probably
+have to install libXXX-dev or libXXX-devel packages too.
+
+(Sun java is NOT required if you have libgcj)
+
+Compilation is straightforward:
+
+./configure
+make
+make install
+
+If you have downloaded from Mercurial, you will need to bootstrap the build
+system first:
+
+./bootstrap
+
+This distribution of the sources limits processing
+of fisheye images to fields of view smaller than
+179 degrees. This limit is controlled by the constant
+MAX_FISHEYE_FOV in the file filter.h. There
+is some controversy regarding the legality of processing
+hemispherical images (ie images having 180 degree field
+of view) in connection with virtual reality panoramas.
+If your application of fisheye lenses is not prohibited
+by patents, you can build and use your own unlimited version 
+of the library by changing the soure code.
+

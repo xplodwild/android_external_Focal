@@ -1,0 +1,58 @@
+=head1 NAME
+
+PTuncrop - Uncrop TIFF images
+
+
+=head1 SYNOPSIS
+
+B<PTuncrop> [options] I<input_file> I<output_file>
+
+
+=head1 DESCRIPTION
+
+B<PTuncrop> does the opposite of B<PTcrop>: it takes a cropped file
+and creates an uncropped one.
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-p> I<prefix>
+
+Prefix for output files (defaults to I<uncropped%4d>).
+
+=item B<-f>
+
+Force processing: Overwrite output file if it exists.
+
+=item B<-x>
+
+Delete source files (use with care).
+
+=item B<-q>
+
+Quiet run.
+
+=item B<-q>
+
+Output help summary.
+
+=back
+
+
+=head1 SEE ALSO
+
+L<PTcrop(1)>
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTuncrop was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

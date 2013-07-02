@@ -1,0 +1,29 @@
+=head1 NAME
+
+PToptimizer - Wrapper around control point optimization routines
+
+
+=head1 SYNOPSIS
+
+B<PToptimizer> I<script_file>
+
+
+=head1 DESCRIPTION
+
+B<PToptimizer> is a simple wrapper around control point optimization
+routines available in libpano13.
+
+
+=head1 SEE ALSO
+
+L<http://wiki.panotools.org/PTOptimizer>
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

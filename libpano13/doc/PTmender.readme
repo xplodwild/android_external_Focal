@@ -1,0 +1,43 @@
+PTmender
+--------
+
+This is a program that implements the mapping of panoramas similar to
+PTStitcher
+
+----------------------------------------------------------------------
+WHAT IS NOT GOING TO BE SUPPORTED
+
+
+* PTremap only preforms the remapping of the input images and creates
+  a set of cropped TIFFs, one for each input image.
+
+* It does NOT create any other type of output and it does not flatten the output.
+
+
+----------------------------------------------------------------------
+
+COMMAND LINE OPTIONS
+
+PTremap [options] <script filename>
+
+Options:
+        -o <prefix>     Prefix for output filename, defaults to pano
+        -q              Quiet run
+        -h              Show this mes
+
+----------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------
+If you select circular fisheye a mask is created around a circle:
+
+* The image is always assumed to be in portrait mode.
+
+* if no crop region is specified then the circle is assumed to be
+  bounded by the horizontal axis. A mask is created with a circle of
+  horizontal_width/2 radious, centered in the middle of the image
+
+* If a crop region is specified then a mask is created such that the
+  circle is enclosed (in the horizontal axis) by the crop region. 

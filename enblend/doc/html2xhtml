@@ -1,0 +1,258 @@
+#! /bin/sh
+#! /bin/dash -x
+
+# This file is part of Enblend.
+# Licence details can be found in the file COPYING.
+
+# name:          html2xhtml
+# synopsis:      Convert the HTML output of makeinfo(1) to valid XHTML
+# author:        Dr. Christoph L. Spiel
+# shell version: bash-3.2.39, dash-0.5.4
+
+
+readonly global__command=`basename $0`
+         global__meta_key_val=
+readonly global__sed=${SED:-sed}
+readonly global__tidy=${TIDY:-tidy}
+         global__tidy_flags=""
+readonly global__xmllint=${XMLLINT:-xmllint}
+         global__xmllint_flags="--valid --noblanks --noent -nonet --nsclean --format --encode iso-8859-1"
+
+
+failwith_error ()
+{
+    echo "$global__command: $@" 1>&2
+    exit 1
+}
+
+
+convert_with_tidy ()
+{
+    # We add the system identifier with sed(1) after tidy(1).  See
+    # function postprocess_tidy_output.  Also see
+    #     http://www.w3.org/QA/2002/04/valid-dtd-list.html
+    # for a list of recommended doctype declarations.
+
+    $global__tidy \
+        --add-xml-decl yes \
+        --doctype '"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"' \
+        --file /dev/null \
+        --new-blocklevel-tags "math, mfenced, mfrac, mover, mrow, msqrt, msub, msup, mtable, mtd, mtr, munder, munderover" \
+        --new-empty-tags mspace \
+        --new-inline-tags "mathinline, mfencedinline, mi, mn, mo, mrowinline, msqrtinline, msubinline, msupinline, mtext" \
+        --sort-attributes alpha \
+        --output-encoding latin1 \
+        --output-xhtml yes \
+        --preserve-entities yes \
+        --quiet yes \
+        --wrap 0 \
+        $global__tidy_flags \
+        "$@"
+}
+
+
+# We must postprocess tidy(1)'s output, because 1/ it still contains
+# elements that make an XML parser puke and 2/ we have intentionally
+# introduced pseudo MathML tags to coerce tidy(1) into formatting them
+# inline; these tags must be reverted.
+postprocess_tidy_output ()
+{
+    if test -z "$lazy__meta_tag" && test -n "$global__meta_key_val"; then
+        lazy__meta_tag=`echo $global__meta_key_val | \
+                          $global__sed -e 's#;#\n#g' | \
+                          $global__sed -e 's#\([^,]*\),\(.*\)#<meta name="\1" content="\2" />#'`
+    fi
+
+    $global__sed \
+        -e '1,9s#""#"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd"#' \
+        \
+        -e "s#^<head>#<head>\n$lazy__meta_tag#" \
+        \
+        -e 's#<html\([^>]*\) lang="[^"]*"\([^>]*\)#<html\1\2#' \
+        -e 's#<ol[^>]*>#<ol>#' \
+        -e 's#<t\([dh]\)\([^>]*\)width="[^"]*"\([^>]*\)#<t\1\2\3#' \
+        -e 's#<ul\([^>]*\)compact="[^"]*"\([^>]*\)#<ul\1\2#' \
+        \
+        -e 's#<\(/*\)\(math\|mfenced\|mrow\|msqrt\|msub\|msup\)inline#<\1\2#g'
+}
+
+
+# Makeinfo(1) generates indirect-reference files for each float.
+# Their filenames start with "Table_" or "Figure_*", which is how we
+# distinguish them from the html files making up the body.
+is_indirect_reference_file ()
+{
+    local filename=$1
+
+    test -z "${filename%Table_*}" || test -z "${filename%Figure_*}"
+}
+
+
+# Convert all html files iside the given directory.
+convert_directory ()
+{
+    local html_directory=$1
+    local xhtml_directory=`basename $html_directory .html`.xhtml
+
+    mkdir -p $xhtml_directory
+
+    (
+        cd $html_directory || failwith_error "cannot cd to \"$html_directory\""
+        ls -1 *.html | \
+            $global__sed -ne 's#\(.*\)\.html#s|\1\\.html|\1.xhtml|g#p' > ,fix-file-refs.sed
+    )
+
+    printf '' > $html_directory/,fix-indir.sed
+    for html_file in $html_directory/*.html; do
+        local html_base=`basename $html_file`
+
+        if is_indirect_reference_file $html_base; then
+            url=`$global__sed -ne 's#^.*url=\([^"]*\)".*$#\1#p' < $html_file`
+            target_file=`echo $url | $global__sed -e 's/#.*$//'`
+            echo "s|$html_base|$target_file|" >> $html_directory/,fix-indir.sed
+        fi
+    done
+
+    for html_file in $html_directory/*.html; do
+        local html_base=`basename $html_file`
+
+        if ! is_indirect_reference_file $html_base; then
+            local xhtml_file=$xhtml_directory/`basename $html_base .html`.xhtml
+
+	    convert_with_tidy $html_file | \
+                postprocess_tidy_output | \
+	        $global__sed \
+                  -f $html_directory/,fix-indir.sed \
+                  -f $html_directory/,fix-file-refs.sed \
+	          -e 's|<a\([^>]*\)name="[^"]*"\([^>]*\)|<a\1\2|g' \
+	          -e 's|\("[^/"]*\)\.html\([#"]\)|\1.xhtml\2|' | \
+	        $global__xmllint $global__xmllint_flags --output $xhtml_file -
+            test $? -eq 0 || { rm -f $xhtml_file; exit 1; }
+        fi
+    done
+}
+
+
+# Convert a single standalone html file.
+convert_file ()
+{
+    local html_file=$1
+    local xhtml_file=`basename $html_file .html`.xhtml
+
+    convert_with_tidy $html_file | \
+        postprocess_tidy_output | \
+        $global__sed -e 's|<a\([^>]*\)name=\([^>]*\)|<a\1id=\2|g' | \
+        $global__xmllint $global__xmllint_flags --output $xhtml_file -
+    test $? -eq 0 || { rm -f $xhtml_file; exit 1; }
+}
+
+
+convert_html_to_xhtml ()
+{
+    local html=$1
+
+    if test -d "$html"; then
+        convert_directory $html
+    else
+        convert_file $html
+    fi
+}
+
+
+# We prefer to check for all binaries before we get an unpleasant
+# surprise in one of the pipes.
+check_binaries ()
+{
+    for v in global__sed global__tidy global__xmllint; do
+        eval x=\$$v
+        test -z "$x" && failwith_error "variable \"${v#global__}\" is not defined"
+        $x --version > /dev/null 2>&1 || \
+            failwith_error "cannot execute \"$x\" for \"${v#global__}\""
+    done
+}
+
+
+parse_options ()
+{
+    : $((n=0))
+
+    while test -n "$1"; do
+        case "$1" in
+            --meta=*)
+                if test -z "$global__meta_key_val"; then
+                    global__meta_key_val="${1#--meta=}"
+                else
+                    global__meta_key_val="$global__meta_key_val;${1#--meta=}"
+                fi
+                ;;
+            -h | --help)
+                show_help
+                exit 0
+                ;;
+            --tidy-flags=*)
+                global__tidy_flags="$global__tidy_flags ${1#--tidy-flags=}"
+                ;;
+            --xmllint-flags=*)
+                global__xmllint_flags="$global__xmllint_flags ${1#--xmllint-flags=}"
+                ;;
+
+            --)
+                shift
+                : $((n=n+1))
+                break 2
+                ;;
+
+            --*)
+                failwith_error "unknown long option \"$1\""
+                ;;
+            -*)
+                failwith_error "unknown short option \"$1\""
+                ;;
+
+            *)
+                break 2
+        esac
+        shift
+        : $((n=n+1))
+    done
+
+    return $n
+}
+
+
+show_help ()
+{
+    printf %s "\
+Usage: $global__command_name [OPTIONS] [HTML...]
+Convert HTML files or directories to XHTML.
+
+Options:
+      --meta=NAME,CONTENT    add meta tags with NAME and CONTENT
+      --tidy-flags=FLAGS     set flags for tidy(1)
+      --xmllint-flags=FLAGS  set flags for xmllint(1)
+  -h, --help                 show this help screen
+
+Influential environment variables:
+  SED                        name of sed binary [default: \"$global__sed\"]
+  TIDY                       name of tidy binary [default: \"$global__tidy\"]
+  XMLLINT                    name of xmllint binary [default: \"$global__xmllint\"]
+"
+}
+
+
+
+main ()
+{
+    parse_options "$@"
+    shift $?                    # shift away all options
+
+    check_binaries
+
+    for x in "$@"; do
+        convert_html_to_xhtml "$x"
+    done
+}
+
+
+main "$@"
+exit 0

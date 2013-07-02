@@ -1,0 +1,46 @@
+=head1 NAME
+
+PTtiffdump - Compare two TIFF images
+
+
+=head1 SYNOPSIS
+
+B<PTtiffdump> [options] I<tiff_file1> I<tiff_file2>
+
+
+=head1 DESCRIPTION
+
+B<PTtiffdump> compares the contents of 2 different tiff files. If the
+byte is different, it gets output.
+
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-o>
+
+Overwrite output file if it exists.
+
+=item B<-q>
+
+Quiet run
+
+=item B<-h>
+
+Output help summary.
+
+=back
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTtiffdump was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

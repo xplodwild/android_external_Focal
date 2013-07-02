@@ -1,0 +1,9 @@
+# PTStitcher script, written by hugin
+
+p f0 w500 h182 v80  n"JPEG q90"
+m g1 i0
+
+# output image lines
+o w750 h500 f0 a0 b0 c0 d0 e0 g0 p8.91614 r0.192433 t0 v25.3608 y-13.4262  u10 m0 n"051221_6054_750.jpg"
+o w750 h500 f0 a0 b0 c0 d0 e0 g0 p8.61975 r-0.511296 t0 v25.3608 y-26.6329  u10 m0 n"051221_6055_750.jpg"
+

@@ -1,0 +1,36 @@
+=head1 NAME
+
+PTinfo - Display information about a panotools-generated image
+
+
+=head1 SYNOPSIS
+
+B<PTinfo> [options] I<tiff_file(s)>
+
+
+=head1 DESCRIPTION
+
+B<PTinfo> displays information about an image created with panotools.
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-h>
+
+Output help summary.
+
+=back
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTinfo was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="LocalDefs"
+	>
+	<UserMacro
+		Name="WXWIDGETS_HOME"
+		Value="C:\Users\Public\HuginSDK-2009\wxWidgets-2.8.10"
+		PerformEnvironmentSet="true"
+	/>
+</VisualStudioPropertySheet>

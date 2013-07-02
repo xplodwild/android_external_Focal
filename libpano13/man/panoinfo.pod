@@ -1,0 +1,27 @@
+=head1 NAME
+
+panoinfo - List details about the libpano13 library
+
+
+=head1 SYNOPSIS
+
+B<panoinfo>
+
+
+=head1 DESCRIPTION
+
+B<panoinfo> is a simple utility built alongside the libpano13 library
+that outputs a list of details about the currently installed version
+of this library. It is particularly useful for debugging.
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+panoinfo was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

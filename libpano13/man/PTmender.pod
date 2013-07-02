@@ -1,0 +1,113 @@
+=head1 NAME
+
+PTmender - Replacement for PTStitcher
+
+
+=head1 SYNOPSIS
+
+B<PTmender> [options] I<script_filename> I<images>
+
+
+=head1 DESCRIPTION
+
+B<PTmender> is a replacement for Professor Helmut Dersch's PTStitcher.
+Most useful features of PTStitcher have already been implemented,
+particularly:
+
+=over
+
+=item *
+
+Compatibility with existing command line and script usage
+
+=item *
+
+Colour and brightness correction
+
+=item *
+
+Multiple TIFF output
+
+=item *
+
+PSD output with layer masks
+
+=item *
+
+Flattened TIFF, JPEG and PNG output
+
+=back
+
+
+There is also new useful features not available in PTStitcher:
+
+=over
+
+=item *
+
+Cropped TIFF output
+
+=item *
+
+LZW compression of TIFF output
+
+=back
+
+
+Features that haven't been implemented:
+
+=over
+
+=item *
+
+Support for VRML, PICT, QTVR, IVR
+
+=item *
+
+Support for other-than-rectilinear lenses such as fisheyes
+
+=item *
+
+Probably lots of other stuff
+
+=back
+
+
+=head1 OPTIONS
+
+=over
+
+=item B<-o> I<prefix>
+
+Prefix for output filename, defaults to I<pano>.
+
+=item B<-q>
+
+Quiet run
+
+=item B<-h>
+
+Output help summary.
+
+=item B<-s>
+
+Sort the filenames provided on the command line in lexicographical
+order (and only on the command line)
+
+=back
+
+If no images are specified on the command line, then the C<i> lines
+are used. If C<i> lines do not contain a valid filename then the C<o>
+lines are used.
+
+
+=head1 AUTHORS
+
+Panorama Tools was originally created by Professor Helmut Dersch, it's
+now maintained by Bruno Postle <bruno@postle.net>.
+
+PTmender was written by Daniel M German <dmgerman@uvic.ca>.
+
+This manpage was written by Cyril Brulebois
+<cyril.brulebois@enst-bretagne.fr> and is licensed under the same
+terms as the libpano13 package itself.

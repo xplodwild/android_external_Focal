@@ -1,0 +1,358 @@
+PLEASE DONT UPDATE THIS FILE ANY MORE. USE ./ChangeLog instead
+
+
+	
+2006-10-22  dmg  <dmg@uvic.ca>
+
+	* PTtiff2psd.c (main): Added support to stack images
+
+2006-09-25  dmg  <dmg@selenium.dmg>
+
+	* added PTtiffdump.c to the svn repository
+
+2006-09-21  dmg  <dmg@uvic.ca>
+
+	* PTblender.c (main): Add the ability to compute stitching masks.
+
+2006-09-20  dmg  <dmg@uvic.ca>
+
+	* PTblender.c: Added option to select type of colour
+	correction. Fixed a bug (when colour correction and flat output
+	was requested, the output file did not use the colour corrected files)
+
+2006-08-12  dmg  <dmg@iridium.dmg>
+
+	* PTtiff2psd.c (main): Updated call to functions now in
+	ptstitch.h. Added include.
+
+2006-07-30  dmg  <dmg@hydrogen.dmg>
+
+	* PTmender.c, PTtiff2psd.c: Replaced calls to makeTempPath with
+	panoFileMakeTemp, and to VerifyTiffsAreCompatible with
+	panoTiffVerifyAreCompatible
+
+2006-07-28  dmg  <dmg@hydrogen.dmg>
+
+	* Makefile.am: changed name of the library to pano13
+
+2006-07-08  dmg  <dmgerman@uvic.ca>
+
+	* PTBlender.c, PTmender.c, PTtiff2psd.c, PTuncrop.c: updated
+	function call according to refactoring in PTcommon.c.
+
+2006-06-25  dmg  <dmgerman@uvic.ca>
+
+	* PTblender.c: Implemented the ability to write a .amp file
+	(photoshop arbitrary map format)
+
+2006-06-25  dmg  <dmgerman@uvic.ca>
+
+	* PTblender.c: Implemented the ability to write a .acv file
+	(photoshop curve layer format) that be loaded as a layer in
+	photoshop. This file will contain the curves used to match one
+	photo to the other.
+
+
+2006-06-12  dmg  <dmgerman@uvic.ca>
+
+	* .cvsignore: Added PTuncrop
+
+2006-06-11  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main): Made sure that exit(-1) is used when
+	PTmender exists due to an error
+
+2006-05-27  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am, PTuncrop.c: added this program to "uncrop" tiffs.
+
+2006-05-06  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c: Make sure that Stitching masks is done only when
+	there are at least 2 photos. Improve progress errors. 
+
+	* PTStitcher.cpp: sent to the attic.
+
+	* PTblender.c, PTtiff2psd, PTmender: Changed name of quietFlag to
+	ptQuietFlag. I replaced their own version number with libpano.
+
+	* PTcommon.c, PTcommon.h, PTmender.c, Makefile.am: Moved
+	CreatePanorama to PTcommon.c and all the functions required by it.
+
+	* PTcommon.c (CreatePanorama): Added an error when the type of
+	panorama is not valid.
+
+2006-02-21  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c: Replaced InsertFileName with the one from
+	ptpicker.c (patch submitted by Max Lyons)
+
+2006-02-20  dmg  <dmgerman@uvic.ca>
+
+	* PTcommon.c (AddStitchingMasks): Removed exit that I was using
+	during debugging.
+
+	* PTtiff2psd.c (PT_TIFF2PSD_USAGE): Added name of default output file.
+
+	* PTmender.c (ComputeStitchingMask8bits,
+	ComputeStitchingMask16bits,
+	ComputeStitchingMask,SetBestAlphaChannel16bits,
+	SetBestAlphaChannel8bits, CalculateAlphaChannel,
+	ApplyFeather8bits, ApplyFeather16bits, ApplyFeather): Removed
+	functions, they are  already in PTcommon.c
+
+	* PTmender.c: Removed test code for TEST_ENABLE_COLOUR_CORRECTION
+
+	Changes submitted by Max Lyons:
+	
+	* PTcommon.c: Moved InsertFileName to this file from
+	PTmender.c. It should be compiled only under Windows.
+
+	* PTmender.c (main): Changed 0x6f for 'o'.
+
+2006-01-23  dmg  <dmgerman@uvic.ca>
+
+	* PTblender.c (main): There was an extra colon in the spec of the
+	command line options (reported by josh at joshdoe com)
+
+	* PTcommon.c (SetBestAlphaChannel8bits): Fixed minor bug.
+
+2006-01-20  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (bin_PROGRAMS): Added PTtiff2psd.
+
+	* PTblender.c (main): Freed pointers. Added call to
+	VerifyTiffsAreCompatible.  Added include to PTcommon.h
+	
+	* PTmender.h: Moved quietFlag from this one to PTcommon.h
+
+	* PTmender.c: Added include to PTcommon.h, extracted CreatePSD,
+	and CreateStitchingMasks.
+
+	* PTtiff2psd.c: Created program.
+
+	* PTcommon.h (VerifyTiffsAreCompatible): Created file, added
+	prototypes.
+
+	* PTcommon.c (VerifyTiffsAreCompatible): Created file, and added
+	functions. Moved CreatePSD and CreateStitchingMasks, and the
+	functions they use from PTmender.c.
+
+2006-01-19  dmg  <dmgerman@uvic.ca>
+
+	* PTblender.c (main): If no files were specified in the command
+	line, then print usage.
+
+	* PTmender.c (main): Used PATH_SEP instead of '/' to get it to
+	work under Windogs. 
+	(CreateStitchingMasks): Removed unnecessary assert.
+
+	* PTblender.c: Added program.
+
+	* PTmender.c (CreatePanorama): Changed call to
+	ColourBrightness to match new prototype. See below.  Moved
+	ReplaceExt from to ColourBrightness.
+
+	* ColourBrightness.h: Changed prototypes (see below).
+
+	* ColourBrightness.c (CorrectFileColourBrightness): Add an extra
+	parameter to handle different input and output file names.
+	(ColourBrightness): Added an extra parameter to handle different
+	input and output filename. If the input filename is different from
+	output, then process file. 
+	(ReplaceExt): Moved it here from
+	PTmender.c
+
+2006-01-15  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: Removed useless comments.
+	
+	* ColourBrightness.c (Unknown49): Fixed a bug. Unknown49 is
+	identical to Unknown48, not itself!
+	
+
+	* PTmender.c (CreatePanorama): Found a bug. A strcmp did not
+	include ==0.
+	(ComputeStitchingMask8bits): Implemented function.
+	(CalculateAlphaChannel): Implemented function.
+	(SetBestAlphaChannel8bits): Implemented function.
+	(CreateStitchingMasks): Found an error: Progress returns zero
+	when not error, not !=0. Also, I forgot return -1
+	(ApplyFeather): Implemented function.
+	(SetBestAlphaChannel8bits): Fixed a bug in the function. Wrong
+	condition in loop.
+	(PT_MENDER_VERSION):  Bumped version to 0.3 "The Mask". Released.
+
+2006-01-14  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePSD): Implemented function.
+	(TiffSetImageParameters): Added function.
+	(CreateStitchingMasks): Implemented function.
+	(ComputeStitchingMask): Implemented function.
+
+2006-01-12  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: Remove fprintfs
+
+	* PTmender.c: Enabled colour correction. Ready for
+	testing. Upgraded version to 0.2: "the Enlightment"
+
+	* ColourBrightness.c (Unknown40): Fixed another bug. This time it
+	was the data type of a variable. It was double, not integer!
+
+2006-01-12  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): Reduced the size of the cache to
+	500kbytes
+
+	* ColourBrightness.c: Improved readibility of many functions.
+	(RemapHistogram): Another bug. Divided a/b
+	instead of b/a.
+
+2006-01-11  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: (ComputeColourBrightnessCorrection) Found
+	another bug (limit of for loop was < 0xff not <= 0xff).
+	(ComputeColourBrightnessCorrection): Cleaned up the function,
+	renamed variables to make them meaninful. Killed another
+	bug. Again, a/b instead of b/a
+	(CorrectFileColourBrightness): Another bug. Missundertood return
+	value from readTIFF: it is zero when success, -1 when it is not.
+	(CorrectImageColourBrigthness): Another bug. im->data is a pointer
+	to the pointer to the actual data, not a pointer to the data!
+	Took advante of the editing and cleaned up the code and renamed
+	some veriables.
+	(DisplayHistogramsError): Refactored this function from
+	ColourBrightness.
+
+	* ColourBrightness.h, ColourBrightness.c: Renamed Unknown41 to
+	ComputeAdjustmentCurve. Renamed Unknown37 to RemapHistogram. I
+	have added assertions and debug code everywhere. Renamed Unknown33
+	to MapFunction. Updated callers accordingly.
+	
+2006-01-10  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: (ComputeColourBrightnessCorrection): Another
+	bug: incorrect number of daisies.
+	
+2006-01-10  dmg  <dmgerman@uvic.ca>
+
+	* ColourBrightness.c: I changed all mallocs to callocs. I also
+	added and removed some debug messages, and added optional use of
+	the dmalloc library.
+	(InitializeMagnolia): fixed a bug. I had allocated sizeof(pointer)
+	rather than sizeof(thing pointed by pointer). What an amateur!
+	(ColourBrightness): Another bug, I was freeing an incorrect number
+	of histograms.
+	(Unknown33): Fixed another bug. I referenced last element as
+	array[n] instead of the correct way array[n-1].
+	(Unknown37): Another bug 2 bugs. I had missed a set of parenthesis
+	in an expression. The next line had a couple of errors too.
+	(FreeHistograms): Another bug. One free  was in the wrong place.
+
+	* README.PTmender: Updated it.
+
+	* PTmender.c (CreatePanorama): Disabled code for colour correction.
+
+	* Makefile.am (AM_CPPFLAGS): Added flags for TIFF and JPEG to the
+	compilation of the programs.
+
+
+2006-01-09  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): Fixed a bug that affected cropped
+	images. I think TIFF_m is ready for the masses. The tests I have
+	performed are promising.
+	(main): Added a Version message for its official release. Initial
+	release: 0.1
+
+	* ColorBrightness.c, ColorBrightness.h: First bug: I got burned by
+	the fact that chars are by default signed. I changed any use of
+	char to unsigned.
+	
+2006-01-09  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am (PTmender_SOURCES): Added colourBrightness.* to PTmender
+
+	* PTmender.c: Renamed CreatePanorama, removed old function stub
+
+	* ColorBrightness.c, ColorBrightness.h: added files. All the
+	functions for colourBrightness have been created, but they do not
+	work.
+
+2006-01-04  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main): Fixed another bug, in the case that no files
+	were specified in the command line.
+	(ARGtoRGBAImage): Fixed another bug (a line I duplicated, but that
+	I did not update).
+	(CreatePanorama): Replaced assertion on colourCorreection. I had
+	misinterpreted what the value was.
+
+2005-12-25  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (main,CreatePanorama): Fixed 5 more bugs. I am able
+	to stitch the first one photo panorama! 
+
+2005-12-24  dmg  <dmgerman@uvic.ca>
+
+	* Makefile.am: Removed -Wall from make process
+
+	* PTmender.c (main): Fixed 3 bugs.
+	(CreatePanorama): Fixed 2 bugs
+
+2005-12-23  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.c (CreatePanorama): It appears now to be complete. We
+	have all the code for TIFF_m without brightness adjustment. Time
+	to start planning the testing phase.
+	
+	* PTmender.c (main): First bug: getopt should be used instead of
+	iloopCounter
+
+2005-12-22  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.h: Renamed Unknown09 to
+	Clear_Area_Outside_Selected_Region
+
+	* PTmender.c (Clear_Area_Outside_Selected_Region): Created
+	function. This completes all the functions needed for
+	TIFF_m. 
+
+2005-12-21  dmg  <dmgerman@uvic.ca>
+
+	* PTmender.h (InsertFileName): added prototype.
+
+	* Makefile.am (PTmender_LDADD): We now require the tiff library too.
+	(AM_CFLAGS): Added -Wall. I need to catch _any_ potential error.
+
+	* PTmender.c, PTmender.h (ARGtoRGBAImage): Renamed Unknown08 to
+	ARGtoRGBAImage and implemented it.
+
+	* I forgot that OS X is case insensitive (even though it is case
+	preserving). I have renamed ptmender.h to PTmender.h. Updated
+	Makefile.am and PTmender.c (thanks to Bruno Postle for noticing
+	this).
+	
+	* PTmender.c (CreatePanorama): Fixed some bugs during code review
+	of CreatePanorama
+	(CreatePanorama): Changed name of Unknown28 to Colour_Brightness
+
+	* README.PTmender: Added an explanation of its command line options.
+
+	* PTmender.c (main): Completed main.
+	(sorting_function): Added it to sort files if -s
+
+2005-12-20  dmg  <dmgerman@uvic.ca>
+
+	* README.PTmender: Added this file.
+
+	* PTmender.c, PTmender.h: I created these two files. Created the
+	functions ReplaceExt, InsertFileName, and CreatePanorama. It has
+	also all the skeletons to all the functions that need to be
+	rewritten.
+
+	* Modified Makefile.am to add PTmender. The program currently
+	compiles, but does nothing. 
+
+	* Created the ChangeLog.

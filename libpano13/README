@@ -1,0 +1,60 @@
+
+This is the pano13 library, part of the Panorama Tools by Helmut
+Dersch of the University of Applied Sciences Furtwangen.
+
+   http://panotools.sourceforge.net/
+
+Also included with the library are:
+
+- PToptimizer  a command-line tool for optimizing control points.
+- PTmender     a command-line tool for reprojecting images.
+
+Usage
+----
+
+The typical workflow would be:
+
+- PTmender     maps the pano files, outputs cropped TIFFS
+- PTblender*   fixes colour shifts in TIFFs, outputs cropped TIFFS (8 bit only)
+- PTmasker*    creates stitching masks in TIFFs, outputs cropped TIFFS
+- PTroller     creates a single TIFF from set of TIFFs
+- PTcrop       recropps a TIFF to a tight bounding box, creates a cropped TIFF
+
+* Optional step.
+
+Other tools:
+
+- PTtiff2psd   Combines a set of tiffs into one PSD file with multiple
+               layers (including stacking feature) and the ability to
+               specify blending mode (8 bit only)
+
+- PTuncrop     Uncrops a cropped TIFF.
+
+- panoinfo     a command-line tool for querying the library version.
+
+- PTAInterpolate  Interpolate intermediate images between stereo photos
+
+- PTinfo       Display information about a panotools-generated image
+
+- PTtiffdump   Compare two TIFF images
+
+- panoinfo     List details about the libpano13 library
+
+
+Installation
+------------
+
+Build and install as normal:
+
+    ./configure
+    make
+    make install
+
+If you have retrieved this from Mercurial SCM you need to prepare the build
+system first:
+
+    ./bootstrap
+    ./configure
+    make
+    make install
+

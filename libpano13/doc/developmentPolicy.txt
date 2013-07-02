@@ -1,0 +1,61 @@
+BEFORE YOU START
+
+* Subscribe to the panotools-devel mailing list and the commits
+  mailing list
+
+https://lists.sourceforge.net/lists/listinfo/panotools-cvs
+
+* Discussions regarding the development of libpano should take place
+  in the developers mailing list.
+
+----------------------------------------------------------------------
+* Release management
+
+ -- Bruno has been mostly responsible for this, and has done a good
+    job. But I believe that many of us (me particularly) have step on
+    his toes and mess his release cycle. 
+
+   Bruno, do you want to add something regarding this?
+
+* For any changes:
+
+ -- Before you start the work, please notify us in the panotools-devel
+   mailing list of your intentions. the message does not to be long, but
+   at least it should contain:
+
+   * Objective
+   * An expected timeline
+   * Impact (change in functionality, configuration management, fix
+     error, etc)
+
+   This will avoid conflict with others.
+
+ -- For each commit:
+
+  * Well documented ChangeLog: list files changes, and what the work
+    was. 
+
+  * Send the delta of the ChangeLog to the mailist list to inform others
+    of your progress with respect to your intended timeline (whe more 
+
+----------------------------------------------------------------------
+FOR DIFFERENT TYPES OF CHANGES
+
+* Changes to configuration files (Cmake, autoconf, automake, etc).
+
+  -- Do the changes, commit them, and ask for others to test in
+     different architectures/OSs.
+
+* Bug fixes including compiler warnings.
+
+  -- Do the changes, test the build using make check, and commit. 
+
+* New features
+
+  -- Discuss them in advance in the list. We should determine if a
+     branch is required, or the work can be incrementally done without
+     affecting reliability.
+
+* Documentation
+
+  -- Do the changes, commit them.

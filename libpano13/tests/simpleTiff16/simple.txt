@@ -1,0 +1,8 @@
+# PTStitcher script, written by hugin
+
+p f0 w60 h297 v22  n"TIFF_m c:DEFLATE"
+m g1 i7 f0
+
+# output image lines
+o w2346 h3504 f0 a0 b-0.002987 c0 d0 e0 g0 p31.0663 r0.0686968 t0 v17.0615 y1.19627  u10 m0 n"060520_3398.TIF"
+

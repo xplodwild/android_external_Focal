@@ -1,0 +1,100 @@
+
+RGB mode:
+--------
+k type correction (color): I fixed minor rounding errors that should
+reduce the error. The change might not be very noticeable in most
+cases.
+
+HSV mode:
+--------
+
+b type correction (brightness): Fully supported and seems to work
+well and better thar k type.
+
+d type correction (saturation): In PTstitcher d is used for Hue and
+Saturation but I have decided to use it only for Saturation. The
+reason is that in highly saturated areas (such as polarized photos)
+this shifts completely the colours (from blue to green, in my
+tests). Saturation seems to work well instead.
+
+Other types of correction (H and S, H only might be added to PTblender
+when I find out how to add new keywords to the parser).
+
+USING Colour Correction
+----------------------------------------------------------------------
+
+I think it is important to understand the way colour is corrected in
+PTmender (and PTblender) and how it is different from enblend
+(PTblender can be used as a "replacement" for enblend to fix colour
+differences). Let us assume 2 images:
+
+* Enblend (as its name implies) smooths transitions between the
+2 images, and leaves the rest of the image unaltered (this might
+result in strong banding).
+
+* PTblender, on the other hand changes the entire second image so that
+the histograms of the areas of overlap of both images are as close
+as possible to each other
+
+PTblender fails miserably in the following three situations:
+
+1. When the areas of overlap are very different in content. Because it
+assumes the histograms should be as close to each other as possible
+you really need images that overlap well (and have few or no
+ghosts).
+
+2. When the lens has strong vignetting. Same reason. Usually images
+overlap in the area of vignetting. Please use software to correct
+vignetting before using PTblender. In fact, experiment with and
+without it to notice the (big) difference.
+
+3. When the chain of correction is large. In PTblender you select an
+"anchor" image, that is, the one that is not to be corrected. We
+will call this the corrected area.
+
+The algorithm finds the to-be-correted image with the largest
+overlap to the corrected area. It then corrects it and adds it to
+the area of overlap. This happens recursively until no more images
+are corrected.
+
+The farther "away" an image (in terms of the chain-of-correction)
+is from the anchor, the bigger the potential for error.
+
+As Helmut once explained, if you have a "cap" image (a zenith), it
+can help to reduce the length of the largest chain-of-correction.
+
+
+So, when is PTblender useful. These are some examples:
+
+* Panoramas with few images
+
+* Images with very strong changes in brightness (automatic exposure,
+for example)
+
+* Panoramas to be displayed flat (no need to blend around the edges)
+
+
+My recommendations on how to use PTblender:
+
+* FIX vignetting before you map the images (use fulla for it, or
+photoshop)
+
+* Experiment with the 3 outputs (RGB, saturation, intensity).
+
+* Choose an anchor in such a way that it minimizes the
+chain-of-correction. ( experiment with different anchors)
+
+* Experiment with using the 3 types of outputs plus uncorrected as 4
+different layers in photoshop and mask/unmask areas as you see
+fit. This might prove to be very useful (similar to enblend).
+
+
+Another option is to use enblend and PTblender in the same pano, each
+dealing with different types of corrections. I have not tried this
+myself. PTblender accept TIFFs with alpha channel and can output TIFFs
+or PSDs.
+
+There is lots of room for improvement in colour correction, but at the
+very least we (panotools) are now where Helmut left it (approx 5 year
+ago).
+

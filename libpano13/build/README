@@ -1,0 +1,13 @@
+This directory contains various stuff that is used when building
+software from CVS. So far, it contains:
+
+- some auxiliary scripts that are used when using libtool, for things
+  that libtool doesn't handle currently.
+
+In order to generate DLLs with version resources included (a nice
+touch, and more Windows style), we need support for compiling and
+including resources with DLL version number. Currently this knowledge
+is not in libtool, but in the compile-resource and lt-compile-resource
+scripts here in the win32 subdirectory.
+
+These were originally from the GNOME project.
