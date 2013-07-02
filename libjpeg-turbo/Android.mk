@@ -1,5 +1,7 @@
 # Makefile for libjpeg-turbo
 
+ifeq ($(ANDROID_BUILD_TOP),)
+
 ##################################################
 ###                simd                        ###
 ##################################################
@@ -72,3 +74,5 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := libjpeg
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif

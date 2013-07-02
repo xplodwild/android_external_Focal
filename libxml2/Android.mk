@@ -1,3 +1,5 @@
+ifeq ($(ANDROID_BUILD_TOP),)
+
 LOCAL_PATH:= $(call my-dir)
 
 common_SRC_FILES := \
@@ -62,3 +64,5 @@ LOCAL_CFLAGS += -fvisibility=hidden
 LOCAL_MODULE:= libxml2
 
 include $(BUILD_STATIC_LIBRARY)
+
+endif
