@@ -29,7 +29,8 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../libiconv/include
 else
 LOCAL_C_INCLUDES += \
-	external/libxml2
+	external/libxml2/include \
+	external/icu4c/common
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
@@ -71,7 +72,8 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../libiconv/include
 else
 LOCAL_C_INCLUDES += \
-	external/libxml2
+	external/libxml2/include \
+	external/icu4c/common
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
