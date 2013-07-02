@@ -3,29 +3,29 @@
 ######################################################
 ###                    libsift                      ##
 ######################################################
- 
+
 LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
 libsift_SOURCES = \
-                  LoweDetector.c RANSAC.c GaussianConvolution.c \
-                  ScaleSpace.c KeypointXML.c MatchKeys.c KDTree.c BondBall.c \
-                  AreaFilter.c ImageMatchModel.c Transform.c DisplayImage.c ImageMap.c \
-                  HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c
+	LoweDetector.c RANSAC.c GaussianConvolution.c \
+	ScaleSpace.c KeypointXML.c MatchKeys.c KDTree.c BondBall.c \
+	AreaFilter.c ImageMatchModel.c Transform.c DisplayImage.c ImageMap.c \
+	HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c
 
 LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
-                          
+
 LOCAL_SRC_FILES:= $(libsift_SOURCES)
- 
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
-      $(LOCAL_PATH)/include \
-      $(LOCAL_PATH)/../libpano13 \
-      $(LOCAL_PATH)/../libxml2/include \
-      $(LOCAL_PATH)/../libiconv/include
- 
-LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -DANDROID \
-        -D__Ansi__ -D_GNU_SOURCE -DHAS_PANO13
+	$(LOCAL_PATH)/include \
+	$(LOCAL_PATH)/../libpano13 \
+	$(LOCAL_PATH)/../libxml2/include \
+	$(LOCAL_PATH)/../libiconv/include
+
+LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
+	-D__Ansi__ -D_GNU_SOURCE -DHAS_PANO13
 
 LOCAL_STATIC_LIBRARIES := libxml2 libiconv
 
@@ -46,21 +46,20 @@ include $(CLEAR_VARS)
 enblend_SOURCES = AutoPano.c
 
 LOCAL_SDK_VERSION := 14
-				  
+
 LOCAL_SRC_FILES:= $(enblend_SOURCES)
- 
+
 LOCAL_SHARED_LIBRARIES := libtiffdecoder libpano13
 LOCAL_STATIC_LIBRARIES := libsift
- 
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/../libtiff \
-      $(LOCAL_PATH)/../libpano13 \
-      $(LOCAL_PATH)/../libxml2/include
- 
-LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -DANDROID -D__Ansi__ -DHAS_PANO13
+	$(LOCAL_PATH)/../libpano13 \
+	$(LOCAL_PATH)/../libxml2/include
 
-LOCAL_LDLIBS := 
+LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
+
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
