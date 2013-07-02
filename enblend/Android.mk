@@ -19,17 +19,16 @@ enblend_SOURCES = \
 	src/layer_selection/layer_selection.cc \
 	src/layer_selection/selector.cc
 
-LOCAL_CPP_EXTENSION := cc
+LOCAL_CPP_EXTENSION := .cc
 
 LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
-				  
 LOCAL_SRC_FILES:= $(enblend_SOURCES)
- 
+
 LOCAL_SHARED_LIBRARIES := libvigraimpex libtiffdecoder
 LOCAL_STATIC_LIBRARIES := liblcms2 libgsl liblayersel
- 
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/src/layer_selection/ \
