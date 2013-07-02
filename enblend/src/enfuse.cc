@@ -1686,8 +1686,8 @@ int main(int argc, char** argv)
 
     gsl_set_error_handler_off();
 
-    TIFFSetWarningHandler(tiff_warning);
-    TIFFSetErrorHandler(tiff_error);
+    //TIFFSetWarningHandler(tiff_warning);
+    //TIFFSetErrorHandler(tiff_error);
 
     //< src::layer-selector all-layers
     LayerSelection.set_selector(*selector::find_by_id(selector::AllLayersId));
