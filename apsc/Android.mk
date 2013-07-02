@@ -20,9 +20,17 @@ LOCAL_SRC_FILES:= $(libsift_SOURCES)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
-	$(LOCAL_PATH)/../libpano13 \
+	$(LOCAL_PATH)/../libtiff \
+	$(LOCAL_PATH)/../libpano13
+
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../libxml2/include \
 	$(LOCAL_PATH)/../libiconv/include
+else
+LOCAL_C_INCLUDES += \
+	external/libxml2
+endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
 	-D__Ansi__ -D_GNU_SOURCE -DHAS_PANO13
@@ -55,8 +63,16 @@ LOCAL_STATIC_LIBRARIES := libsift
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/../libtiff \
-	$(LOCAL_PATH)/../libpano13 \
-	$(LOCAL_PATH)/../libxml2/include
+	$(LOCAL_PATH)/../libpano13
+
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../libxml2/include \
+	$(LOCAL_PATH)/../libiconv/include
+else
+LOCAL_C_INCLUDES += \
+	external/libxml2
+endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
 

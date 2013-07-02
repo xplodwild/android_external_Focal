@@ -56,9 +56,17 @@ LOCAL_LDLIBS := -lz
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../libtiff \
-	$(LOCAL_PATH)/../libjpeg-turbo \
-	$(LOCAL_PATH)/../libpng \
 	external/zlib
+
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../libjpeg-turbo \
+	$(LOCAL_PATH)/../libpng
+else
+LOCAL_C_INCLUDES += \
+	external/jpeg \
+	external/libpng
+endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 \
 	-DANDROID_TILE_BASED_DECODE -DENABLE_ANDROID_NULL_CONVERT -D__Ansi__

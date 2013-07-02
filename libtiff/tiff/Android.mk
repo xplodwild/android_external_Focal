@@ -49,9 +49,16 @@ LOCAL_TIFF_SRC_FILES += port/lfind.c
 LOCAL_SRC_FILES:= $(LOCAL_TIFF_SRC_FILES)
 
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../../libjpeg-turbo \
 	$(LOCAL_PATH)/libtiff \
 	external/zlib
+
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../libjpeg-turbo
+else
+LOCAL_C_INCLUDES += \
+	external/jpeg
+endif
 
 LOCAL_CFLAGS += -DAVOID_TABLES  -O3 -fstrict-aliasing -fprefetch-loop-arrays
 
@@ -72,9 +79,16 @@ LOCAL_ARM_MODE := arm
 LOCAL_SRC_FILES:= $(LOCAL_TIFF_SRC_FILES)
 
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../../libjpeg-turbo \
 	$(LOCAL_PATH)/libtiff \
 	external/zlib
+
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../libjpeg-turbo
+else
+LOCAL_C_INCLUDES += \
+	external/jpeg
+endif
 
 LOCAL_CFLAGS += -DAVOID_TABLES -O3 -fstrict-aliasing -fprefetch-loop-arrays
 
