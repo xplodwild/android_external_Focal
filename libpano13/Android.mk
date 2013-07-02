@@ -1,9 +1,9 @@
 # Makefile for libpano13
- 
+
 ######################################################
 ###              libpano13.so                       ##
 ######################################################
- 
+
 LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
@@ -12,7 +12,7 @@ libpano13_SOURCES_DIST = javastub.c \
 	bmp.c \
 	ColourBrightness.c \
 	correct.c \
-    dump.c \
+	dump.c \
 	fftn.c \
 	file.c \
 	filter.c \
@@ -49,20 +49,20 @@ libpano13_SOURCES_DIST = javastub.c \
 	PaniniGeneral.c
 
 LOCAL_SRC_FILES:= $(libpano13_SOURCES_DIST)
- 
+
 LOCAL_SHARED_LIBRARIES := libjpeg libz
 LOCAL_STATIC_LIBRARIES := libpng libtiff #libsimd
- 
+LOCAL_LDLIBS := -lz
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../libtiff \
 	$(LOCAL_PATH)/../libjpeg-turbo \
 	$(LOCAL_PATH)/../libpng \
 	external/zlib
- 
-LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fstrict-aliasing -fprefetch-loop-arrays  -DANDROID \
-        -DANDROID_TILE_BASED_DECODE -DENABLE_ANDROID_NULL_CONVERT -D__Ansi__
 
-LOCAL_LDLIBS := -lz
+LOCAL_CFLAGS := -DAVOID_TABLES -O3 \
+	-DANDROID_TILE_BASED_DECODE -DENABLE_ANDROID_NULL_CONVERT -D__Ansi__
+
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 

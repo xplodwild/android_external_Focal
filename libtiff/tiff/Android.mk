@@ -47,36 +47,42 @@ LOCAL_TIFF_SRC_FILES += port/lfind.c
 ###########################################################
 
 LOCAL_SRC_FILES:= $(LOCAL_TIFF_SRC_FILES)
+
 LOCAL_C_INCLUDES += \
-					$(LOCAL_PATH)/libtiff \
-					external/zlib \
-					external/jpeg
-LOCAL_CFLAGS += -DAVOID_TABLES 
-LOCAL_CFLAGS += -O3 -fstrict-aliasing -fprefetch-loop-arrays
-LOCAL_STATIC_LIBRARIES := \
-	libjpeg
-LOCAL_SHARED_LIBRARIES := \
-	libz
+	$(LOCAL_PATH)/../../libjpeg-turbo \
+	$(LOCAL_PATH)/libtiff \
+	external/zlib
+
+LOCAL_CFLAGS += -DAVOID_TABLES  -O3 -fstrict-aliasing -fprefetch-loop-arrays
+
+LOCAL_SHARED_LIBRARIES := libz libjpeg
+LOCAL_LDLIBS := -lz
+
 LOCAL_MODULE:= libtiff
 LOCAL_PRELINK_MODULE:=false
+
 include $(BUILD_SHARED_LIBRARY)
 
 ###########################################################
 
 include $(CLEAR_VARS)
+
 LOCAL_ARM_MODE := arm
+
 LOCAL_SRC_FILES:= $(LOCAL_TIFF_SRC_FILES)
+
 LOCAL_C_INCLUDES += \
-					$(LOCAL_PATH)/libtiff \
-					external/zlib \
-					external/jpeg
-LOCAL_CFLAGS += -DAVOID_TABLES
-LOCAL_CFLAGS += -O3 -fstrict-aliasing -fprefetch-loop-arrays
-LOCAL_STATIC_LIBRARIES := \
-	libjpeg
-LOCAL_SHARED_LIBRARIES := \
-	libz
-LOCAL_MODULE:= libtiff
+	$(LOCAL_PATH)/../../libjpeg-turbo \
+	$(LOCAL_PATH)/libtiff \
+	external/zlib
+
+LOCAL_CFLAGS += -DAVOID_TABLES -O3 -fstrict-aliasing -fprefetch-loop-arrays
+
+LOCAL_SHARED_LIBRARIES := libz libjpeg
+LOCAL_LDLIBS := -lz
+
+LOCAL_MODULE:= libtiff_static
+
 include $(BUILD_STATIC_LIBRARY)
 
 ###########################################################
@@ -86,10 +92,10 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES = tools/tiffinfo.c
 
 LOCAL_C_INCLUDES += \
-					$(LOCAL_PATH)/libtiff
+	$(LOCAL_PATH)/libtiff
 
-LOCAL_SHARED_LIBRARIES = \
-						 libtiff
+LOCAL_SHARED_LIBRARIES = libtiff
+
 LOCAL_MODULE:= tiffinfo
 
 include $(BUILD_EXECUTABLE)

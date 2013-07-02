@@ -1,23 +1,23 @@
 # Makefile for enblend suite
 
 ######################################################
-###                     enblend                     ##
+###                  enblend                        ##
 ######################################################
  
 LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
 enblend_SOURCES = \
-                  src/enblend.cc \
-                  src/gpu.cc \
-                  src/error_message.cc \
-                  src/filenameparse.cc \
-                  src/filespec.cc \
-                  src/self_test.cc \
-                  src/tiff_message.cc \
-                  src/layer_selection/info.cc \
-                  src/layer_selection/layer_selection.cc \
-                  src/layer_selection/selector.cc
+	src/enblend.cc \
+	src/gpu.cc \
+	src/error_message.cc \
+	src/filenameparse.cc \
+	src/filespec.cc \
+	src/self_test.cc \
+	src/tiff_message.cc \
+	src/layer_selection/info.cc \
+	src/layer_selection/layer_selection.cc \
+	src/layer_selection/selector.cc
 
 LOCAL_CPP_EXTENSION := cc
 
@@ -39,10 +39,10 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../lcms2/include \
 	$(LOCAL_PATH)/../vigra/include
  
-LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -DANDROID \
-        -D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
+LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
+	-D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 
-LOCAL_LDLIBS := 
+LOCAL_LDLIBS := -lz
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
