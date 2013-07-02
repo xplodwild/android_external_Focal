@@ -63,6 +63,16 @@
 // Separator of key and value in a syntactic comment
 #define KEY_VALUE_SEPARATOR_CHAR ':'
 
+// Android doesn't actually implement glob and globfree
+extern "C" int glob(const char *pattern, int flags, int (*errfunc) (const char *epath, int eerrno), glob_t *pglob)
+{
+    return 0;
+}
+
+extern "C" void globfree(glob_t *pglob)
+{
+}
+
 
 typedef std::pair<std::string, std::string> key_value_pair;
 

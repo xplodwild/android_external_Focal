@@ -1,5 +1,5 @@
-
 NEMESIS_JNI_PATH := $(call my-dir)
+
 include $(NEMESIS_JNI_PATH)/libjpeg-turbo/Android.mk
 include $(NEMESIS_JNI_PATH)/libpng/Android.mk
 include $(NEMESIS_JNI_PATH)/libtiff/Android.mk

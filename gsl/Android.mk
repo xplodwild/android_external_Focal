@@ -13,6 +13,9 @@ include $(CLEAR_VARS)
 
 libgsl_la_SOURCES = \
 	version.c \
+	block/init.c \
+	block/file.c \
+	block/block.c \
 	rng/borosh13.c \
 	rng/cmrg.c \
 	rng/coveyou.c \
