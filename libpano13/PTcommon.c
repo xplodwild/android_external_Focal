@@ -1034,7 +1034,7 @@ int panoCreatePanorama(fullPath ptrImageFileNames[], int counterImageFiles,
         ///  CREATE OUTPUT FILE
 
         // Copy the current output file name to he fullPathImages[loopCounter]
-        memcpy(&fullPathImages[loopCounter], &panoFileName, sizeof(fullPath));
+        memcpy(&fullPathImages[loopCounter], &panoFileName, sizeof(fullPath[loopCounter]));
 
         // Create temporary file where output data wil be written
         if (panoFileMakeTemp(&fullPathImages[loopCounter]) == 0) {
