@@ -54,7 +54,7 @@ LOCAL_C_INCLUDES += \
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../libjpeg-turbo
+	$(LOCAL_PATH)/../../libjpeg-turbo
 else
 LOCAL_C_INCLUDES += \
 	external/jpeg
@@ -84,7 +84,7 @@ LOCAL_C_INCLUDES += \
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../libjpeg-turbo
+	$(LOCAL_PATH)/../../libjpeg-turbo
 else
 LOCAL_C_INCLUDES += \
 	external/jpeg
