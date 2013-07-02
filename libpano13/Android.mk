@@ -56,7 +56,8 @@ LOCAL_STATIC_LIBRARIES := libpng libtiff #libsimd
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../libtiff \
 	$(LOCAL_PATH)/../libjpeg-turbo \
-	$(LOCAL_PATH)/../libpng
+	$(LOCAL_PATH)/../libpng \
+	external/zlib
  
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fstrict-aliasing -fprefetch-loop-arrays  -DANDROID \
         -DANDROID_TILE_BASED_DECODE -DENABLE_ANDROID_NULL_CONVERT -D__Ansi__
