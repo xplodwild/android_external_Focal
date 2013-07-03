@@ -40,13 +40,17 @@ libhugin_SOURCES_DIST = \
 	panotools/PanoToolsUtils.cpp \
 	algorithms/basic/CalculateOverlap.cpp \
 	algorithms/basic/CalculateCPStatistics.cpp \
+	algorithms/basic/CalculateOptimalROI.cpp \
 	algorithms/basic/CalculateOptimalScale.cpp \
 	algorithms/basic/CalculateMeanExposure.cpp \
+	algorithms/basic/LayerStacks.cpp \
 	algorithms/basic/RotatePanorama.cpp \
 	algorithms/basic/StraightenPanorama.cpp \
+	algorithms/basic/TranslatePanorama.cpp \
 	algorithms/control_points/CleanCP.cpp \
 	algorithms/nona/CenterHorizontally.cpp \
 	algorithms/nona/CalculateFOV.cpp \
+	algorithms/nona/ComputeImageROI.cpp \
 	algorithms/nona/FitPanorama.cpp \
 	algorithms/point_sampler/PointSampler.cpp \
 	algorithms/optimizer/ImageGraph.cpp \
