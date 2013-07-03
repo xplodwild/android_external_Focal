@@ -1,0 +1,13 @@
+add_library(huginlevmar STATIC lm.c lm.h Axb.c misc.c misc.h lmlec.c lmbc.c)
+IF (NOT MSVC)
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+ENDIF (NOT MSVC)
+
+IF(LAPACK_FOUND)
+  ADD_DEFINITIONS(-DHAVE_LAPACK)
+ENDIF(LAPACK_FOUND)
+
+IF(NOT MSVC)
+SET_TARGET_PROPERTIES(huginlevmar PROPERTIES COMPILE_FLAGS -fPIC)
+ENDIF()
+

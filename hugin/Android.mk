@@ -15,6 +15,8 @@ include $(CLEAR_VARS)
 
 libhugin_SOURCES_DIST = \
 	vigra_ext/emor.cpp \
+	appbase/ProgressReporterOld.cpp \
+	appbase/ProgressDisplay.cpp \
 	hugin_utils/alphanum.cpp \
 	hugin_utils/platform.cpp \
 	hugin_utils/utils.cpp \
@@ -33,7 +35,19 @@ libhugin_SOURCES_DIST = \
 	panotools/PanoToolsOptimizerWrapper.cpp \
 	panotools/PanoToolsTransformGPU.cpp \
 	panotools/PanoToolsUtils.cpp \
-	algorithms/basic/CalculateOverlap.cpp
+	algorithms/basic/CalculateOverlap.cpp \
+	algorithms/basic/CalculateCPStatistics.cpp \
+	algorithms/optimizer/ImageGraph.cpp \
+	algorithms/control_points/CleanCP.cpp \
+	algorithms/optimizer/PTOptimizer.cpp \
+	algorithms/optimizer/PhotometricOptimizer.cpp \
+	algorithms/nona/CenterHorizontally.cpp \
+	algorithms/nona/CalculateFOV.cpp \
+	levmar/lm.c \
+	levmar/Axb.c \
+	levmar/misc.c \
+	levmar/lmlec.c levmar/lmbc.c
+
 
 LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
@@ -63,3 +77,4 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := libhugin
 
 include $(BUILD_SHARED_LIBRARY)
+

@@ -24,7 +24,7 @@
 #include "PhotometricOptimizer.h"
 
 #include <fstream>
-#include <foreign/levmar/lm.h>
+#include <levmar/lm.h>
 #include <photometric/ResponseTransform.h>
 
 #ifdef DEBUG
@@ -435,7 +435,7 @@ bool PhotometricOptimizer::runAlgorithm()
         if(getProgressDisplay()->wasCancelled())
             cancelAlgorithm();
     }
-    
+
     return wasCancelled(); // let's hope so.
 }
 

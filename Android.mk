@@ -14,6 +14,7 @@ ifeq ($(ANDROID_BUILD_TOP),)
 	include $(NEMESIS_JNI_PATH)/libiconv/Android.mk
 	include $(NEMESIS_JNI_PATH)/libxml2/Android.mk
 	include $(NEMESIS_JNI_PATH)/hugin/Android.mk
+	include $(NEMESIS_JNI_PATH)/hugin/tools/Android.mk
 	include $(NEMESIS_JNI_PATH)/exiv2/Android.mk
 	include $(NEMESIS_JNI_PATH)/glib/Android.mk
 	include $(NEMESIS_JNI_PATH)/lensfun/Android.mk
