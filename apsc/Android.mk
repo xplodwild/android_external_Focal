@@ -7,7 +7,7 @@
 LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
-libsift_SOURCES = \
+libsift_SOURCES := \
 	LoweDetector.c RANSAC.c GaussianConvolution.c \
 	ScaleSpace.c KeypointXML.c MatchKeys.c KDTree.c BondBall.c \
 	AreaFilter.c ImageMatchModel.c Transform.c DisplayImage.c ImageMap.c \
@@ -36,7 +36,12 @@ endif
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
 	-D__Ansi__ -D_GNU_SOURCE -DHAS_PANO13
 
-LOCAL_STATIC_LIBRARIES := libxml2 libiconv
+LOCAL_STATIC_LIBRARIES := libxml2
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_STATIC_LIBRARIES += libiconv
+else
+LOCAL_SHARED_LIBRARIES += libicuuc
+endif
 
 LOCAL_LDLIBS := -lxml
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
@@ -52,11 +57,11 @@ include $(BUILD_STATIC_LIBRARY)
  
 include $(CLEAR_VARS)
 
-enblend_SOURCES = AutoPano.c
+autopano_SOURCES := AutoPano.c
 
 LOCAL_SDK_VERSION := 14
 
-LOCAL_SRC_FILES:= $(enblend_SOURCES)
+LOCAL_SRC_FILES:= $(autopano_SOURCES) $(libsift_SOURCES)
 
 LOCAL_SHARED_LIBRARIES := libtiffdecoder libpano13
 LOCAL_STATIC_LIBRARIES := libsift
@@ -74,6 +79,13 @@ else
 LOCAL_C_INCLUDES += \
 	external/libxml2/include \
 	external/icu4c/common
+endif
+
+LOCAL_STATIC_LIBRARIES := libxml2
+ifeq ($(ANDROID_BUILD_TOP),)
+LOCAL_STATIC_LIBRARIES += libiconv
+else
+LOCAL_SHARED_LIBRARIES += libicuuc
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
