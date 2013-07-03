@@ -21,8 +21,6 @@ celeste_SOURCES = \
 	Utilities.cpp \
 	Main.cpp
 
-LOCAL_SDK_VERSION := 14
-
 LOCAL_SRC_FILES:= $(celeste_SOURCES)
 
 LOCAL_SHARED_LIBRARIES := libhugin libvigraimpex

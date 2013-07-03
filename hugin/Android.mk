@@ -61,8 +61,6 @@ libhugin_SOURCES_DIST = \
 	levmar/misc.c \
 	levmar/lmlec.c levmar/lmbc.c
 
-
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libhugin_SOURCES_DIST)

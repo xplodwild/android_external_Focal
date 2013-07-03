@@ -14,8 +14,6 @@ LOCAL_SRC_FILES := \
 	HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c \
 	AutoPano.c
 
-LOCAL_SDK_VERSION := 14
-
 LOCAL_SHARED_LIBRARIES := libtiffdecoder libpano13
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
