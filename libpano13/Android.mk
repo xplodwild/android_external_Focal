@@ -51,7 +51,7 @@ libpano13_SOURCES_DIST = javastub.c \
 LOCAL_SRC_FILES:= $(libpano13_SOURCES_DIST)
 
 LOCAL_SHARED_LIBRARIES := libjpeg libz
-LOCAL_STATIC_LIBRARIES := libpng libtiff #libsimd
+LOCAL_STATIC_LIBRARIES := libpng libtiff_static #libsimd
 LOCAL_LDLIBS := -lz
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
