@@ -86,5 +86,5 @@ LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := libhugin
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 

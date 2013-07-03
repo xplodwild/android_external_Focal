@@ -602,12 +602,14 @@ void Panorama::printPanoramaScript(std::ostream & o,
 {
     using namespace std;
     
-#ifdef __unix__
+#if defined(__unix__) && !defined(ANDROID)
+    cout << "!! SETTING LOCALE !!" << endl;
     // set numeric locale to C, for correct number output
     char * t = setlocale(LC_NUMERIC,NULL);
     char * old_locale = (char*) malloc(strlen(t)+1);
     strcpy(old_locale, t);
     setlocale(LC_NUMERIC,"C");
+    cout << "!! DONE SETTING LOCALE !!" << endl;
 #endif
 
     if (forPTOptimizer) {
@@ -863,7 +865,7 @@ void Panorama::printPanoramaScript(std::ostream & o,
         o << "#hugin_optimizerPhotoMasterSwitch 0" << endl;
     };
 
-#ifdef __unix__
+#if defined(__unix__) && !defined(ANDROID)
     // reset locale
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);

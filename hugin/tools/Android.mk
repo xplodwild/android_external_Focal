@@ -16,7 +16,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../libpano13 \
 	$(LOCAL_PATH)/..
 
-LOCAL_SHARED_LIBRARIES := libhugin
+LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := ptclean
 
@@ -37,7 +37,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../libpano13 \
 	$(LOCAL_PATH)/..
 
-LOCAL_SHARED_LIBRARIES := libhugin libvigraimpex libpano13
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
+LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := autooptimiser
 
@@ -58,7 +59,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../libpano13 \
 	$(LOCAL_PATH)/..
 
-LOCAL_SHARED_LIBRARIES := libhugin libvigraimpex libpano13
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
+LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := pano_modify
 
@@ -80,7 +82,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../lensfun/include/lensfun \
 	$(LOCAL_PATH)/..
 
-LOCAL_SHARED_LIBRARIES := libhugin libvigraimpex libpano13
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
+LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := pto_gen
 

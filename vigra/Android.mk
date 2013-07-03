@@ -53,7 +53,7 @@ LOCAL_C_INCLUDES += \
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
-	-D__Ansi__
+	-D__Ansi__ -DHasJPEG -DHasTIFF -DHasPNG
 
 LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug

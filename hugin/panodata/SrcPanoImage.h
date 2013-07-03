@@ -212,11 +212,14 @@ public:
      */
     SrcPanoImage(const std::string &filename)
     {
+        std::cout << "setDefaults..." << std::endl;
         setDefaults();
         m_Filename = filename;
         double crop = 0;
         double fl = 0;
+        std::cout << "reading EXIF..." << std::endl;
         successfullEXIFread=readEXIF(fl, crop, true, true);
+        std::cout << "SrcPanoImage ready" << std::endl;
     };
     /** return true, if EXIF infomation was read sucessful */
     const bool hasEXIFread() const {return successfullEXIFread;};

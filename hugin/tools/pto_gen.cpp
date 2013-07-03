@@ -269,13 +269,18 @@ int main(int argc, char* argv[])
         }
 #else
         input=argv[optind];
+        cout << "Checking " << input << "..." << endl;
         if(hugin_utils::FileExists(input))
         {
             if(vigra::isImage(input.c_str()))
             {
                 filelist.push_back(GetAbsoluteFilename(input));
-            };
-        };
+            }
+            else
+            {
+                cerr << "...This is not an image" << endl;
+            }
+        }
 #endif
         optind++;
     };
@@ -284,21 +289,30 @@ int main(int argc, char* argv[])
     {
         cerr << "No valid image files given." << endl;
         return 1;
-    };
+    }
+    else
+    {
+        cout << "Uses " << filelist.size() << "images." << endl;
+    }
 
     //sort filenames
     sort(filelist.begin(),filelist.end(),doj::alphanum_less());
 
     if(projection<0)
     {
+        cout << "No projection set, initializing Lens DB..." << endl;
         InitLensDB();
+        cout << "Lens DB initialized." << endl;
     };
 
     Panorama pano;
     for(size_t i=0; i<filelist.size();i++)
     {
-        SrcPanoImage srcImage(filelist[i]);
         cout << "Reading " << filelist[i] << "..." << endl;
+
+        SrcPanoImage srcImage(filelist[i]);
+        cout << "Made SrcPanoImage..." << endl;
+
         if(projection>=0)
         {
             srcImage.setProjection((HuginBase::BaseSrcPanoImage::Projection)projection);
@@ -437,6 +451,8 @@ int main(int argc, char* argv[])
         };
     };
 
+    cout << "Done assigning lenses. Linking stacks (" << pano.getNrOfImages() << " images)..." << endl;
+
     //link stacks
     if(pano.getNrOfImages()>1 && stackLength>1)
     {
@@ -455,6 +471,7 @@ int main(int argc, char* argv[])
                 {
                     if(firstImgStack+i<pano.getNrOfImages())
                     {
+                        cout << "Linking image variable stack..." << endl;
                         pano.linkImageVariableStack(firstImgStack,firstImgStack+i);
                         if(linkStacks)
                         {
@@ -462,6 +479,7 @@ int main(int argc, char* argv[])
                             pano.linkImageVariablePitch(firstImgStack,firstImgStack+i);
                             pano.linkImageVariableRoll(firstImgStack,firstImgStack+i);
                         };
+                        cout << "Done for image..." << endl;
                     };
                 };
             };
@@ -469,6 +487,7 @@ int main(int argc, char* argv[])
         };
     };
 
+    cout << "Done linking stacks." << endl;
     //set output exposure value
     PanoramaOptions opt = pano.getOptions();
     opt.outputExposureValue = CalculateMeanExposure::calcMeanExposure(pano);
@@ -477,6 +496,7 @@ int main(int argc, char* argv[])
     pano.setOptimizerSwitch(HuginBase::OPT_PAIR);
     pano.setPhotometricOptimizerSwitch(HuginBase::OPT_EXPOSURE | HuginBase::OPT_VIGNETTING | HuginBase::OPT_RESPONSE);
 
+    cout << "Setting output..." << endl;
     //output
     if(output=="")
     {
@@ -489,11 +509,16 @@ int main(int argc, char* argv[])
         output=output.append(".pto");
     };
     output=GetAbsoluteFilename(output);
+    cout << "Writing output to " << output << endl;
+
     //write output
     UIntSet imgs;
     fill_set(imgs,0, pano.getNrOfImages()-1);
     ofstream of(output.c_str());
-    pano.printPanoramaScript(of, pano.getOptimizeVector(), pano.getOptions(), imgs, false, hugin_utils::getPathPrefix(output));
+    cout << "-> Printing panorama script..." << endl;
+    std::string pathPrefix = hugin_utils::getPathPrefix(output);
+    cout << "-> Path prefix: " << pathPrefix << endl;
+    pano.printPanoramaScript(of, pano.getOptimizeVector(), pano.getOptions(), imgs, false, pathPrefix);
 
     cout << endl << "Written output to " << output << endl;
     HuginBase::LensDB::LensDB::Clean();
