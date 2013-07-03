@@ -27,7 +27,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_SRC_FILES:= $(enblend_SOURCES)
 
 LOCAL_SHARED_LIBRARIES := libvigraimpex libtiffdecoder
-LOCAL_STATIC_LIBRARIES := liblcms2 libgsl liblayersel
+LOCAL_STATIC_LIBRARIES := liblcms2 libgsl
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
@@ -73,7 +73,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_SRC_FILES:= $(enfuse_SOURCES)
 
 LOCAL_SHARED_LIBRARIES := libvigraimpex libtiffdecoder
-LOCAL_STATIC_LIBRARIES := liblcms2 libgsl liblayersel
+LOCAL_STATIC_LIBRARIES := liblcms2 libgsl
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
