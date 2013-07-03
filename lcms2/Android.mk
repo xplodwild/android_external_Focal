@@ -26,7 +26,6 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fstrict-aliasing -fprefetch-loop-arrays \
 
 LOCAL_LDLIBS := -lz
 
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := liblcms2

@@ -84,7 +84,6 @@ LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-lo
 	-frtti -D__Ansi__
 
 LOCAL_LDLIBS := -lz
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := libhugin

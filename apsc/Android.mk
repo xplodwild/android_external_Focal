@@ -44,7 +44,6 @@ LOCAL_SHARED_LIBRARIES += libicuuc
 endif
 
 LOCAL_LDLIBS := -lxml
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := libsift
@@ -90,7 +89,6 @@ endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
 
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := autopano

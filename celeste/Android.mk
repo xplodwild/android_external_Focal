@@ -38,7 +38,6 @@ LOCAL_CFLAGS := -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
 	-D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 
 LOCAL_LDLIBS := -lz
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := celeste

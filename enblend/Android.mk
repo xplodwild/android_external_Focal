@@ -42,7 +42,6 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loo
 	-D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 
 LOCAL_LDLIBS := -lz
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := enblend
@@ -88,7 +87,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
 	-D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_STATIC_LIBRARY)
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := enfuse
