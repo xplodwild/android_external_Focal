@@ -20,6 +20,9 @@ libhugin_SOURCES_DIST = \
 	hugin_utils/alphanum.cpp \
 	hugin_utils/platform.cpp \
 	hugin_utils/utils.cpp \
+	hugin_math/Matrix3.cpp \
+	hugin_math/eig_jacobi.cpp \
+	hugin_math/Vector3.cpp \
 	lensdb/LensDB.cpp \
 	panodata/ControlPoint.cpp \
 	panodata/ImageVariableGroup.cpp \
@@ -37,12 +40,18 @@ libhugin_SOURCES_DIST = \
 	panotools/PanoToolsUtils.cpp \
 	algorithms/basic/CalculateOverlap.cpp \
 	algorithms/basic/CalculateCPStatistics.cpp \
-	algorithms/optimizer/ImageGraph.cpp \
+	algorithms/basic/CalculateOptimalScale.cpp \
+	algorithms/basic/CalculateMeanExposure.cpp \
+	algorithms/basic/RotatePanorama.cpp \
+	algorithms/basic/StraightenPanorama.cpp \
 	algorithms/control_points/CleanCP.cpp \
-	algorithms/optimizer/PTOptimizer.cpp \
-	algorithms/optimizer/PhotometricOptimizer.cpp \
 	algorithms/nona/CenterHorizontally.cpp \
 	algorithms/nona/CalculateFOV.cpp \
+	algorithms/nona/FitPanorama.cpp \
+	algorithms/point_sampler/PointSampler.cpp \
+	algorithms/optimizer/ImageGraph.cpp \
+	algorithms/optimizer/PTOptimizer.cpp \
+	algorithms/optimizer/PhotometricOptimizer.cpp \
 	levmar/lm.c \
 	levmar/Axb.c \
 	levmar/misc.c \
