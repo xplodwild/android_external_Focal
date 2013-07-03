@@ -101,9 +101,15 @@ namespace hugin_utils
                     ((x > (float)INT_MAX) ? INT_MAX : static_cast<int>(x + 0.5)));
     }
 
+#ifdef isnan
+#undef isnan
+#endif
+
     inline int isnan(double x)
     {
-#ifndef _MSC_VER
+#ifdef ANDROID
+        return isnan(x);
+#elif defined(_MSC_VER)
         return std::isnan(x);
 #else
         return _isnan(x);

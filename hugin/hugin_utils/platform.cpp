@@ -24,6 +24,9 @@
 
 #include "platform.h"
 
+#if defined(ANDROID) && defined(__unused)
+#undef __unused
+#endif
 
 #ifdef _WIN32
 #include "vigra/windows.h"

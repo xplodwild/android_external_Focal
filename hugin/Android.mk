@@ -61,6 +61,7 @@ libhugin_SOURCES_DIST = \
 	levmar/misc.c \
 	levmar/lmlec.c levmar/lmbc.c
 
+LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libhugin_SOURCES_DIST)
@@ -79,7 +80,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../lensfun/include/lensfun
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
-	-frtti -D__Ansi__
+	-frtti -D__Ansi__ -Wno-sequence-point
 
 LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug
