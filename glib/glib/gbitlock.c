@@ -56,7 +56,7 @@ _g_futex_thread_init (void) {
  * If anyone actually gets bit by this, please file a bug. :)
  */
 #include <linux/futex.h>
-#include <syscall.h>
+#include <sys/syscall.h>
 #include <unistd.h>
 
 /* < private >
