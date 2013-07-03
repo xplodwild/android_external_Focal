@@ -1,4 +1,4 @@
-# Makefile for autopano tools
+# Makefile for autopano-sift-c tools
 
 ######################################################
 ###                   autopano                      ##
@@ -8,18 +8,26 @@ LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
+	APSCpp/ANN/ANN.cpp APSCpp/ANN/brute.cpp \
+	APSCpp/ANN/kd_tree.cpp APSCpp/ANN/kd_util.cpp APSCpp/ANN/kd_split.cpp \
+	APSCpp/ANN/kd_dump.cpp APSCpp/ANN/kd_search.cpp APSCpp/ANN/kd_pr_search.cpp \
+	APSCpp/ANN/kd_fix_rad_search.cpp APSCpp/ANN/bd_tree.cpp APSCpp/ANN/bd_search.cpp \
+	APSCpp/ANN/bd_pr_search.cpp APSCpp/ANN/bd_fix_rad_search.cpp \
+	APSCpp/ANN/perf.cpp APSCpp/ANNkd_wrap.cpp \
+	APSCpp/CamLens.c APSCpp/HermiteSpline.c APSCpp/saInterp.c \
+	APSCpp/saRemap.c APSCpp/APSCpp_main.c APSCpp/APSCpp.c \
 	LoweDetector.c RANSAC.c GaussianConvolution.c \
 	ScaleSpace.c KeypointXML.c MatchKeys.c KDTree.c BondBall.c \
 	AreaFilter.c ImageMatchModel.c Transform.c DisplayImage.c ImageMap.c \
-	HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c \
-	AutoPano.c
+	HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c
 
 LOCAL_SHARED_LIBRARIES := libtiffdecoder libpano13
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/../libtiff \
-	$(LOCAL_PATH)/../libpano13
+	$(LOCAL_PATH)/../libpano13 \
+	$(LOCAL_PATH)/APSCpp
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \

@@ -387,15 +387,18 @@ int main(int argc, char* argv[])
 	} 
 	
 	// Convert mask format to lower case
+        cout << "Converting mask format to lower case..." << endl;
 	transform(mask_format.begin(), mask_format.end(), mask_format.begin(),(int(*)(int)) tolower);
 
 	// Vectors to store SVM responses and PTO file info etc
 	vector<string> images,pto_file_top,pto_file_cps,pto_file_end;
 	vector<double> svm_responses;
 
+    cout << "Loading SVMmodel..." << endl;
     struct celeste::svm_model* model;
     if(!celeste::loadSVMmodel(model,model_file))
     {
+        cerr << "Could not load SVMmodel" << endl;
         return 1;
     };
 
@@ -455,6 +458,7 @@ int main(int argc, char* argv[])
             celeste::destroySVMmodel(model);
             return 1;
         }
+	cout << "Done parsing Hugin step 1" << endl;
 
         for(unsigned int i=0;i<pano.getNrOfImages();i++)
         {
@@ -496,11 +500,14 @@ int main(int argc, char* argv[])
     		    };
             };
         };
+        cout << "about to write new pto file" << endl;
 
 		// write new pto file
         ofstream of(output_pto.c_str());
         UIntSet imgs;
+	cout << "fill_set..." << endl;
         fill_set(imgs,0, pano.getNrOfImages()-1);
+	cout << "printing..." << endl; 
         pano.printPanoramaScript(of, pano.getOptimizeVector(), pano.getOptions(), imgs, false, hugin_utils::getPathPrefix(pto_file));
     
         cout << endl << "Written file " << output_pto << endl << endl;

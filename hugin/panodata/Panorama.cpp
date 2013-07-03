@@ -601,16 +601,17 @@ void Panorama::printPanoramaScript(std::ostream & o,
                                    const std::string & stripPrefix) const
 {
     using namespace std;
-    
+    cout << "initializing printPanoramaScript" << endl;
 #if defined(__unix__) && !defined(ANDROID)
-    cout << "!! SETTING LOCALE !!" << endl;
     // set numeric locale to C, for correct number output
     char * t = setlocale(LC_NUMERIC,NULL);
     char * old_locale = (char*) malloc(strlen(t)+1);
+#ifndef ANDROID
     strcpy(old_locale, t);
-    setlocale(LC_NUMERIC,"C");
-    cout << "!! DONE SETTING LOCALE !!" << endl;
 #endif
+    setlocale(LC_NUMERIC,"C");
+#endif
+    cout << "done setting locale" << endl;
 
     if (forPTOptimizer) {
         o << "# PTOptimizer script, written by hugin" << std::endl
@@ -877,11 +878,13 @@ void Panorama::printStitcherScript(std::ostream & o,
                                    const PanoramaOptions & target,
                                    const UIntSet & imgs) const
 {
-#ifdef __unix__
+#if defined(__unix__)
     // set numeric locale to C, for correct number output
     char * t = setlocale(LC_NUMERIC,NULL);
     char * old_locale = (char*) malloc(strlen(t)+1);
+#ifndef ANDROID
     strcpy(old_locale, t);
+#endif
     setlocale(LC_NUMERIC,"C");
 #endif
 
@@ -923,7 +926,7 @@ void Panorama::printStitcherScript(std::ostream & o,
         o << std::endl;
     }
     o << std::endl;
-#ifdef __unix__
+#if defined(__unix__) //&& !defined(ANDROID)
     // reset locale
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);
@@ -938,11 +941,13 @@ void Panorama::parseOptimizerScript(std::istream & i, const UIntSet & imgs,
     using namespace PTScriptParsing;
     
     DEBUG_TRACE("");
-#ifdef __unix__
+#if defined(__unix__) //&& !defined(ANDROID)
     // set numeric locale to C, for correct number output
     char * t = setlocale(LC_NUMERIC,NULL);
     char * old_locale = (char*) malloc(strlen(t)+1);
+#ifndef ANDROID
     strcpy(old_locale, t);
+#endif
     setlocale(LC_NUMERIC,"C");
 #endif
 
@@ -1074,7 +1079,7 @@ void Panorama::parseOptimizerScript(std::istream & i, const UIntSet & imgs,
             break;
         }
     }
-#ifdef __unix__
+#if defined(__unix__) //&& !defined(ANDROID)
     // reset locale
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);
@@ -2212,7 +2217,11 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
     DEBUG_TRACE("");
     // set numeric locale to C, for correct number output
     char * p = setlocale(LC_NUMERIC,NULL);
+#ifdef ANDROID
+    char * old_locale = "";
+#else
     char * old_locale = strdup(p);
+#endif
     setlocale(LC_NUMERIC,"C");
     PTParseState state;
     string line;
@@ -2264,19 +2273,26 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
         {
             DEBUG_DEBUG("p line: " << line);
             int i;
+            DEBUG_DEBUG("... F ...");
             if (getIntParam(i,line,"f"))
                 options.setProjection( (PanoramaOptions::ProjectionFormat) i );
             unsigned int w;
+            DEBUG_DEBUG("... W ...");
             if (getIntParam(w, line, "w"))
                 options.setWidth(w);
             double v;
-            if (getDoubleParam(v, line, "v"))
+            DEBUG_DEBUG("... V ...");
+            if (getDoubleParam(v, line, "v")) {
+                DEBUG_DEBUG("... V getDoubleParam OK");
                 options.setHFOV(v, false);
+            }
             int height;
+            DEBUG_DEBUG("... H ...");
             if (getIntParam(height, line, "h"))
                 options.setHeight(height);
 
             double newE;
+            DEBUG_DEBUG("... E ...");
             if (getDoubleParam(newE, line, "E"))
                 options.outputExposureValue = newE;
             int ar=0;
@@ -2920,7 +2936,12 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
 /** @todo Warn the user when the script links variables in a way not expressable
  * by SrcPanoImage.
  */
+//#ifndef ANDROID
 #define RESET_LOCALE setlocale(LC_NUMERIC,old_locale); free(old_locale);
+//#else
+//#define RESET_LOCALE
+//#endif
+	DEBUG_DEBUG("GOING TO IMAGE_VARIABLES");
 #define image_variable( name, type, default_value )\
         PTOVariableConverterFor##name::addToVariableMap(name_src.get##name##IV(), vars_for_name);\
         for (VariableMap::iterator vit = vars_for_name.begin();\
@@ -2949,7 +2970,7 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
 #include "image_variables.h"
 #undef image_variable
         new_img.setProjection((SrcPanoImage::Projection) iImgInfo[i].f);
-
+	DEBUG_DEBUG("setProjection OK");
         // check, if stacks are correctly linked
 #define check_stack_link(name) \
         if(!new_img.YawisLinked() && new_img.name##isLinked())\
@@ -2975,6 +2996,7 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
         check_stack_link(TranslationPlaneYaw);
         check_stack_link(TranslationPlanePitch);
 #undef check_stack_link
+	DEBUG_DEBUG("Done check_stack_link");
 
 #if 0
         new_img.setFeatherWidth((unsigned int) iImgInfo[i].blend_radius);
@@ -2997,6 +3019,7 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
             }
             new_img.setCropRect(iImgInfo[i].crop);
         }
+	DEBUG_DEBUG("Done setting options");
 
         //now fill the mask
         for(unsigned int j=0;j<ImgMasks.size();j++)
@@ -3008,15 +3031,17 @@ bool PanoramaMemento::loadPTScript(std::istream &i, int & ptoVersion, const std:
                     new_img.addMask(ImgMasks[j]);
                 };
     }
-    
+    DEBUG_DEBUG("Optimizing vectors...");
     // if we haven't found a v line in the project file
     if (optvec.size() != images.size()) {
         optvec = OptimizeVector(images.size());
     }
-
+    DEBUG_DEBUG("Done.");
+#ifndef ANDROID
     // reset locale
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);
+#endif
 
     return true;
 }

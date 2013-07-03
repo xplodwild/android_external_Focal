@@ -281,9 +281,11 @@ void PanoramaOptions::setWidth(unsigned int w, bool keepView)
             m_roi &= Rect2D(m_size);
         }
         if (fovCalcSupported(m_projectionFormat)) {
+            DEBUG_DEBUG("fovCalcSupported");
             if (getVFOV() > getMaxVFOV()) {
                 setVFOV(getMaxVFOV());
             }
+            DEBUG_DEBUG("FOV DONE");
         }
     }
 
@@ -312,6 +314,7 @@ void PanoramaOptions::setHeight(unsigned int h)
 
 void PanoramaOptions::setHFOV(double h, bool keepView)
 {
+    DEBUG_DEBUG("E setHFOV");
     if (keepView && !fovCalcSupported(m_projectionFormat)) {
         DEBUG_NOTICE("Ignoring keepView");
         keepView = false;
@@ -328,6 +331,7 @@ void PanoramaOptions::setHFOV(double h, bool keepView)
     if (keepView) {
         setVFOV(std::min(vfov, getMaxVFOV()));
     }
+    DEBUG_DEBUG("X setHFOV");
 }
 
 void PanoramaOptions::setVFOV(double VFOV)

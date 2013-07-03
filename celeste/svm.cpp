@@ -2754,10 +2754,12 @@ svm_model *svm_load_model(const char *model_file_name)
     char *p,*old_locale;
 	if(fp==NULL) return NULL;
 	
+#ifndef ANDROID
     // set numeric locale to C, for correct number output
     p = setlocale(LC_NUMERIC,NULL);
     old_locale = strdup(p);
     setlocale(LC_NUMERIC,"C");
+#endif
 
 	// read parameters
 	svm_model *model = Malloc(svm_model,1);
@@ -2884,8 +2886,10 @@ svm_model *svm_load_model(const char *model_file_name)
 			free(model->label);
 			free(model->nSV);
 			free(model);
+#ifndef ANDROID
             setlocale(LC_NUMERIC,old_locale);
             free(old_locale);
+#endif
 			return NULL;
 		}
 	}
@@ -2947,8 +2951,10 @@ out2:
 	if (ferror(fp) != 0 || fclose(fp) != 0) return NULL;
 
 	model->free_sv = 1;	// XXX
+#ifndef ANDROID
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);
+#endif
 	return model;
 }
 

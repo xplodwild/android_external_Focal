@@ -55,7 +55,11 @@ void calcCtrlPointErrors (PanoramaData& pano)
     if(pano.getNrOfImages()>0 && pano.getNrOfCtrlPoints()>0)
     {
         char * p=setlocale(LC_ALL,NULL);
+#ifndef ANDROID
         char * oldlocale=strdup(p);
+#else
+	char * oldlocale="";
+#endif
         setlocale(LC_ALL,"C");
         UIntSet allImg;
         std::ostringstream scriptbuf;

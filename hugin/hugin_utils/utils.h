@@ -71,7 +71,7 @@
     #define DEBUG_HEADER hugin_utils::GetCurrentTimeString() <<" (" << __FILE__ << ":" << __LINE__ << ") "  << __func__ << "(): "
 #endif
 
-
+#define DEBUG 1
 #ifdef DEBUG
     // debug trace
     #define DEBUG_TRACE(msg) { std::cerr << "TRACE " << DEBUG_HEADER << msg << std::endl; }
@@ -179,7 +179,9 @@ namespace hugin_utils
         double res=0;
         // set numeric locale to C, for correct number output
         char * old_locale = setlocale(LC_NUMERIC,NULL);
+#ifndef ANDROID
         old_locale = strdup(old_locale);
+#endif
         setlocale(LC_NUMERIC,"C");
 
         STR str(str_);
@@ -194,9 +196,11 @@ namespace hugin_utils
         char * pe=0;
         res = strtod(p,&pe);
 
+#ifndef ANDROID
         // reset locale
         setlocale(LC_NUMERIC,old_locale);
         free(old_locale);
+#endif
 
         if (pe == p) {
             // conversion failed.
