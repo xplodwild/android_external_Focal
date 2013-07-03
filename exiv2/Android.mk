@@ -60,6 +60,9 @@ CCSRC += src/preview.cpp           \
 
 LOCAL_SRC_FILES:= $(CCSRC)
 
+LOCAL_SDK_VERSION := 14
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
 LOCAL_SHARED_LIBRARIES :=
 LOCAL_STATIC_LIBRARIES := 
 LOCAL_LDLIBS := -lz -lc
