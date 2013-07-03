@@ -183,4 +183,4 @@ extern void g_cclosure_marshal_BOOLEAN__BOXED_BOXED (GClosure     *closure,
 
 G_END_DECLS
 
-#endif /* __G_MARSHAL_H__
+#endif /* __G_MARSHAL_H__ */
