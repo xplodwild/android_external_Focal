@@ -7,7 +7,7 @@
 # Hugin is normally a gui frontend for multiple panorama
 # tools. We need some of their sources here, but not the
 # GUI as it wouldn't run on Android anyway :) So we just
-# build what we need as a shared library
+# build what we need.
 
 LOCAL_PATH := $(my-dir)
 
@@ -92,5 +92,4 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := libhugin
 
 include $(BUILD_STATIC_LIBRARY)
-
 
