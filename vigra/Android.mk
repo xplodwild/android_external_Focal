@@ -35,8 +35,8 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libvigraimpex_SOURCES_DIST)
 
-LOCAL_SHARED_LIBRARIES := libjpeg
-LOCAL_STATIC_LIBRARIES := libpng libtiff_static
+LOCAL_SHARED_LIBRARIES := libjpeg libtiff libz
+LOCAL_STATIC_LIBRARIES := libpng
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \

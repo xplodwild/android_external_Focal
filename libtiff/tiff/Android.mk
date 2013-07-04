@@ -92,7 +92,8 @@ endif
 
 LOCAL_CFLAGS += -DAVOID_TABLES -O3 -fstrict-aliasing -fprefetch-loop-arrays
 
-LOCAL_SHARED_LIBRARIES := libz libjpeg
+LOCAL_SHARED_LIBRARIES := libjpeg
+LOCAL_STATIC_LIBRARIES := libz
 LOCAL_LDLIBS := -lz
 
 LOCAL_MODULE:= libtiff_static
