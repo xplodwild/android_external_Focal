@@ -180,14 +180,18 @@ public:
 	    i++;
 	}
 
+        std::cout << "setOptimizeVector..." << std::endl;
 	m_localPano->setOptimizeVector(m_opt_first_pass);
+        std::cout << "... done" << std::endl;
 	// optimize parameters using panotools (or use a custom made optimizer here?)
 	UIntSet imgs;
 	imgs.insert(0);
 	imgs.insert(1);
 	//std::cout << "Optimizing without hfov:" << std::endl;
 	//pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
+        std::cout << "Optimizing..." << std::endl;
 	PTools::optimize(*pano);
+        std::cout << "...done optimizing" << std::endl;
 	//std::cout << "result:" << std::endl;
 	//pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
 
@@ -195,7 +199,9 @@ public:
 	    m_localPano->setOptimizeVector(m_opt_second_pass);
 	    //std::cout << "Optimizing with hfov" << std::endl;
 	    //pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
+            std::cout << "Optimizing (2nd pass)..." << std::endl;
 	    PTools::optimize(*pano);
+            std::cout << "..done" << std::endl;
 	    //std::cout << "result:" << std::endl;
 	    //pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
 	}

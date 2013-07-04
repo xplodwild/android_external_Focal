@@ -105,10 +105,17 @@ void panoLocaleSave(void)
 }
 */
 
+#ifndef ANDROID
 #define panoLocaleSave    char *oldLocale;oldLocale=strdup(setlocale(LC_ALL, NULL));setlocale(LC_ALL, "C")
+#else
+#define panoLocaleSave ;
+#endif
 
+#ifndef ANDROID
 #define panoLocaleRestore (oldLocale != NULL? (setlocale(LC_ALL,oldLocale),free(oldLocale)):0)
-
+#else
+#define panoLocaleRestore ;
+#endif
 
 // Optimizer Script parser; fill global info structure
 
@@ -153,7 +160,9 @@ int ParseScript( char* script, AlignInfo *gl )
     int                 n=0; // Number of parameters to optimize
     int                 numIm,numPts,nt;
 
+    PrintError("panoLocaleSave");
     panoLocaleSave;
+    PrintError("panoLocaleSave done");
 
     gl->im  = NULL;
     gl->opt = NULL;
@@ -182,6 +191,8 @@ int ParseScript( char* script, AlignInfo *gl )
         PrintError("Not enough memory");
         goto fail;
     }
+
+    PrintError("Malloc done");
     
     // Rik's mask-from-focus hacking
     ZCombSetDisabled();
@@ -203,7 +214,7 @@ int ParseScript( char* script, AlignInfo *gl )
     
     ch = script;
 
-    
+    PrintError("start parsing");
     while( *ch != 0 ) {
         lineNum++;
         
@@ -806,7 +817,7 @@ int ParseScript( char* script, AlignInfo *gl )
         default: break;
         }
     }
-
+    PrintError("done parsing");
     // Set up Panorama description
     
     if( gl->pano.width == 0 && gl->im[0].hfov != 0.0)  // Set default for panorama width based on first image

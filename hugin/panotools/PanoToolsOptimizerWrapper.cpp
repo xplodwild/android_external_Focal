@@ -28,6 +28,7 @@
 
 #include <hugin_config.h>
 
+#include <iostream>
 #include <sstream>
 #include <hugin_utils/utils.h>
 
@@ -62,13 +63,17 @@ unsigned int optimize(PanoramaData& pano,
 {
     char * script = 0;
     unsigned int retval = 0;
+    std::cout << "PTools::optimize E" << std::endl;
 
     if (userScript == 0) {
         std::ostringstream scriptbuf;
         UIntSet allImg;
         fill_set(allImg,0, unsigned(pano.getNrOfImages()-1));
+        std::cout << "userScript = 0, printing panorama script to scriptbuf" << std::endl;
         pano.printPanoramaScript(scriptbuf, pano.getOptimizeVector(), pano.getOptions(), allImg, true);
+        std::cout << "strduping it.." << std::endl;
         script = strdup(scriptbuf.str().c_str());
+        std::cout << "done" << std::endl;
     } else {
         script = const_cast<char *>(userScript);
     }
@@ -76,8 +81,10 @@ unsigned int optimize(PanoramaData& pano,
     OptInfo		opt;
 	AlignInfo	ainf;
 
+    std::cout << "parsing script" << std::endl;
     if (ParseScript( script, &ainf ) == 0)
 	{
+            std::cout << "parsed script, checkparams" << std::endl;
 		if( CheckParams( &ainf ) == 0 )
 		{
 			ainf.fcn	= fcnPano;
@@ -94,6 +101,7 @@ unsigned int optimize(PanoramaData& pano,
 			RunLMOptimizer( &opt );
 			ainf.data		= opt.message;
             // get results from align info.
+            std::cout << "updating params "<<std::endl;
 #ifdef DEBUG_WRITE_OPTIM_OUTPUT
             fullPath path;
             StringtoFullPath(&path, DEBUG_WRITE_OPTIM_OUTPUT_FILE );
@@ -115,6 +123,7 @@ unsigned int optimize(PanoramaData& pano,
     if (! userScript) {
         free(script);
     }
+    std::cout << "PTools::optimize X" << std::endl;
     return retval;
 }
 

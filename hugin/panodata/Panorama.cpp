@@ -81,9 +81,9 @@ Panorama::Panorama()
 
 Panorama::~Panorama()
 {
-    DEBUG_TRACE("dtor");
+    DEBUG_WARN("dtor");
     reset();
-    DEBUG_TRACE("dtor about to finish");
+    DEBUG_WARN("dtor about to finish");
 }
 
 
@@ -606,9 +606,7 @@ void Panorama::printPanoramaScript(std::ostream & o,
     // set numeric locale to C, for correct number output
     char * t = setlocale(LC_NUMERIC,NULL);
     char * old_locale = (char*) malloc(strlen(t)+1);
-#ifndef ANDROID
     strcpy(old_locale, t);
-#endif
     setlocale(LC_NUMERIC,"C");
 #endif
     cout << "done setting locale" << endl;

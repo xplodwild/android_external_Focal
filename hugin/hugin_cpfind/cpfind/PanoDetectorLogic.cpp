@@ -762,7 +762,7 @@ bool PanoDetector::RansacMatchesInPairCam(MatchData& ioMatchData, const PanoDete
         delete panoSubset;
 
         TRACE_PAIR("Removed " << controlPoints.size() - inliers.size() << " matches. " << inliers.size() << " remaining.");
-        if (inliers.size() < 0.5 * controlPoints.size())
+        if (inliers.size() < 0.5 * controlPoints.size() && false)
         {
             // more than 50% of matches were removed, ignore complete pair...
             TRACE_PAIR("RANSAC found more than 50% outliers, removing all matches");
@@ -772,7 +772,7 @@ bool PanoDetector::RansacMatchesInPairCam(MatchData& ioMatchData, const PanoDete
     }
 
 
-    if (inliers.size() < (unsigned int)iPanoDetector.getMinimumMatches())
+    if (inliers.size() < (unsigned int)iPanoDetector.getMinimumMatches() && false)
     {
         TRACE_PAIR("Too few matches ... removing all of them.");
         ioMatchData._matches.clear();
