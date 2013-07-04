@@ -69,5 +69,5 @@ LOCAL_STATIC_LIBRARIES := libhugin libboost_thread-gcc-mt-1_53
 
 LOCAL_MODULE := cpfind
 
-include $(BUILD_EXECUTABLE)
+#include $(BUILD_EXECUTABLE)
 
