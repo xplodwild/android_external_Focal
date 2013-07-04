@@ -1,11 +1,12 @@
-ifeq ($(ANDROID_BUILD_TOP),)
-
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_CFLAGS := 
 
-LOCAL_MODULE := libpng
+LOCAL_MODULE := libpng_static
+
+LOCAL_SDK_VERSION := 14
+LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES :=\
 	png.c \
@@ -30,5 +31,3 @@ LOCAL_SHARED_LIBRARIES := libz
 LOCAL_C_INCLUDES := external/zlib
 
 include $(BUILD_STATIC_LIBRARY)
-
-endif

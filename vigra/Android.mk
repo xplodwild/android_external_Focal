@@ -36,20 +36,19 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_SRC_FILES:= $(libvigraimpex_SOURCES_DIST)
 
 LOCAL_SHARED_LIBRARIES := libjpeg libtiff libz
-LOCAL_STATIC_LIBRARIES := libpng
+LOCAL_STATIC_LIBRARIES := libpng_static
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
-	$(LOCAL_PATH)/../libtiff
+	$(LOCAL_PATH)/../libtiff \
+	$(LOCAL_PATH)/../libpng
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../libjpeg-turbo \
-	$(LOCAL_PATH)/../libpng
+	$(LOCAL_PATH)/../libjpeg-turbo
 else
 LOCAL_C_INCLUDES += \
-	external/jpeg \
-	external/libpng
+	external/jpeg
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \

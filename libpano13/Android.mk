@@ -51,21 +51,20 @@ libpano13_SOURCES_DIST = javastub.c \
 LOCAL_SRC_FILES:= $(libpano13_SOURCES_DIST)
 
 LOCAL_SHARED_LIBRARIES := libjpeg libz
-LOCAL_STATIC_LIBRARIES := libpng libtiff_static #libsimd
+LOCAL_STATIC_LIBRARIES := libpng_static libtiff_static #libsimd
 LOCAL_LDLIBS := -lz
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../libtiff \
-	external/zlib
+	external/zlib \
+	$(LOCAL_PATH)/../libpng
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../libjpeg-turbo \
-	$(LOCAL_PATH)/../libpng
+	$(LOCAL_PATH)/../libjpeg-turbo
 else
 LOCAL_C_INCLUDES += \
-	external/jpeg \
-	external/libpng
+	external/jpeg
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES -O3 \
