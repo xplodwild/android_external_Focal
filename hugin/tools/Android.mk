@@ -89,7 +89,7 @@ LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := pto_gen
 
-include $(BUILD_EXECUTABLE)
+#include $(BUILD_EXECUTABLE)
 
 ######################################################
 ###                       nona                      ##
