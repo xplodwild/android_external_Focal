@@ -15,8 +15,10 @@ include $(CLEAR_VARS)
 
 libhugin_SOURCES_DIST = \
 	vigra_ext/emor.cpp \
+	vigra_ext/MultiThreadOperations.cpp \
 	appbase/ProgressReporterOld.cpp \
 	appbase/ProgressDisplay.cpp \
+	appbase/ProgressDisplayOld.cpp \
 	hugin_utils/alphanum.cpp \
 	hugin_utils/platform.cpp \
 	hugin_utils/utils.cpp \
@@ -52,6 +54,7 @@ libhugin_SOURCES_DIST = \
 	algorithms/nona/CalculateFOV.cpp \
 	algorithms/nona/ComputeImageROI.cpp \
 	algorithms/nona/FitPanorama.cpp \
+	algorithms/nona/NonaFileStitcher.cpp \
 	algorithms/point_sampler/PointSampler.cpp \
 	algorithms/optimizer/ImageGraph.cpp \
 	algorithms/optimizer/PTOptimizer.cpp \
@@ -77,7 +80,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../libpano13 \
 	$(LOCAL_PATH)/../exiv2/include \
 	$(LOCAL_PATH)/../boost-1_53/ \
-	$(LOCAL_PATH)/../lensfun/include/lensfun
+	$(LOCAL_PATH)/../lensfun/include/lensfun \
+	$(LOCAL_PATH)/../libtiff
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
 	-frtti -D__Ansi__ -Wno-sequence-point
@@ -88,4 +92,5 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := libhugin
 
 include $(BUILD_STATIC_LIBRARY)
+
 

@@ -45,10 +45,13 @@
 #include <hugin_utils/platform.h>
 #include <algorithms/nona/NonaFileStitcher.h>
 #include <vigra_ext/MultiThreadOperations.h>
+#ifdef USE_GPU_ACCEL
 #include <vigra_ext/ImageTransformsGPU.h>
+#endif
 
 #include <tiffio.h>
 
+#ifdef USE_GPU_ACCEL
 #if !defined Hugin_shared || !defined _WINDOWS
 #define GLEW_STATIC
 #endif
@@ -58,13 +61,16 @@
 #else
   #include <GL/glut.h>
 #endif
+#endif
 
 using namespace vigra;
 using namespace HuginBase;
 using namespace hugin_utils;
 using namespace std;
 
+#ifdef USE_GPU_ACCEL
 GLuint GlutWindowHandle;
+#endif
 
 static void usage(const char * name)
 {
@@ -89,7 +95,9 @@ static void usage(const char * name)
     << "      -v         quiet, do not output progress indicators" << std::endl
     << "      -d         print detailed output for gpu processing" << std::endl
     << "      -t num     number of threads to be used (default: nr of available cores)" << std::endl
+#ifdef USE_GPU_ACCEL
     << "      -g         perform image remapping on the GPU" << std::endl
+#endif
     << std::endl
     << "  The following options can be used to override settings in the project file:" << std::endl
     << "      -i num     remap only image with number num" << std::endl
@@ -115,6 +123,7 @@ static void usage(const char * name)
     << std::endl;
 }
 
+#ifdef USE_GPU_ACCEL
 /** Try to initalise GLUT and GLEW, and create an OpenGL context for GPU stitching.
  * OpenGL extensions required by the GPU stitcher (-g option) are checked here.
  * @return true if everything went OK, false if we can't use GPGPU mode.
@@ -165,6 +174,7 @@ static bool wrapupGPU() {
     glutDestroyWindow(GlutWindowHandle);
     return true;
 }
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -238,12 +248,14 @@ int main(int argc, char *argv[])
                 compression = optarg;
                 std::transform(compression.begin(), compression.end(), compression.begin(), (int(*)(int)) toupper);
                 break;
+#ifdef USE_GPU_ACCEL
             case 'g':
                 useGPU = true;
                 break;
             case 'd':
                 vigra_ext::SetGPUDebugMessages(true);
                 break;
+#endif
             default:
 		usage(argv[0]);
                 abort ();
@@ -350,6 +362,7 @@ int main(int argc, char *argv[])
             << "Nothing to do for nona." << std::endl;
         return 0;
     };
+#ifdef USE_GPU_ACCEL
     if(useGPU)
     {
         switch(opts.getProjection())
@@ -365,13 +378,16 @@ int main(int argc, char *argv[])
                 break;
         };
     };
-    
+#endif
+
     DEBUG_DEBUG("output basename: " << basename);
     
     try {
+#ifdef USE_GPU_ACCEL
         if (useGPU) {
             useGPU = initGPU(&argc, argv);
         }
+#endif
         opts.remapUsingGPU = useGPU;
         pano.setOptions(opts);
 
@@ -381,11 +397,11 @@ int main(int argc, char *argv[])
         if (verbose > 0) {
             cout << std::endl;
         }
-
+#ifdef USE_GPU_ACCEL
         if (useGPU) {
             wrapupGPU();
         }
-
+#endif
     } catch (std::exception & e) {
         cerr << "caught exception: " << e.what() << std::endl;
         return 1;

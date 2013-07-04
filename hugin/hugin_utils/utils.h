@@ -71,7 +71,7 @@
     #define DEBUG_HEADER hugin_utils::GetCurrentTimeString() <<" (" << __FILE__ << ":" << __LINE__ << ") "  << __func__ << "(): "
 #endif
 
-#define DEBUG 1
+//#define DEBUG 1
 #ifdef DEBUG
     // debug trace
     #define DEBUG_TRACE(msg) { std::cerr << "TRACE " << DEBUG_HEADER << msg << std::endl; }

@@ -76,3 +76,26 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := libpano13
 
 include $(BUILD_SHARED_LIBRARY)
+
+######################################################
+###                  PTblender                      ##
+######################################################
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := tools/PTblender.c
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+	$(LOCAL_PATH)/../vigra/include \
+	$(LOCAL_PATH)/../boost-1_53/ \
+	$(LOCAL_PATH)/../exiv2/include \
+	$(LOCAL_PATH)/../libpano13 \
+	$(LOCAL_PATH)/../lensfun/include/lensfun \
+	$(LOCAL_PATH)/../libtiff
+
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
+LOCAL_STATIC_LIBRARIES := libhugin
+
+LOCAL_MODULE := PTblender
+
+#include $(BUILD_EXECUTABLE)

@@ -149,7 +149,9 @@ public:
     bool estimate(const std::vector<const ControlPoint *> & points, std::vector<double> & p) const
     {
 	// reset to the initial parameters.
+        std::cout << "estimate resize" << std::endl;
 	p.resize(m_initParams.size());
+        std::cout << "copy" << std::endl;
 	std::copy(m_initParams.begin(), m_initParams.end(), p.begin());
 
 	return leastSquaresEstimate(points, p);
@@ -159,12 +161,14 @@ public:
 
     bool leastSquaresEstimate(const std::vector<const ControlPoint *> & points, std::vector<double> & p) const 
     {
+        std::cout << "copying points into panorama object" << std::endl;
 	// copy points into panorama object
 	CPVector cpoints(points.size());	
 	for (int i=0; i < points.size(); i++) {
 	    cpoints[i] = *points[i];
 	}
 
+        std::cout << "setting ctrl points" << std::endl;
 	m_localPano->setCtrlPoints(cpoints);
 
 	PanoramaData * pano = const_cast<PanoramaData *>(m_localPano);
@@ -172,7 +176,7 @@ public:
 	int i=0;
 	BOOST_FOREACH(const OptVarSpec & v, m_optvars) {
 	    v.set(*pano, p[i]);
-	    DEBUG_DEBUG("Initial " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
+	    DEBUG_WARN("Initial " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
 	    i++;
 	}
 
@@ -200,7 +204,7 @@ public:
 	i=0;
 	BOOST_FOREACH(const OptVarSpec & v, m_optvars) {
 	    p[i] = v.get(*pano);
-	    DEBUG_DEBUG("Optimized " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
+	    DEBUG_WARN("Optimized " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
 	    i++;
 	}
 	return true;
@@ -210,6 +214,7 @@ public:
     bool agree(std::vector<double> &p, const ControlPoint & cp) const
     {
 	PanoramaData * pano = const_cast<PanoramaData *>(m_localPano);
+        std::cout << "agreeing: casted const, sertting pano data to optvar" << std::endl;
 	// set parameters in pano object
 	int i=0;
 	BOOST_FOREACH(const OptVarSpec & v, m_optvars) {
@@ -218,8 +223,10 @@ public:
 	}
 	// TODO: argh, this is slow, we should really construct this only once
 	// and reuse it for all calls...
+        std::cout << "making inv transform" << std::endl;
 	PTools::Transform trafo_i1_to_pano;
 	trafo_i1_to_pano.createInvTransform(m_localPano->getImage(m_li1),m_localPano->getOptions());
+        std::cout << "making inv transform" << std::endl;
 	PTools::Transform trafo_pano_to_i2;
 	trafo_pano_to_i2.createTransform(m_localPano->getImage(m_li2),m_localPano->getOptions());
 
@@ -235,14 +242,15 @@ public:
 	    x2 = cp.x1;
 	    y2 = cp.y1;
 	}   
+        std::cout << "transformImgCoord" << std::endl;
 	trafo_i1_to_pano.transformImgCoord(xt, yt, x1, y1);
 	trafo_pano_to_i2.transformImgCoord(x2t, y2t, xt, yt);
-	DEBUG_DEBUG("Trafo i1 (0 " << x1 << " " << y1 << ") -> ("<< xt <<" "<< yt<<") -> i2 (1 "<<x2t<<", "<<y2t<<"), real ("<<x2<<", "<<y2<<")")
+	DEBUG_WARN("Trafo i1 (0 " << x1 << " " << y1 << ") -> ("<< xt <<" "<< yt<<") -> i2 (1 "<<x2t<<", "<<y2t<<"), real ("<<x2<<", "<<y2<<")")
 	// compute error in pixels...
 	x2t -= x2;
 	y2t -= y2;
 	double  e = hypot(x2t,y2t);
-	DEBUG_DEBUG("Error ("<<x2t<<", "<<y2t<<"), " << e)
+	DEBUG_WARN("Error ("<<x2t<<", "<<y2t<<"), " << e)
 	return  e < m_maxError;
     }
 
@@ -289,15 +297,15 @@ std::vector<int> RANSACOptimizer::findInliers(PanoramaData & pano, int i1, int i
 	break;
     }
 
-    DEBUG_DEBUG("Optimizing HFOV:" << optHFOV << " b:" << optB)
+    DEBUG_WARN("Optimizing HFOV:" << optHFOV << " b:" << optB)
     PTOptEstimator estimator(pano, i1, i2, maxError, optHFOV, optB);
 
     std::vector<double> parameters(estimator.m_initParams.size());
     std::copy(estimator.m_initParams.begin(),estimator.m_initParams.end(), parameters.begin());
     std::vector<int> inlier_idx;
-    DEBUG_DEBUG("Number of control points: " << estimator.m_xy_cps.size() << " Initial parameter[0]" << parameters[0]);
+    DEBUG_WARN("Number of control points: " << estimator.m_xy_cps.size() << " Initial parameter[0]" << parameters[0]);
     std::vector<const ControlPoint *> inliers = Ransac::compute(parameters, inlier_idx, estimator, estimator.m_xy_cps, 0.999, 0.3);
-    DEBUG_DEBUG("Number of inliers:" << inliers.size() << "optimized parameter[0]" << parameters[0]);
+    DEBUG_WARN("Number of inliers:" << inliers.size() << "optimized parameter[0]" << parameters[0]);
 
     // set parameters in pano object
     int i=0;

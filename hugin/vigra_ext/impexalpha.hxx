@@ -30,6 +30,7 @@
 #define VIGRA_EXT_IMPEX_ALPHA_IMAGE_H
 
 #include <iostream>
+#include "utils.h"
 #include <vigra/imageiterator.hxx>
 #include <vigra/transformimage.hxx>
 #include <vigra/initimage.hxx>
@@ -282,7 +283,6 @@ private:
     Acc2 a2_;
 };
 
-
 // get: convert from UInt8 mask to native type
 // read: convert from native type to UInt8 mask
 template <class Iter1, class Acc1, class Iter2, class Acc2>
@@ -298,7 +298,6 @@ public:
 
     typedef vigra::TinyVector<typename VT1::value_type, static_size> value_type;
     typedef typename value_type::value_type component_type;
-
     typedef typename Acc2::value_type alpha_type;
 
         /** Construct from two image iterators and associated accessors.
@@ -392,7 +391,6 @@ public:
     Iter2 i2_;
     Acc2 a2_;
 };
-
 
 // scalar image
 template<class SrcIterator, class SrcAccessor,

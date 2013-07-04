@@ -35,6 +35,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../boost-1_53/ \
 	$(LOCAL_PATH)/../../exiv2/include \
 	$(LOCAL_PATH)/../../libpano13 \
+	$(LOCAL_PATH)/../../libtiff \
 	$(LOCAL_PATH)/..
 
 LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
@@ -79,6 +80,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../boost-1_53/ \
 	$(LOCAL_PATH)/../../exiv2/include \
 	$(LOCAL_PATH)/../../libpano13 \
+	$(LOCAL_PATH)/../../libtiff \
 	$(LOCAL_PATH)/../../lensfun/include/lensfun \
 	$(LOCAL_PATH)/..
 
@@ -86,6 +88,35 @@ LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
 LOCAL_STATIC_LIBRARIES := libhugin
 
 LOCAL_MODULE := pto_gen
+
+include $(BUILD_EXECUTABLE)
+
+######################################################
+###                       nona                      ##
+######################################################
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := nona.cpp \
+	../nona/Stitcher.cpp \
+	../nona/Stitcher1.cpp \
+	../nona/Stitcher2.cpp \
+	../nona/Stitcher3.cpp \
+	../nona/Stitcher4.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+	$(LOCAL_PATH)/../../vigra/include \
+	$(LOCAL_PATH)/../../boost-1_53/ \
+	$(LOCAL_PATH)/../../libtiff \
+	$(LOCAL_PATH)/../../exiv2/include \
+	$(LOCAL_PATH)/../../libpano13 \
+	$(LOCAL_PATH)/../../lensfun/include/lensfun \
+	$(LOCAL_PATH)/../
+
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13
+LOCAL_STATIC_LIBRARIES := libhugin libboost_thread-gcc-mt-1_53
+
+LOCAL_MODULE := nona
 
 include $(BUILD_EXECUTABLE)
 

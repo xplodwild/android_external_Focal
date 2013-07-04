@@ -36,6 +36,8 @@
 #include <cctype>
 #include <algorithm>
 
+
+#include <vigra/copyimage.hxx>
 #include <vigra/stdimage.hxx>
 #include <vigra/rgbvalue.hxx>
 #include <vigra/tiff.hxx>

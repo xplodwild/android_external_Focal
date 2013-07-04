@@ -866,8 +866,11 @@ void Panorama::printPanoramaScript(std::ostream & o,
         o << "#hugin_optimizerPhotoMasterSwitch 0" << endl;
     };
 
+    o.flush();
+    cout << "printing done" << endl;
 #if defined(__unix__) && !defined(ANDROID)
     // reset locale
+    cout << "resetting locale" << endl;
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);
 #endif
@@ -1079,7 +1082,7 @@ void Panorama::parseOptimizerScript(std::istream & i, const UIntSet & imgs,
             break;
         }
     }
-#if defined(__unix__) //&& !defined(ANDROID)
+#if defined(__unix__) && !defined(ANDROID)
     // reset locale
     setlocale(LC_NUMERIC,old_locale);
     free(old_locale);

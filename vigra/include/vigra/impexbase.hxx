@@ -38,6 +38,9 @@
 
 
 #include <string>
+#include <iostream>
+#include "accessor.hxx"
+#include "tiff.hxx"
 #include "inspectimage.hxx"
 #include "sized_int.hxx"
 #include "utilities.hxx"
@@ -151,6 +154,7 @@ namespace vigra
         find_value_range(Iterator upper_left, Iterator lower_right, Accessor accessor,
                          /* is_scalar? */ VigraFalseType)
         {
+#if 0
             typedef typename Accessor::ElementAccessor element_accessor;
             typedef typename element_accessor::value_type value_type;
 
@@ -163,8 +167,24 @@ namespace vigra
 
                 inspectImage(upper_left, lower_right, band, extrema);
             }
+            return range_t(static_cast<double>(extrema.min), static_cast<double>(extrema.max));
+#endif
+#if 0
+	    std::cout << "FFFFFFFFF" << std::endl;
+            typedef typename Accessor::value_type value_type;
+
+            FindMinMax<value_type> extrema;
+            const int number_of_bands(static_cast<int>(accessor.size(upper_left)));
+
+            for (int i = 0; i != number_of_bands; ++i)
+            {
+                inspectImage(upper_left, lower_right, accessor[i], extrema);
+            }
 
             return range_t(static_cast<double>(extrema.min), static_cast<double>(extrema.max));
+ #endif
+            std::cout << "FFFFFFFFUUUU" << std::endl;
+            return range_t(0.5, 0.5);
         }
 
 

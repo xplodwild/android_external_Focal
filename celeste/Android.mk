@@ -30,6 +30,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../vigra/include \
 	$(LOCAL_PATH)/../hugin \
 	$(LOCAL_PATH)/../libpano13/ \
+	$(LOCAL_PATH)/../libtiff/ \
 	$(LOCAL_PATH)/../exiv2/include
 
 LOCAL_CFLAGS := -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
