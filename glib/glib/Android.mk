@@ -103,6 +103,7 @@ include $(BUILD_STATIC_LIBRARY)
 else
 LOCAL_STATIC_LIBRARIES := libpcre
 LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_LDLIBS := -llog
 
 include $(BUILD_SHARED_LIBRARY)
 endif
