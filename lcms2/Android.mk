@@ -18,6 +18,9 @@ liblcms2_la_SOURCES = \
 
 LOCAL_SRC_FILES:= $(liblcms2_la_SOURCES)
 
+LOCAL_SDK_VERSION := 14
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include
 
