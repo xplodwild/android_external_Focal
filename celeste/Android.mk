@@ -23,8 +23,8 @@ celeste_SOURCES = \
 
 LOCAL_SRC_FILES:= $(celeste_SOURCES)
 
-LOCAL_SHARED_LIBRARIES := libhugin libvigraimpex
-LOCAL_STATIC_LIBRARIES := 
+LOCAL_SHARED_LIBRARIES := libvigraimpex libexiv2 libpano13
+LOCAL_STATIC_LIBRARIES := libhugin libboost_system-gcc-mt-1_53
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../vigra/include \
@@ -40,6 +40,9 @@ LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := celeste
+
+LOCAL_SDK_VERSION := 14
+LOCAL_NDK_STL_VARIANT := gnustl_static
 
 include $(BUILD_EXECUTABLE)
 
