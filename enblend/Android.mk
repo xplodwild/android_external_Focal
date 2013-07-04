@@ -65,7 +65,7 @@ enfuse_SOURCES = \
 	src/layer_selection/layer_selection.cc \
 	src/layer_selection/selector.cc
 
-LOCAL_CPP_EXTENSION := cc
+LOCAL_CPP_EXTENSION := .cc
 
 LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
