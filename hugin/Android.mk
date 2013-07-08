@@ -69,8 +69,8 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libhugin_SOURCES_DIST)
 
-LOCAL_SHARED_LIBRARIES := libpano13 libgmodule-2.0 \
-	libgobject-2.0 libgthread-2.0 libglib-2.0 libvigraimpex \
+LOCAL_SHARED_LIBRARIES := libpano13 \
+	libvigraimpex \
 	libexiv2
 LOCAL_STATIC_LIBRARIES := liblensfun libboost_filesystem-gcc-mt-1_53 \
 	libboost_system-gcc-mt-1_53

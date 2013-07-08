@@ -226,7 +226,7 @@ void createCtrlPoints(Panorama & pano, int img1, const ImageType & leftImg, cons
             //double curvThresh = 0.0;
 
             vigra_ext::CorrelationResult res;
-
+            cout << "PointFineTune..." << endl;
             res = vigra_ext::PointFineTune(leftImg,
                                             (*it).second,
                                             templWidth,
@@ -241,6 +241,7 @@ void createCtrlPoints(Panorama & pano, int img1, const ImageType & leftImg, cons
             }
             if (res.maxi < corrThresh )
             {
+                cout << "low correlation, bad point" << endl;
                 nBad++;
                 DEBUG_DEBUG("low correlation: " << res.maxi << " curv: " << res.curv);
                 continue;
@@ -248,6 +249,7 @@ void createCtrlPoints(Panorama & pano, int img1, const ImageType & leftImg, cons
             
             if (pyrLevel > 0)
             {
+                cout << "pyrLevel > 0, point fine tune..." << endl;
                 res = vigra_ext::PointFineTune(leftImgOrig,
                                             Diff2D((*it).second.x * scaleFactor, (*it).second.y * scaleFactor),
                                             templWidth,
@@ -270,6 +272,7 @@ void createCtrlPoints(Panorama & pano, int img1, const ImageType & leftImg, cons
             }
             
             nGood++;
+            cout << "adding control point" << endl;
             // add control point
             ControlPoint p(img1, (*it).second.x * scaleFactor,
                             (*it).second.y * scaleFactor,
@@ -582,7 +585,9 @@ int main2(std::vector<std::string> files, Parameters param)
             // add control points.
             // work on smaller images
             // TODO: or use a fast interest point operator.
+            cout << "create ctrl points" << endl;
             createCtrlPoints(pano, i-1, *leftImg, *leftImgOrig, i, *rightImg, *rightImgOrig, param.pyrLevel, 2, param.nPoints, param.grid, param.stereo);
+            cout << "done create ctrl points" << endl;
 
             // swap images;
             delete leftImg;

@@ -64,6 +64,7 @@ void FitPolynom(T x, T xend, T y, double & a, double & b, double & c)
         double sxy=0;
         double sx2y=0;
         T xi,yi;
+        std::cout << "for (xi=" << x << "; yi=" << y << "; xi != " << xend << std::endl;
         for (xi=x, yi=y; xi != xend; ++xi, ++yi) {
             double tx = *xi;
             double ty = *yi;

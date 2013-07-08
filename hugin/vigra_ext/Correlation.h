@@ -224,6 +224,7 @@ CorrelationResult subpixelMaxima(vigra::triple<Iterator, Iterator, Accessor> img
 {
     const int interpWidth = 1;
     CorrelationResult res;
+
     vigra_precondition(max.x > interpWidth && max.y > interpWidth,
                  "subpixelMaxima(): coordinates of "
                  "maxima must be > interpWidth, interpWidth.");
@@ -252,13 +253,15 @@ CorrelationResult subpixelMaxima(vigra::triple<Iterator, Iterator, Accessor> img
 
     double a,b,c;
     FitPolynom(x, x + 2*interpWidth+1, zx, a,b,c);
+#if 0
     if (hugin_utils::isnan(a) || hugin_utils::isnan(b) || hugin_utils::isnan(c)) {
-	exportImage(img,vigra::ImageExportInfo("test.tif"));
 	DEBUG_ERROR("Bad polynomial fit results");
+	exportImage(img,vigra::ImageExportInfo("test.tif"));
 	res.maxpos.x=max.x;
 	res.maxpos.y=max.y;
 	return res;
     }
+#endif
 
     // calculate extrema of x position by setting
     // the 1st derivate to zero
