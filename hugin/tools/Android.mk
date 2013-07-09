@@ -130,12 +130,7 @@ LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := nona.cpp \
-	../nona/Stitcher.cpp \
-	../nona/Stitcher1.cpp \
-	../nona/Stitcher2.cpp \
-	../nona/Stitcher3.cpp \
-	../nona/Stitcher4.cpp
+LOCAL_SRC_FILES := nona.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../vigra/include \
@@ -167,12 +162,7 @@ include $(BUILD_EXECUTABLE)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := align_image_stack.cpp \
-	../nona/Stitcher.cpp \
-	../nona/Stitcher1.cpp \
-	../nona/Stitcher2.cpp \
-	../nona/Stitcher3.cpp \
-	../nona/Stitcher4.cpp
+LOCAL_SRC_FILES := align_image_stack.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../../vigra/include \

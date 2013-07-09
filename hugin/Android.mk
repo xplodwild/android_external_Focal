@@ -62,7 +62,12 @@ libhugin_SOURCES_DIST = \
 	levmar/lm.c \
 	levmar/Axb.c \
 	levmar/misc.c \
-	levmar/lmlec.c levmar/lmbc.c
+	levmar/lmlec.c levmar/lmbc.c \
+	nona/Stitcher.cpp \
+	nona/Stitcher1.cpp \
+	nona/Stitcher2.cpp \
+	nona/Stitcher3.cpp \
+	nona/Stitcher4.cpp
 
 LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
