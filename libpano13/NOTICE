@@ -1,0 +1,130 @@
+This package is based on the libpano13 package.
+
+It was downloaded from <http://sourceforge.net/projects/panotools/>.
+
+Upstream Authors and Copyright Holders:
+
+    Daniel M. German <dmgerman@uvic.ca>, 2005-2006
+    Jim Watters <jimwatters@rogers.com>, 2003-2007
+    Bruno Postle <bruno@postle.net>, 2006
+    Max Lyons <maxlyons@tawbaware.com>, 2006
+
+
+Other Authors:
+
+    Helmut Dersch <der@fh-furtwangen.de>, 1998-2006
+        Author of PTStitcher (licensed under the same terms), from
+        which some parts of code are borrowed.
+    Tom Lane, Marti Maria
+        See jpegicc.* below.
+    Kevin Kratzke
+    Rik Littlefield
+    Fulvio Senore
+    Thomas Rauscher
+    Pablo d'Angelo
+    Bret McKee
+    Robert Platt
+
+Android support:
+    Chirayu Desai <cdesai@cyanogenmod.org>
+    Guillaume Lesniak <xplodwild@cyanogenmod.org>
+
+
+Copyright:
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUTANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301, USA.
+
+On Debian systems, the complete text of the GNU General Public License
+version 2 can be found in /usr/share/common-licenses/GPL-2 file.
+
+
+Some parts of the software are derived from other sources, which are
+distributed under different copyrights. These are:
+
+(1) The public domain Levenberg-Marquardt solver of the Argonne
+    National Laboratories MINPACK mathematical library, C translation
+    by Steve Moshier (file lmdif.c).
+
+(2) Fast fourier transformation (fftn.c, fftn.h), code by:
+    RC Singleton, Stanford Research Institute, Sept. 1968
+    Copyright MJ Olesen, Queen's University at Kingston, 1995-97.
+
+Licence:
+
+    Permission to use, copy, modify, and distribute this software for
+    any purpose without fee is hereby granted, provided that this
+    entire notice is included in all copies of any software which is
+    or includes a copy or modification of this software and in all
+    copies of the supporting documentation for such software.
+
+    THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+    IMPLIED WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR QUEEN'S
+    UNIVERSITY AT KINGSTON MAKES ANY REPRESENTATION OR WARRANTY OF ANY
+    KIND CONCERNING THE MERCHANTABILITY OF THIS SOFTWARE OR ITS
+    FITNESS FOR ANY PARTICULAR PURPOSE.
+
+    All of which is to say that you can do what you like with this
+    source code provided you don't try to sell it as your own and you
+    include an unaltered copy of this message (including the
+    copyright).
+
+    It is also implicitly understood that bug fixes and improvements
+    should make their way back to the general Internet community so
+    that everyone benefits.
+
+
+
+Files: jpegicc.c, jpegicc.h:
+Copyright: Tom Lane
+           Marti Maria
+License: GPL-2+
+ | This source file was originally part of the LCMS package. I asked
+ | Marti for permission to change its license from MIT to GPL (Aug 4,
+ | 2006). -- Daniel German
+
+
+
+Files: f2c.h
+Copyright: © 1990-1995 AT&T Bell Laboratories and Bellcore
+License:
+ | Permission to use, copy, modify, and distribute this software
+ | and its documentation for any purpose and without fee is hereby
+ | granted, provided that the above copyright notice appear in all
+ | copies and that both that the copyright notice and this
+ | permission notice and warranty disclaimer appear in supporting
+ | documentation, and that the names of AT&T Bell Laboratories or
+ | Bellcore or any of their entities not be used in advertising or
+ | publicity pertaining to distribution of the software without
+ | specific, written prior permission.
+ |
+ | AT&T and Bellcore disclaim all warranties with regard to this
+ | software, including all implied warranties of merchantability
+ | and fitness.  In no event shall AT&T or Bellcore be liable for
+ | any special, indirect or consequential damages or any damages
+ | whatsoever resulting from loss of use, data or profits, whether
+ | in an action of contract, negligence or other tortious action,
+ | arising out of or in connection with the use or performance of
+ | this software.
+
+
+
+Files: rgbe.c, rgbe.h
+Copyright: © 1995 Bruce Walter <bjw@graphics.cornell.edu>
+License:
+ | The license of these files has been clarified by Bruce Walter during
+ | a private email conversation.
+ |
+ | These files are public domain.
