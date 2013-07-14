@@ -24,10 +24,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := ptclean
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -55,10 +56,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := autooptimiser
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti -Wno-sign-compare -Wno-sign-promo -Wno-non-virtual-dtor
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -85,10 +87,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := pano_modify
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -117,10 +120,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := pto_gen
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Nemesis/gnustl.mk
 
 #include $(BUILD_EXECUTABLE)
 
@@ -149,10 +153,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := nona
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -181,10 +186,11 @@ LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 \
 
 LOCAL_MODULE := align_image_stack
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 

@@ -19,7 +19,8 @@ LOCAL_C_INCLUDES := external/zlib \
 	$(LOCAL_PATH)/../glib/android \
 	$(LOCAL_PATH)/../glib/
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_STATIC_LIBRARY)

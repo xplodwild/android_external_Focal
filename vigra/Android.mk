@@ -30,7 +30,6 @@ libvigraimpex_SOURCES_DIST = src/impex/bmp.cxx \
 
 LOCAL_CPP_EXTENSION := .cxx
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(libvigraimpex_SOURCES_DIST)
@@ -58,5 +57,7 @@ LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := libvigraimpex
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_SHARED_LIBRARY)

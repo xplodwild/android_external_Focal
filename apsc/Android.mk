@@ -21,7 +21,6 @@ LOCAL_SRC_FILES := \
 	AreaFilter.c ImageMatchModel.c Transform.c DisplayImage.c ImageMap.c \
 	HashTable.c ArrayList.c Random.c SimpleMatrix.c Utils.c
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SHARED_LIBRARIES := libtiffdecoder libpano13
@@ -54,6 +53,8 @@ LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-lo
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := autopano
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 

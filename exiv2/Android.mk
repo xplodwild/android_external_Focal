@@ -63,7 +63,6 @@ CCSRC += \
 
 LOCAL_SRC_FILES:= $(CCSRC)
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SHARED_LIBRARIES :=
@@ -82,5 +81,7 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 \
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := libexiv2
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_SHARED_LIBRARY)

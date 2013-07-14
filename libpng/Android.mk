@@ -5,7 +5,6 @@ LOCAL_CFLAGS :=
 
 LOCAL_MODULE := libpng_static
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES :=\
@@ -29,5 +28,7 @@ LOCAL_LDLIBS := -lz
 LOCAL_SHARED_LIBRARIES := libz
 
 LOCAL_C_INCLUDES := external/zlib
+
+-include external/Nemesis/gnustl.mk
 
 include $(BUILD_STATIC_LIBRARY)

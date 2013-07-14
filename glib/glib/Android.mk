@@ -95,16 +95,16 @@ LOCAL_CFLAGS := \
 	-DGLIB_COMPILATION \
 	-Wno-format-security
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 ifeq ($(GLIB_BUILD_STATIC),true)
+-include external/Nemesis/gnustl.mk
 include $(BUILD_STATIC_LIBRARY)
 else
 LOCAL_STATIC_LIBRARIES := libpcre
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_LDLIBS := -llog
-
+-include external/Nemesis/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)
 endif
 

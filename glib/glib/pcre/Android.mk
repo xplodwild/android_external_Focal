@@ -40,7 +40,7 @@ LOCAL_CFLAGS := \
 	-DPCRE_STATIC \
 	-DPOSIX_MALLOC_THRESHOLD=10
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
+-include external/Nemesis/gnustl.mk
 include $(BUILD_STATIC_LIBRARY)

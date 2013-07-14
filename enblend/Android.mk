@@ -21,7 +21,6 @@ enblend_SOURCES = \
 
 LOCAL_CPP_EXTENSION := .cc
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(enblend_SOURCES)
@@ -46,6 +45,7 @@ LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := enblend
 
+-include external/Nemesis/gnustl.mk
 include $(BUILD_EXECUTABLE)
 
 ######################################################
@@ -67,7 +67,6 @@ enfuse_SOURCES = \
 
 LOCAL_CPP_EXTENSION := .cc
 
-LOCAL_SDK_VERSION := 14
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_SRC_FILES:= $(enfuse_SOURCES)
@@ -91,5 +90,6 @@ LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := enfuse
 
+-include external/Nemesis/gnustl.mk
 include $(BUILD_EXECUTABLE)
 
