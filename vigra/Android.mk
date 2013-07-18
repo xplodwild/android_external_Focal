@@ -40,7 +40,8 @@ LOCAL_STATIC_LIBRARIES := libpng_static
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/../libtiff \
-	$(LOCAL_PATH)/../libpng
+	$(LOCAL_PATH)/../libpng \
+	external/zlib
 
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_C_INCLUDES += \
