@@ -21,6 +21,7 @@ ifeq ($(ANDROID_BUILD_TOP),)
 	include $(NEMESIS_JNI_PATH)/lensfun/Android.mk
 	include $(NEMESIS_JNI_PATH)/celeste/Android.mk
 	include $(NEMESIS_JNI_PATH)/XMPToolkit/Android.mk
+	include $(NEMESIS_JNI_PATH)/jni/Android.mk
 endif
 
 ifneq ($(ANDROID_BUILD_TOP),)
