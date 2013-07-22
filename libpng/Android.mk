@@ -26,6 +26,7 @@ LOCAL_SRC_FILES :=\
 
 LOCAL_LDLIBS := -lz
 LOCAL_SHARED_LIBRARIES := libz
+LOCAL_ARM_MODE := arm
 
 LOCAL_C_INCLUDES := external/zlib
 

@@ -30,6 +30,8 @@ LOCAL_LDLIBS := -lz
 
 LOCAL_MODULE_TAGS := debug
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE := liblcms2
 
 -include external/Nemesis/gnustl.mk

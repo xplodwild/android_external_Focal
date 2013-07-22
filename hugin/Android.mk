@@ -93,6 +93,8 @@ LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-lo
 LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE := libhugin
 
 -include external/Nemesis/gnustl.mk

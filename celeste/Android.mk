@@ -41,6 +41,8 @@ LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := celeste
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 -include external/Nemesis/gnustl.mk

@@ -43,6 +43,8 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loo
 LOCAL_LDLIBS := -lz
 LOCAL_MODULE_TAGS := debug
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE := enblend
 
 -include external/Nemesis/gnustl.mk
@@ -87,6 +89,8 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fexceptions -fstrict-aliasing -fprefetch-loo
 	-D__Ansi__ -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64
 
 LOCAL_MODULE_TAGS := debug
+
+LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := enfuse
 

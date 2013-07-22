@@ -21,6 +21,7 @@ LOCAL_CFLAGS := \
 	-DG_DISABLE_DEPRECATED
 
 LOCAL_NDK_STL_VARIANT := gnustl_static
+LOCAL_ARM_MODE := arm
 
 ifeq ($(GLIB_BUILD_STATIC),true)
 -include external/Nemesis/gnustl.mk

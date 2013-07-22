@@ -12,6 +12,7 @@ LOCAL_SRC_FILES := libs/lensfun/camera.cpp libs/lensfun/database.cpp libs/lensfu
 
 LOCAL_LDLIBS := -lz
 LOCAL_SHARED_LIBRARIES := libz
+LOCAL_ARM_MODE := arm
 
 LOCAL_C_INCLUDES := external/zlib \
 	$(LOCAL_PATH)/include/lensfun \

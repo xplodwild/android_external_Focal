@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := \
 	libcharset/lib/localcharset.c \
 	libcharset/lib/relocatable.c
 
+LOCAL_ARM_MODE := arm
 LOCAL_LDLIBS := -llog
 
 include $(BUILD_STATIC_LIBRARY)

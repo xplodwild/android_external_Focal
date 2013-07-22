@@ -31,6 +31,7 @@ LOCAL_C_INCLUDES := \
 
 AM_CFLAGS := -march=armv7-a -mfpu=neon
 AM_CCASFLAGS := -march=armv7-a -mfpu=neon
+LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE_TAGS := debug
 
@@ -68,6 +69,7 @@ LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fstrict-aliasing -fprefetch-loop-arrays \
 	-DANDROID_TILE_BASED_DECODE -DENABLE_ANDROID_NULL_CONVERT
 
 LOCAL_MODULE_TAGS := debug
+LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := libjpeg
 

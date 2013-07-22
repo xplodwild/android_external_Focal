@@ -271,6 +271,8 @@ LOCAL_CFLAGS := -DAVOID_TABLES -O3 -fstrict-aliasing -fprefetch-loop-arrays \
 
 LOCAL_MODULE_TAGS := debug
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE := libgsl
 
 include $(BUILD_STATIC_LIBRARY)

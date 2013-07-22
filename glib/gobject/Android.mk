@@ -41,6 +41,8 @@ LOCAL_CFLAGS := \
 
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
+LOCAL_ARM_MODE := arm
+
 ifeq ($(GLIB_BUILD_STATIC),true)
 LOCAL_STATIC_LIBRARIES := libglib-2.0 libgthread-2.0
 -include external/Nemesis/gnustl.mk

@@ -47,6 +47,8 @@ LOCAL_LDFLAGS := -llog -lGLESv2
 
 LOCAL_SHARED_LIBRARIES := liblog libGLESv2
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_MODULE := libjni_mosaic2
@@ -72,6 +74,8 @@ LOCAL_SRC_FILES := \
 LOCAL_LDFLAGS := -llog
 
 LOCAL_SHARED_LIBRARIES := liblog
+
+LOCAL_ARM_MODE := arm
 
 LOCAL_NDK_STL_VARIANT := gnustl_static
 

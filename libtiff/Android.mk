@@ -13,6 +13,8 @@ LOCAL_LDLIBS := -ldl -llog
 
 LOCAL_SHARED_LIBRARIES := libtiff liblog
 
+LOCAL_ARM_MODE := arm
+
 include $(BUILD_SHARED_LIBRARY)
 
 include $(LOCAL_PATH)/tiff/Android.mk

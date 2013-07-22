@@ -53,6 +53,7 @@ LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-lo
 LOCAL_MODULE_TAGS := debug
 
 LOCAL_MODULE := autopano
+LOCAL_ARM_MODE := arm
 
 -include external/Nemesis/gnustl.mk
 

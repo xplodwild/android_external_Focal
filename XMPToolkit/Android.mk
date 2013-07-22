@@ -73,6 +73,8 @@ LOCAL_LDFLAGS := -lz
 
 LOCAL_SHARED_LIBRARIES := libz
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_MODULE_TAGS := optional
