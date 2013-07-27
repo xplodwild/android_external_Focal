@@ -50,7 +50,7 @@ extern "C"
 {
     JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved);
     JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved);
-    JNIEXPORT jint JNICALL Java_org_cyanogenmod_nemesis_XMPHelper_writeXmpToFile(
+    JNIEXPORT jint JNICALL Java_org_cyanogenmod_focal_XMPHelper_writeXmpToFile(
             JNIEnv * env, jobject obj, jstring fileName, jstring xmpData);
 };
 
@@ -84,7 +84,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved)
 
 }
 
-JNIEXPORT jint JNICALL Java_org_cyanogenmod_nemesis_XMPHelper_writeXmpToFile(
+JNIEXPORT jint JNICALL Java_org_cyanogenmod_focal_XMPHelper_writeXmpToFile(
         JNIEnv * env, jobject obj, jstring fileName, jstring xmpData)
 {
 	// Convert JString to std::string
