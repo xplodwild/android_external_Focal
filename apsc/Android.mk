@@ -44,8 +44,6 @@ endif
 LOCAL_STATIC_LIBRARIES := libxml2
 ifeq ($(ANDROID_BUILD_TOP),)
 LOCAL_STATIC_LIBRARIES += libiconv
-else
-LOCAL_SHARED_LIBRARIES += libicuuc
 endif
 
 LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays  -D__Ansi__ -DHAS_PANO13
