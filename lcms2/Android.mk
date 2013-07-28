@@ -34,6 +34,6 @@ LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := liblcms2
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_STATIC_LIBRARY)

@@ -24,10 +24,10 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_ARM_MODE := arm
 
 ifeq ($(GLIB_BUILD_STATIC),true)
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_STATIC_LIBRARY)
 else
 LOCAL_SHARED_LIBRARIES := libglib-2.0
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)
 endif

@@ -53,7 +53,7 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE := autopano
 LOCAL_ARM_MODE := arm
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 

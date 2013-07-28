@@ -6,7 +6,7 @@
 #define VERSION_MINOR 5
 #define VERSION_PATCH 1
 
-#define PACKAGE_VERSION "2.5.1-Nemesis"
+#define PACKAGE_VERSION "2.5.1-Focal"
 
 /* Define if PANO13 should be used */
 #define PANO13_FOUND 1

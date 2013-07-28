@@ -84,6 +84,6 @@ LOCAL_MODULE := libexiv2
 
 LOCAL_ARM_MODE := arm
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_SHARED_LIBRARY)

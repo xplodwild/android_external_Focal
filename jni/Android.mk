@@ -84,5 +84,5 @@ LOCAL_SHARED_LIBRARIES := libxmptoolkit
 
 LOCAL_MODULE := libxmphelper_jni
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)

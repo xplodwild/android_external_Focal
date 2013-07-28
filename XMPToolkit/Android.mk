@@ -81,5 +81,5 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_MODULE := libxmptoolkit
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)

@@ -5,7 +5,7 @@
 // Licence details can be found in the file COPYING.
 
 #include <numeric>
-#define VERSION "Nemesis"
+#define VERSION "Focal"
 #define PACKAGE_BUGREPORT "XpLoDWilD <xplodwild@cyanogenmod.org>"
 
 extern const std::string command;

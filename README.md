@@ -1,4 +1,5 @@
-android_external_Nemesis
+android_external_Focal
 ========================
 
-Nemesis external dependencies
+Focal external dependencies
+

@@ -45,10 +45,10 @@ LOCAL_ARM_MODE := arm
 
 ifeq ($(GLIB_BUILD_STATIC),true)
 LOCAL_STATIC_LIBRARIES := libglib-2.0 libgthread-2.0
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_STATIC_LIBRARY)
 else
 LOCAL_SHARED_LIBRARIES := libglib-2.0 libgthread-2.0
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)
 endif

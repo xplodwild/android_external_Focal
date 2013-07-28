@@ -28,7 +28,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -60,7 +60,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti -Wno-sign-compare -Wno-sign-promo -Wno-non-virtual-dtor
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -91,7 +91,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -124,7 +124,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 #include $(BUILD_EXECUTABLE)
 
@@ -157,7 +157,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 
@@ -190,7 +190,7 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 
 LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_EXECUTABLE)
 

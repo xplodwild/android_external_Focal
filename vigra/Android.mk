@@ -61,6 +61,6 @@ LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := libvigraimpex
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 
 include $(BUILD_SHARED_LIBRARY)

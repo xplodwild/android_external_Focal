@@ -47,7 +47,7 @@ LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := enblend
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_EXECUTABLE)
 
 ######################################################
@@ -94,6 +94,6 @@ LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := enfuse
 
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_EXECUTABLE)
 

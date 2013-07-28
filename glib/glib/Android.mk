@@ -100,13 +100,13 @@ LOCAL_NDK_STL_VARIANT := gnustl_static
 LOCAL_ARM_MODE := arm
 
 ifeq ($(GLIB_BUILD_STATIC),true)
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_STATIC_LIBRARY)
 else
 LOCAL_STATIC_LIBRARIES := libpcre
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_LDLIBS := -llog
--include external/Nemesis/gnustl.mk
+-include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)
 endif
 
