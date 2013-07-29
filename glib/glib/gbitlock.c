@@ -56,7 +56,6 @@ _g_futex_thread_init (void) {
  * If anyone actually gets bit by this, please file a bug. :)
  */
 #define __user 
-#include <sys/linux-syscalls.h>
 #include <linux/futex.h>
 #include <sys/syscall.h>
 #include <unistd.h>
@@ -82,7 +81,7 @@ static void
 g_futex_wait (const volatile gint *address,
               gint                 value)
 {
-  syscall (__NR_futex, address, (gsize) FUTEX_WAIT, (gsize) value, NULL);
+  syscall (SYS_futex, address, (gsize) FUTEX_WAIT, (gsize) value, NULL);
 }
 
 /* < private >
@@ -99,7 +98,7 @@ g_futex_wait (const volatile gint *address,
 static void
 g_futex_wake (const volatile gint *address)
 {
-  syscall (__NR_futex, address, (gsize) FUTEX_WAKE, (gsize) 1, NULL);
+  syscall (SYS_futex, address, (gsize) FUTEX_WAKE, (gsize) 1, NULL);
 }
 
 #else

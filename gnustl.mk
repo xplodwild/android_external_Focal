@@ -3,7 +3,6 @@
 # Make sure bionic is first so we can include system headers.
 LOCAL_C_INCLUDES := \
 	bionic \
-	prebuilts/ndk/current/platforms/android-14/arch-arm/usr/include/ \
 	prebuilts/ndk/current/sources/cxx-stl/gnu-libstdc++/include \
 	prebuilts/ndk/current/sources/cxx-stl/gnu-libstdc++/libs/armeabi-v7a/include \
 	$(LOCAL_C_INCLUDES)
