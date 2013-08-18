@@ -65,9 +65,19 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(LOCAL_PATH)/../zthread/include \
 	$(LOCAL_PATH)/../../
 
-LOCAL_STATIC_LIBRARIES := libhugin libboost_thread-gcc-mt-1_53
+LOCAL_STATIC_LIBRARIES := libhugin libboost_thread-gcc-mt-1_53 libboost_system-gcc-mt-1_53
+LOCAL_SHARED_LIBRARIES := libvigraimpex libpano13 libexiv2
+
+LOCAL_CFLAGS := -DAVOID_TABLES  -O3 -fexceptions -fstrict-aliasing -fprefetch-loop-arrays \
+	-frtti -D__Ansi__ -Wno-return-type -Wno-non-virtual-dtor
+
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
+LOCAL_ARM_MODE := arm
 
 LOCAL_MODULE := cpfind
 
-#include $(BUILD_EXECUTABLE)
+-include external/Focal/gnustl.mk
+
+include $(BUILD_EXECUTABLE)
 

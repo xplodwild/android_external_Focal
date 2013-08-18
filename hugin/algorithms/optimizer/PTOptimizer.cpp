@@ -149,9 +149,7 @@ public:
     bool estimate(const std::vector<const ControlPoint *> & points, std::vector<double> & p) const
     {
 	// reset to the initial parameters.
-        std::cout << "estimate resize" << std::endl;
 	p.resize(m_initParams.size());
-        std::cout << "copy" << std::endl;
 	std::copy(m_initParams.begin(), m_initParams.end(), p.begin());
 
 	return leastSquaresEstimate(points, p);
@@ -161,14 +159,12 @@ public:
 
     bool leastSquaresEstimate(const std::vector<const ControlPoint *> & points, std::vector<double> & p) const 
     {
-        std::cout << "copying points into panorama object" << std::endl;
 	// copy points into panorama object
 	CPVector cpoints(points.size());	
 	for (int i=0; i < points.size(); i++) {
 	    cpoints[i] = *points[i];
 	}
 
-        std::cout << "setting ctrl points" << std::endl;
 	m_localPano->setCtrlPoints(cpoints);
 
 	PanoramaData * pano = const_cast<PanoramaData *>(m_localPano);
@@ -176,22 +172,18 @@ public:
 	int i=0;
 	BOOST_FOREACH(const OptVarSpec & v, m_optvars) {
 	    v.set(*pano, p[i]);
-	    DEBUG_WARN("Initial " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
+	    DEBUG_DEBUG("Initial " << v.m_name <<  ": i1:" << pano->getImage(m_li1).getVar(v.m_name) << ", i2: " << pano->getImage(m_li2).getVar(v.m_name));
 	    i++;
 	}
 
-        std::cout << "setOptimizeVector..." << std::endl;
 	m_localPano->setOptimizeVector(m_opt_first_pass);
-        std::cout << "... done" << std::endl;
 	// optimize parameters using panotools (or use a custom made optimizer here?)
 	UIntSet imgs;
 	imgs.insert(0);
 	imgs.insert(1);
 	//std::cout << "Optimizing without hfov:" << std::endl;
 	//pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
-        std::cout << "Optimizing..." << std::endl;
 	PTools::optimize(*pano);
-        std::cout << "...done optimizing" << std::endl;
 	//std::cout << "result:" << std::endl;
 	//pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
 
@@ -199,9 +191,7 @@ public:
 	    m_localPano->setOptimizeVector(m_opt_second_pass);
 	    //std::cout << "Optimizing with hfov" << std::endl;
 	    //pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
-            std::cout << "Optimizing (2nd pass)..." << std::endl;
 	    PTools::optimize(*pano);
-            std::cout << "..done" << std::endl;
 	    //std::cout << "result:" << std::endl;
 	    //pano->printPanoramaScript(std::cerr, m_localPano->getOptimizeVector(), pano->getOptions(), imgs, true );
 	}
@@ -220,7 +210,6 @@ public:
     bool agree(std::vector<double> &p, const ControlPoint & cp) const
     {
 	PanoramaData * pano = const_cast<PanoramaData *>(m_localPano);
-        std::cout << "agreeing: casted const, sertting pano data to optvar" << std::endl;
 	// set parameters in pano object
 	int i=0;
 	BOOST_FOREACH(const OptVarSpec & v, m_optvars) {
@@ -229,10 +218,8 @@ public:
 	}
 	// TODO: argh, this is slow, we should really construct this only once
 	// and reuse it for all calls...
-        std::cout << "making inv transform" << std::endl;
 	PTools::Transform trafo_i1_to_pano;
 	trafo_i1_to_pano.createInvTransform(m_localPano->getImage(m_li1),m_localPano->getOptions());
-        std::cout << "making inv transform" << std::endl;
 	PTools::Transform trafo_pano_to_i2;
 	trafo_pano_to_i2.createTransform(m_localPano->getImage(m_li2),m_localPano->getOptions());
 
@@ -248,15 +235,15 @@ public:
 	    x2 = cp.x1;
 	    y2 = cp.y1;
 	}   
-        std::cout << "transformImgCoord" << std::endl;
+
 	trafo_i1_to_pano.transformImgCoord(xt, yt, x1, y1);
 	trafo_pano_to_i2.transformImgCoord(x2t, y2t, xt, yt);
-	DEBUG_WARN("Trafo i1 (0 " << x1 << " " << y1 << ") -> ("<< xt <<" "<< yt<<") -> i2 (1 "<<x2t<<", "<<y2t<<"), real ("<<x2<<", "<<y2<<")")
+	DEBUG_DEBUG("Trafo i1 (0 " << x1 << " " << y1 << ") -> ("<< xt <<" "<< yt<<") -> i2 (1 "<<x2t<<", "<<y2t<<"), real ("<<x2<<", "<<y2<<")")
 	// compute error in pixels...
 	x2t -= x2;
 	y2t -= y2;
 	double  e = hypot(x2t,y2t);
-	DEBUG_WARN("Error ("<<x2t<<", "<<y2t<<"), " << e)
+	DEBUG_DEBUG("Error ("<<x2t<<", "<<y2t<<"), " << e)
 	return  e < m_maxError;
     }
 

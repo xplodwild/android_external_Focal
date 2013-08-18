@@ -86,3 +86,34 @@ LOCAL_MODULE := libxmphelper_jni
 
 -include external/Focal/gnustl.mk
 include $(BUILD_SHARED_LIBRARY)
+
+###
+# Build libpopen_helper_jni
+###
+
+include $(CLEAR_VARS)
+
+LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH)/feature_mos/src
+
+LOCAL_CFLAGS := -O3
+
+LOCAL_SRC_FILES := \
+	popen_helper_jni.cpp
+
+LOCAL_LDFLAGS := -llog
+
+LOCAL_SHARED_LIBRARIES := liblog
+
+LOCAL_ARM_MODE := arm
+
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
+LOCAL_MODULE_TAGS := optional
+LOCAL_SHARED_LIBRARIES := libxmptoolkit
+
+LOCAL_MODULE := libpopen_helper_jni
+
+-include external/Focal/gnustl.mk
+include $(BUILD_SHARED_LIBRARY)
+
