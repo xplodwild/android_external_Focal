@@ -8,17 +8,18 @@ ifeq ($(ANDROID_BUILD_TOP),)
 	include $(NEMESIS_JNI_PATH)/lcms2/Android.mk
 	include $(NEMESIS_JNI_PATH)/gsl/Android.mk
 	include $(NEMESIS_JNI_PATH)/enblend/Android.mk
-	include $(NEMESIS_JNI_PATH)/apsc/Android.mk
+#	include $(NEMESIS_JNI_PATH)/apsc/Android.mk
 	include $(NEMESIS_JNI_PATH)/libjpeg-turbo/Android.mk
 	include $(NEMESIS_JNI_PATH)/libpng/Android.mk
 	include $(NEMESIS_JNI_PATH)/libiconv/Android.mk
 	include $(NEMESIS_JNI_PATH)/libxml2/Android.mk
 	include $(NEMESIS_JNI_PATH)/hugin/Android.mk
 	include $(NEMESIS_JNI_PATH)/hugin/tools/Android.mk
-#	include $(NEMESIS_JNI_PATH)/hugin/hugin_cpfind/Android.mk
+	include $(NEMESIS_JNI_PATH)/hugin/hugin_cpfind/Android.mk
 	include $(NEMESIS_JNI_PATH)/exiv2/Android.mk
 	include $(NEMESIS_JNI_PATH)/glib/Android.mk
 	include $(NEMESIS_JNI_PATH)/lensfun/Android.mk
+	include $(NEMESIS_JNI_PATH)/multiblend/Android.mk
 	include $(NEMESIS_JNI_PATH)/celeste/Android.mk
 	include $(NEMESIS_JNI_PATH)/XMPToolkit/Android.mk
 	include $(NEMESIS_JNI_PATH)/jni/Android.mk

@@ -33,6 +33,40 @@ LOCAL_CFLAGS := -O3 -fexceptions -frtti
 include $(BUILD_EXECUTABLE)
 
 ######################################################
+###                      linefind                   ##
+######################################################
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := linefind.cpp \
+	../lines/FindLines.cpp \
+	../lines/FindN8Lines.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+	$(LOCAL_PATH)/../../vigra/include \
+	$(LOCAL_PATH)/../../boost-1_53/ \
+	$(LOCAL_PATH)/../../exiv2/include \
+	$(LOCAL_PATH)/../../libpano13 \
+	$(LOCAL_PATH)/../../libtiff \
+	$(LOCAL_PATH)/..
+
+LOCAL_SHARED_LIBRARIES := libpano13 libgmodule-2.0 \
+	libgobject-2.0 libgthread-2.0 libglib-2.0 libvigraimpex \
+	libexiv2
+LOCAL_STATIC_LIBRARIES := libhugin liblensfun libboost_filesystem-gcc-mt-1_53 libboost_thread-gcc-mt-1_53 \
+	libboost_system-gcc-mt-1_53
+
+LOCAL_MODULE := linefind
+
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
+LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Focal/gnustl.mk
+
+#include $(BUILD_EXECUTABLE)
+
+######################################################
 ###                autooptimiser                    ##
 ######################################################
 
@@ -126,7 +160,38 @@ LOCAL_CFLAGS := -O3 -fexceptions -frtti
 
 -include external/Focal/gnustl.mk
 
-#include $(BUILD_EXECUTABLE)
+include $(BUILD_EXECUTABLE)
+
+######################################################
+###                    pto_var                      ##
+######################################################
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := pto_var.cpp ParseExp.cpp
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+	$(LOCAL_PATH)/../../vigra/include \
+	$(LOCAL_PATH)/../../boost-1_53/ \
+	$(LOCAL_PATH)/../../exiv2/include \
+	$(LOCAL_PATH)/../../libpano13 \
+	$(LOCAL_PATH)/..
+
+LOCAL_SHARED_LIBRARIES := libpano13 libgmodule-2.0 \
+	libgobject-2.0 libgthread-2.0 libglib-2.0 libvigraimpex \
+	libexiv2
+LOCAL_STATIC_LIBRARIES := libhugin libboost_filesystem-gcc-mt-1_53 \
+	libboost_system-gcc-mt-1_53 libboost_regex-gcc-mt-1_53
+
+LOCAL_MODULE := pto_var
+
+LOCAL_NDK_STL_VARIANT := gnustl_static
+
+LOCAL_CFLAGS := -O3 -fexceptions -frtti
+
+-include external/Focal/gnustl.mk
+
+include $(BUILD_EXECUTABLE)
 
 ######################################################
 ###                       nona                      ##

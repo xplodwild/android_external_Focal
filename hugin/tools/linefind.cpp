@@ -41,7 +41,7 @@
 
 extern "C"
 {
-#include <pano13/filter.h>
+#include <filter.h>
 }
 #if defined _MSC_VER && _MSC_VER>=1600
 #include <ppl.h>
