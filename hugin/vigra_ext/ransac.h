@@ -179,7 +179,6 @@ std::vector<const T *> Ransac::compute(S &parameters,
 				       double desiredProbabilityForNoOutliers,
 				       double maximalOutlierPercentage)
 {
-    std::cout << "Preparing ransac..." << std::endl;
     unsigned int numDataObjects = (int) data.size();
     unsigned int numForEstimate = paramEstimator.numForEstimate();
     //there are less data objects than the minimum required for an exact fit, or
@@ -203,7 +202,6 @@ std::vector<const T *> Ransac::compute(S &parameters,
     int allTries = choose(numDataObjects,numForEstimate);
 
     //parameters.clear();
-    std::cout << "Ransac ready" << std::endl;
 
     numVotesForBest = 0; //initalize with 0 so that the first computation which gives any type of fit will be set to best
     
@@ -222,7 +220,6 @@ std::vector<const T *> Ransac::compute(S &parameters,
 
     //there are cases when the probablistic number of tries is greater than all possible sub-sets
     numTries = numTries<allTries ? numTries : allTries;
-    std::cout << "Starting try..." << std::endl;
     for(i=0; i<numTries; i++) {
         //randomly select data for exact model fit ('numForEstimate' objects).
         memset(notChosen,'1',numDataObjects*sizeof(short));
@@ -252,29 +249,23 @@ std::vector<const T *> Ransac::compute(S &parameters,
                 l++;
             }
         }
-        std::cout << "Got indexes" << std::endl;
+
         //check that the sub set just chosen is unique
         std::pair< std::set<int *, SubSetIndexComparator >::iterator, bool > res = chosenSubSets.insert(curSubSetIndexes);
 
         if(res.second == true) { //first time we chose this sub set
 		                 //use the selected data for an exact model parameter fit
-            std::cout << "res.second = true" << std::endl;
             if (!paramEstimator.estimate(exactEstimateData,exactEstimateParameters))
             {
                 //selected data is a singular configuration (e.g. three colinear points for 
                 //a circle fit)
-                std::cout << "nope estimate" << std::endl;
                 continue;
             }
-            std::cout << "yup estimate" << std::endl;
             //see how many agree on this estimate
             numVotesForCur = 0;
-            std:: cout << "gonna memset" << std::endl;
             memset(curVotes,'\0',numDataObjects*sizeof(short));
             for(j=0; j<(int)numDataObjects; j++) {
-                std::cout << "will we agree?" << std::endl;
                 if(paramEstimator.agree(exactEstimateParameters, data[j])) {
-                    std::cout << "agreed" << std::endl;
                     curVotes[j] = 1;
                     numVotesForCur++;
                 }
@@ -306,13 +297,11 @@ std::vector<const T *> Ransac::compute(S &parameters,
 	    */
         }
         else {  //this sub set already appeared, don't count this iteration
-            std::cout << "this sub set already appeared" << std::endl;
             delete [] curSubSetIndexes;
             i--;
         }
     }
 
-    std::cout << "releasing memory" << std::endl;
     //release the memory
     std::set<int *, SubSetIndexComparator >::iterator it = chosenSubSets.begin();
     std::set<int *, SubSetIndexComparator >::iterator chosenSubSetsEnd = chosenSubSets.end();
@@ -336,7 +325,6 @@ std::vector<const T *> Ransac::compute(S &parameters,
     delete [] curVotes;
     delete [] notChosen;
 
-    std::cout << "done" << std::endl;
 
     return leastSquaresEstimateData;
 }
@@ -406,21 +394,18 @@ void Ransac::estimate(const Estimator & paramEstimator, const std::vector<T> &da
                       int numForEstimate, short *bestVotes, short *curVotes,
                       int &numVotesForBest, int *arr)
 {
-        std::cout << "estimate E" << std::endl;
 	std::vector<T *> exactEstimateData;
 	std::vector<S> exactEstimateParameters;
 	int numDataObjects;
 	int numVotesForCur;//initalize with -1 so that the first computation will be set to best
 	int j;
 
-        std::cout << "memset'ing" << std::endl;
 	numDataObjects = data.size();
 	memset(curVotes,'\0',numDataObjects*sizeof(short));
 	numVotesForCur=0;
 
 	for(j=0; j<numForEstimate; j++)
 		exactEstimateData.push_back(&(data[arr[j]]));
-        std::cout << "estimating param" << std::endl;
 	paramEstimator.estimate(exactEstimateData,exactEstimateParameters);
 	                     //singular data configuration
 	if(exactEstimateParameters.size()==0)
@@ -436,7 +421,6 @@ void Ransac::estimate(const Estimator & paramEstimator, const std::vector<T> &da
 		numVotesForBest = numVotesForCur;
 		memcpy(bestVotes,curVotes, numDataObjects*sizeof(short));
 	}
-        std::cout << "estimate X" << std::endl;
 }
 /*****************************************************************************/
 inline unsigned int Ransac::choose(unsigned int n, unsigned int m)

@@ -55,7 +55,9 @@
 #if !defined Hugin_shared || !defined _WINDOWS
 #define GLEW_STATIC
 #endif
+#ifndef ANDROID
 #include <GL/glew.h>
+#endif
 #ifdef __APPLE__
   #include <GLUT/glut.h>
 #else
@@ -144,6 +146,7 @@ static bool initGPU(int *argcp,char **argv) {
 
     cout << "nona: using graphics card: " << glGetString(GL_VENDOR) << " " << glGetString(GL_RENDERER) << endl;
 
+#ifndef ANDROID
     GLboolean has_arb_fragment_shader = glewGetExtension("GL_ARB_fragment_shader");
     GLboolean has_arb_vertex_shader = glewGetExtension("GL_ARB_vertex_shader");
     GLboolean has_arb_shader_objects = glewGetExtension("GL_ARB_shader_objects");
@@ -151,6 +154,15 @@ static bool initGPU(int *argcp,char **argv) {
     GLboolean has_arb_texture_rectangle = glewGetExtension("GL_ARB_texture_rectangle");
     GLboolean has_arb_texture_border_clamp = glewGetExtension("GL_ARB_texture_border_clamp");
     GLboolean has_arb_texture_float = glewGetExtension("GL_ARB_texture_float");
+#else
+	GLboolean has_arb_fragment_shader = true;
+    GLboolean has_arb_vertex_shader = true;
+    GLboolean has_arb_shader_objects = true;
+    GLboolean has_arb_shading_language = true;
+    GLboolean has_arb_texture_rectangle = true;
+    GLboolean has_arb_texture_border_clamp = true;
+    GLboolean has_arb_texture_float = true;
+#endif
 
     if (!(has_arb_fragment_shader && has_arb_vertex_shader && has_arb_shader_objects && has_arb_shading_language && has_arb_texture_rectangle && has_arb_texture_border_clamp && has_arb_texture_float)) {
         const char * msg[] = {"false", "true"};
